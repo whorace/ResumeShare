@@ -11,6 +11,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
@@ -21,6 +24,13 @@ import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.WaveView;
  * Created by Horace on 16/11/9.
  */
 public class ResumeFragment extends Fragment {
+
+    private ListView mLv_Educations;
+    private ListView mLv_Experiences;
+    private ListView mLv_Skills;
+    private TextView mTv_Email;
+    private TextView mTv_Name;
+    private ImageView mIv_Profile
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
