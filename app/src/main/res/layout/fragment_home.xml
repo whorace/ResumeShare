@@ -61,26 +61,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             ></Gallery>
-        <!--<ImageView-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="100dp"-->
-            <!--android:src="@drawable/beautifulkelly"-->
-            <!--/>-->
-        <!--<ImageView-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="100dp"-->
-            <!--android:src="@drawable/ilovekelly"-->
-            <!--/>-->
-        <!--<ImageView-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="100dp"-->
-            <!--android:src="@drawable/kellyisgenius"-->
-            <!--/>-->
-        <!--<ImageView-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="100dp"-->
-            <!--android:src="@drawable/kellyissupergenius"-->
-            <!--/>-->
     </LinearLayout>
 
 </RelativeLayout>

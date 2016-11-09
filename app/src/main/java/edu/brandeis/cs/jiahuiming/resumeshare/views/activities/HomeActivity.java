@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.NavigationItem;
-import edu.brandeis.cs.jiahuiming.resumeshare.adapters.MenuItemAadapter;
+import edu.brandeis.cs.jiahuiming.resumeshare.adapters.MenuItemAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ContactsFragment;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.HomeFragment;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.SettingsFragment;
@@ -52,7 +52,7 @@ public class HomeActivity extends AppCompatActivity  {
 
         setSupportActionBar(mToolbar);
         mDrawerList=(ListView)findViewById(R.id.left_drawer) ;
-        mDrawerList.setAdapter(new MenuItemAadapter(this,parameters));
+        mDrawerList.setAdapter(new MenuItemAdapter(this,parameters));
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
         mDrawerToggle.syncState();

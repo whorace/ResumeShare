@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.UserModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.NetworkChecker;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
@@ -36,9 +38,16 @@ public class LoginController {
         } else {
             Intent intent = new Intent(context, HomeActivity.class);
             Bundle bundle = new Bundle();
+            userModel=new UserModel(context);
+            User user=userModel.getUserfromlocal(account);
+            if(password.equals(user.getPassword()))
+            {
             bundle.putString("Account", account);
             intent.putExtra("Bundle", bundle);
-            context.startActivity(intent);
+            context.startActivity(intent);}
+            else{
+                Toast.makeText(context, "Wrong Password or Unexisted Account!", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

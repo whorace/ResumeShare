@@ -5,6 +5,8 @@ import android.widget.Toast;
 
 import java.util.regex.Pattern;
 
+import edu.brandeis.cs.jiahuiming.resumeshare.models.UserModel;
+
 /**
  * Created by jiahuiming on 11/8/16.
  */
@@ -15,17 +17,17 @@ public class RegisterController {
     private String password;
     private String password2;
     private Context context;
-    public RegisterController(Context context, String email, String password, String password2){
+    private UserModel userModel;
 
+    public RegisterController(Context context){
         this.context=context;
-        this.email=email;
-        this.password=password;
-        this.password2=password2;
 
 
     }
-    public void verifyInput(){
-
+    public void register(String email, String password, String password2){
+        this.email=email;
+        this.password=password;
+        this.password2=password2;
         if((!email.equals(""))  &&(!password.equals("")) && (!password2.equals("")))
         {
             //检查邮箱地址是否正确
@@ -34,9 +36,14 @@ public class RegisterController {
                 //检查两次密码是否一致
                 if(password.equals(password2))
                 {
+                    userModel=new UserModel(context);
+                    if(userModel.addUserToLocal(email,password)!=-1)
+                        Toast.makeText(context, "Success to Register", Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(context, "Unable to Register", Toast.LENGTH_LONG).show();
 
-                    Toast.makeText(context, "Registering",
-                            Toast.LENGTH_LONG).show();
+
+
                     //register();
                 }
                 else

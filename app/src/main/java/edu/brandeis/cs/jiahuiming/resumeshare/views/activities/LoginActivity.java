@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.LoginController;
+import edu.brandeis.cs.jiahuiming.resumeshare.controllers.RegisterController;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean mRegisterStatue;
     private boolean mLoginStatue;
     private LoginController mLoginController;
+    private RegisterController mRegisterController;
 
 
     @Override
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         mRegisterStatue=false;
         mLoginStatue=true;
         mLoginController=new LoginController(LoginActivity.this);
+        mRegisterController=new RegisterController(LoginActivity.this);
 
 //        mLoginPresenterImpl=new LoginPresenterImpl(this,this);
         mTv_account=(EditText)findViewById(R.id.tv_account);
@@ -64,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                     mLoginStatue=false;
                     mTv_password_again.setVisibility(View.VISIBLE);
                 }else if(mRegisterStatue==true&&mLoginStatue==false){
-
+                    mRegisterController.register(mTv_account.getText().toString(),mTv_password.getText().toString(),mTv_password_again.getText().toString());
 //                    mLoginPresenterImpl.register(mTv_account.getText().toString(),mTv_password.getText().toString(),mTv_password_again.getText().toString());
 
                 }

@@ -17,14 +17,14 @@ import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.NavigationItem;
  * Created by jiahuiming on 11/6/16.
  */
 
-public class MenuItemAadapter extends BaseAdapter {
+public class MenuItemAdapter extends BaseAdapter {
     private ArrayList<NavigationItem> data;
     private LayoutInflater inflator;
     private TextView title;
     private ImageView icon;
     private Context context;
 
-    public MenuItemAadapter(Context context, ArrayList<NavigationItem> data) {
+    public MenuItemAdapter(Context context, ArrayList<NavigationItem> data) {
         this.context = context;
         this.data = data;
     }
