@@ -21,19 +21,16 @@ public class RegisterController {
 
     public RegisterController(Context context){
         this.context=context;
-
-
     }
+
     public void register(String email, String password, String password2){
         this.email=email;
         this.password=password;
         this.password2=password2;
         if((!email.equals(""))  &&(!password.equals("")) && (!password2.equals("")))
         {
-            //检查邮箱地址是否正确
             if(Pattern.matches("^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$", email))
             {
-                //检查两次密码是否一致
                 if(password.equals(password2))
                 {
                     userModel=new UserModel(context);
@@ -41,36 +38,16 @@ public class RegisterController {
                         Toast.makeText(context, "Success to Register", Toast.LENGTH_LONG).show();
                     else
                         Toast.makeText(context, "Unable to Register", Toast.LENGTH_LONG).show();
-
-
-
-                    //register();
                 }
                 else
-                {
-
-                    Toast.makeText(context, "Passwords are not same",
-                            Toast.LENGTH_LONG).show();
-                }
+                {Toast.makeText(context, "Passwords are not same",
+                            Toast.LENGTH_LONG).show();}
             }
             else
-            {
-
-                Toast.makeText(context, "Account format should be email address",
-                        Toast.LENGTH_LONG).show();
-
-            }
-        }
-        else
-        {
-            Toast.makeText(context, "Please fill the information. No empty",
-                    Toast.LENGTH_LONG).show();
-
-
-        }
-
-
-
+            {Toast.makeText(context, "Account format should be email address",
+                        Toast.LENGTH_LONG).show();}
+        } else
+        {Toast.makeText(context, "Please fill the information. No empty",
+                    Toast.LENGTH_LONG).show();}
     }
-
 }

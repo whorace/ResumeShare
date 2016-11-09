@@ -31,9 +31,6 @@
         android:textSize="18sp"
         />
 
-
-
-
     <Button
         android:id="@+id/tv_detail"
 

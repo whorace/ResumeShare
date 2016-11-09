@@ -21,7 +21,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         if(TableName.equals("User"))
             createTable = "CREATE TABLE if not exists [User](Account text primary key,Password text not null, FirstName text, SecondName text)";
         else if(TableName.equals("Skill")){
-            createTable = "CREATE TABLE if not exists [Skill](Account text primary key,Skill text not null, Order integer not null)";
+            createTable = "CREATE TABLE if not exists [Skill](Account text primary key,Skill text primary key)";
 
         }else if(TableName.equals("Experience")){
             createTable = "CREATE TABLE if not exists [Experience](Account text primary key,Company text, Position text, Order integer)";

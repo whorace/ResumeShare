@@ -21,15 +21,6 @@ public class Skill {
         Skill = skill;
     }
 
-    public int getOrder() {
-        return Order;
-    }
-
-    public void setOrder(int order) {
-        Order = order;
-    }
-
-    private int Order;
     private String Account;
     private String Skill;
 }
