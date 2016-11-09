@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ResumeShare</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="tv_account">account</string>
+    <string name="tv_password">password</string>
+    <string name="btn_login">login</string>
+    <string name="btn_register">register</string>
+    <string-array name="menuitem_title">
+        <item>Home</item>
+        <item>Profile</item>
+        <item>Contacts</item>
+        <item>Settings</item>
+    </string-array>
+</resources>
