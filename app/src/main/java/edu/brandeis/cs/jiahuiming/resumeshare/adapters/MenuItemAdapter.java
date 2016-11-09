@@ -11,20 +11,20 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
-import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.NavigationItem;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.MenuItem;
 
 /**
  * Created by jiahuiming on 11/6/16.
  */
 
 public class MenuItemAdapter extends BaseAdapter {
-    private ArrayList<NavigationItem> data;
+    private ArrayList<MenuItem> data;
     private LayoutInflater inflator;
     private TextView title;
     private ImageView icon;
     private Context context;
 
-    public MenuItemAdapter(Context context, ArrayList<NavigationItem> data) {
+    public MenuItemAdapter(Context context, ArrayList<MenuItem> data) {
         this.context = context;
         this.data = data;
     }
@@ -48,7 +48,7 @@ public class MenuItemAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if(convertView==null) {
             inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflator.inflate(R.layout.drawer_list_item, null);
+            convertView = inflator.inflate(R.layout.list_item_drawer, null);
             title =(TextView) convertView.findViewById(R.id.Tv_Title);
             icon = (ImageView) convertView.findViewById(R.id.Iv_Image);
         }

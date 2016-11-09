@@ -14,7 +14,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
-import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.NavigationItem;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.MenuItem;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.MenuItemAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ContactsFragment;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.HomeFragment;
@@ -33,16 +33,20 @@ public class HomeActivity extends AppCompatActivity  {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
+    private String ResumeAccount;
+    public String getResumeAccount(){return ResumeAccount;}
+    public void setResumeAccount(String resumeAccount){this.ResumeAccount=resumeAccount;}
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ArrayList<NavigationItem> parameters=new ArrayList<NavigationItem>();
-        parameters.add(new NavigationItem(getDrawable(R.drawable.action_search),"Home"));
-        parameters.add(new NavigationItem(getDrawable(R.drawable.action_search),"Profile"));
-        parameters.add(new NavigationItem(getDrawable(R.drawable.action_search),"Contacts"));
-        parameters.add(new NavigationItem(getDrawable(R.drawable.action_search),"Settings"));
+        ArrayList<MenuItem> parameters=new ArrayList<MenuItem>();
+
+        parameters.add(new MenuItem(getDrawable(R.drawable.action_search),"Home"));
+        parameters.add(new MenuItem(getDrawable(R.drawable.action_search),"Profile"));
+        parameters.add(new MenuItem(getDrawable(R.drawable.action_search),"Contacts"));
+        parameters.add(new MenuItem(getDrawable(R.drawable.action_search),"Settings"));
 
         mMenuItemTitle=getResources().getStringArray(R.array.menuitem_title);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

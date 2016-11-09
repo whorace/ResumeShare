@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
  * Created by jiahuiming on 11/6/16.
  */
 
-public class NavigationItem {
+public class MenuItem {
     public Drawable getDrawable() {
         return drawable;
     }
@@ -25,7 +25,7 @@ public class NavigationItem {
 
 
 
-    public NavigationItem(Drawable drawable, String title) {
+    public MenuItem(Drawable drawable, String title) {
         this.drawable = drawable;
         this.title = title;
     }

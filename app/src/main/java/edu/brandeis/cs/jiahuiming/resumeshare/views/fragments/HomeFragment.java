@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
+import edu.brandeis.cs.jiahuiming.resumeshare.utils.LocationUtil;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.WaveView;
 
 /**
@@ -57,6 +58,7 @@ public class HomeFragment extends Fragment {
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
                     mWaveView.stop();
                     Log.d("Wave,","stop");
+                   // LocationUtil locUtil=new LocationUtil(getActivity());
                     // Put your own click event here
                 }
                 return false;

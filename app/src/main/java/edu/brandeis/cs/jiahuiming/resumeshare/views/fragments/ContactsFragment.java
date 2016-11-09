@@ -21,8 +21,6 @@ import edu.brandeis.cs.jiahuiming.resumeshare.beans.ContactList;
  */
 public class ContactsFragment extends Fragment{
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 
@@ -31,7 +29,12 @@ public class ContactsFragment extends Fragment{
         //mWaveView = (WaveView)mFragment.findViewById(R.id.waveview);
         List<ContactList> item_ContactList=new ArrayList<>();
         for(int i = 0; i < 20 ; i++){
-            item_ContactList.add(new ContactList(R.mipmap.ic_launcher,"Kate Spade","xxxx.@brandeis.edu","123.pdf","www.linkedin.com"));
+            if(i%2==0){
+                item_ContactList.add(new ContactList(R.mipmap.ic_launcher,"Kate Spade","xxxx.@brandeis.edu","123.pdf","www.linkedin.com"));
+            }else{
+                item_ContactList.add(new ContactList(R.mipmap.ic_launcher,"Hao Wang","xxxx.@gmail.com","123.pdf","www.linkedin.com"));
+            }
+
             //ContactList(int imageId,String name,String account,String resume,String linkedin)
 
 
@@ -41,7 +44,6 @@ public class ContactsFragment extends Fragment{
 
         return mFragment;
     }
-
 
 
 }
