@@ -21,7 +21,7 @@ public class LoginController {
     }
 
     public void login(String account,String password) {
-        NetworkChecker networkerchecker = new NetworkChecker(context);
+        NetworkChecker networkerchecker = new NetworkChecker(this.context);
 
         /**
          * verify account and password input by user
@@ -31,7 +31,7 @@ public class LoginController {
 
         if (account.equals("") || password.equals("")) {
             Toast.makeText(context, "Account and Password can not be empty!", Toast.LENGTH_LONG).show();
-        } else if (!networkerchecker.isNetworkAvailable()) {
+        } else if (!networkerchecker.isNetworkConnected()) {
             Toast.makeText(context, "no avaliable network connection can not be use!", Toast.LENGTH_LONG).show();
         } else {
             Intent intent = new Intent(context, HomeActivity.class);

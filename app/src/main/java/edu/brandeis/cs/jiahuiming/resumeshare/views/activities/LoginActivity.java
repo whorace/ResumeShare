@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         mRegisterStatue=false;
         mLoginStatue=true;
-        mLoginController=new LoginController(this);
+        mLoginController=new LoginController(LoginActivity.this);
 
 //        mLoginPresenterImpl=new LoginPresenterImpl(this,this);
         mTv_account=(EditText)findViewById(R.id.tv_account);
@@ -45,13 +45,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(mLoginStatue==true&&mRegisterStatue==false){
-
+                    mLoginController.login(mTv_account.getText().toString(),mTv_password.getText().toString());
                 }
-//                    mLoginPresenterImpl.login(mTv_account.getText().toString(),mTv_password.getText().toString());}
                 else if(mLoginStatue==false&&mRegisterStatue==true){
                     mRegisterStatue=false;
                     mLoginStatue=true;
-                    mLoginController.login(mTv_account.getText().toString(),mTv_password.getText().toString());
                     mTv_password_again.setVisibility(View.INVISIBLE);
 
                 }
