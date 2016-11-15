@@ -72,11 +72,11 @@ public class UserController {
                 if(password.equals(password2))
                 {
                     userModel=new UserModel(context);
-                    userModel.addUserToRemote(email,password);
-//                    if(userModel.addUserToLocal(email,password)!=-1)
-//                        Toast.makeText(context, "Success to Register", Toast.LENGTH_LONG).show();
-//                    else
-//                        Toast.makeText(context, "Unable to Register", Toast.LENGTH_LONG).show();
+                    userModel.addUserToLocal(email,password);
+                    if(userModel.addUserToLocal(email,password)!=-1)
+                        Toast.makeText(context, "Success to Register", Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(context, "Unable to Register", Toast.LENGTH_LONG).show();
                 }
                 else
                 {Toast.makeText(context, "Passwords are not same",
