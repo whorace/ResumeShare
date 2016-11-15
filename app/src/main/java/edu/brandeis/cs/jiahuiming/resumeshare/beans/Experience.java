@@ -41,6 +41,4 @@ public class Experience {
     public void setPosition(String position) {
         Position = position;
     }
-
-
 }

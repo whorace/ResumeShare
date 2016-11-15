@@ -34,7 +34,6 @@ public class SkillModel {
                 skill.setAccount(cursor.getString(cursor.getColumnIndex("Account")));
                 skill.setSkill(cursor.getString(cursor.getColumnIndex("Skill")));
                 skillslist.add(skill);
-
             }
         }
         return skillslist;
@@ -58,6 +57,4 @@ public class SkillModel {
         }
         return mskill;
     }
-
-
 }

@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.DBOpenHelper;
+import edu.brandeis.cs.jiahuiming.resumeshare.utils.HttpHelper;
 
 /**
  * Created by jiahuiming on 11/8/16.
@@ -16,6 +18,7 @@ public class UserModel {
     private User user;
     private Context context;
     private DBOpenHelper mDBOpenHelper;
+    private HttpHelper mHttpHelper;
     private SQLiteDatabase db;
 
     public UserModel(Context context){
@@ -45,5 +48,11 @@ public class UserModel {
         value.put("Account",account);
         value.put("Password",password);
         return db.insert("User",null,value);
+    }
+
+    public void addUserToRemote(String account,String password){
+        mHttpHelper= new HttpHelper("user","register","account="+account+"&password="+password,context);
+        String result=mHttpHelper.doGet();
+        Toast.makeText(context,result,Toast.LENGTH_LONG).show();
     }
 }

@@ -6,17 +6,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 /**
- * Created by jiahuiming on 10/25/16.
+ * Created by jiahuiming on 11/10/16.
  */
-public class EducationAdapter extends BaseAdapter {
+
+public class SkillAdapter extends BaseAdapter {
 
     private Context context;
     private String account;
 
-    public EducationAdapter(Context context,String account) {
+    public SkillAdapter(Context context,String account) {
         this.account = account;
         this.context = context;
     }
+
     @Override
     public int getCount() {
         return 0;

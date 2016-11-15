@@ -1,37 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_horizontal_margin">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <EditText
             android:id="@+id/tv_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textview_hight"
+            android:background="@color/white"
+            android:hint="@string/hint_account"
+            android:textColorHint="@color/hint"
+            android:textColor="@color/black"
+            android:padding="@dimen/textmagrgin" />
         <EditText
             android:id="@+id/tv_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textview_hight"
+            android:background="@color/white"
+            android:hint="@string/hint_password"
+            android:textColorHint="@color/hint"
+            android:textColor="@color/black"
+            android:padding="@dimen/textmagrgin"/>
         <EditText
             android:id="@+id/tv_password_again"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textview_hight"
+            android:background="@color/white"
+            android:hint="@string/hint_password_again"
+            android:textColorHint="@color/hint"
+            android:textColor="@color/black"
+            android:padding="@dimen/textmagrgin"/>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/btn_login"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_login"/>
+                android:text="@string/btn_login" />
             <Button
                 android:id="@+id/btn_register"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_register"/>
         </LinearLayout>
+        <Button
+            android:id="@+id/btn_signup"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textview_hight"
+            android:textColor="@color/white"
+            android:text="@string/hint_signup"
+            android:gravity="center"/>
     </LinearLayout>
 </RelativeLayout>

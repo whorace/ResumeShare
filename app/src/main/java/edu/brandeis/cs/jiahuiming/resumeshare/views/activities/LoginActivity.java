@@ -10,18 +10,21 @@ import android.widget.Toast;
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.LoginController;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.RegisterController;
+import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 
 public class LoginActivity extends AppCompatActivity {
 
     private Button mBtn_login;
     private Button mBtn_register;
+    private Button mBtn_signup;
     private EditText mTv_account;
     private EditText mTv_password;
     private EditText mTv_password_again;
     private boolean mRegisterStatue;
     private boolean mLoginStatue;
-    private LoginController mLoginController;
-    private RegisterController mRegisterController;
+//    private LoginController mLoginController;
+//    private RegisterController mRegisterController;
+    private UserController mUserController;
 
 
     @Override
@@ -30,25 +33,23 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         mRegisterStatue=false;
         mLoginStatue=true;
-        mLoginController=new LoginController(LoginActivity.this);
-        mRegisterController=new RegisterController(LoginActivity.this);
+        mUserController=new UserController(LoginActivity.this);
 
 //        mLoginPresenterImpl=new LoginPresenterImpl(this,this);
         mTv_account=(EditText)findViewById(R.id.tv_account);
         mTv_password=(EditText)findViewById(R.id.tv_password);
         mTv_password_again=(EditText)findViewById(R.id.tv_password_again);
-        mTv_account.setText("account");
-        mTv_password.setText("password");
-        mTv_password_again.setText("password again");
         mTv_password_again.setVisibility(View.INVISIBLE);
         mBtn_login=(Button)findViewById(R.id.btn_login);
+        mBtn_signup=(Button)findViewById(R.id.btn_signup);
+
         mBtn_register=(Button)findViewById(R.id.btn_register);
         mBtn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(mLoginStatue==true&&mRegisterStatue==false){
-                    mLoginController.login(mTv_account.getText().toString(),mTv_password.getText().toString());
+                    mUserController.login(mTv_account.getText().toString(),mTv_password.getText().toString());
                 }
                 else if(mLoginStatue==false&&mRegisterStatue==true){
                     mRegisterStatue=false;
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                     mLoginStatue=false;
                     mTv_password_again.setVisibility(View.VISIBLE);
                 }else if(mRegisterStatue==true&&mLoginStatue==false){
-                    mRegisterController.register(mTv_account.getText().toString(),mTv_password.getText().toString(),mTv_password_again.getText().toString());
+                    mUserController.register(mTv_account.getText().toString(),mTv_password.getText().toString(),mTv_password_again.getText().toString());
 //                    mLoginPresenterImpl.register(mTv_account.getText().toString(),mTv_password.getText().toString(),mTv_password_again.getText().toString());
 
                 }

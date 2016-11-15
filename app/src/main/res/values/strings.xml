@@ -6,10 +6,18 @@
     <string name="tv_password">password</string>
     <string name="btn_login">login</string>
     <string name="btn_register">register</string>
+    <string name="tv_education">Education BackGround</string>
+    <string name="tv_experience">Professional Experience</string>
+    <string name="tv_skill">Skills</string>
     <string-array name="menuitem_title">
         <item>Home</item>
         <item>Profile</item>
         <item>Contacts</item>
         <item>Settings</item>
     </string-array>
+    <string name="hint_account">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_password_again">password again</string>
+    <string name="hint_signup">Not a member?Sign up now</string>
+    <string name="hint_signin">Already is member.Sign in now</string>
 </resources>
