@@ -46,4 +46,11 @@
         <item name="android:layout_marginBottom">@dimen/textmagrgin</item>
     </style>
 
+    <style name="resume_item_title">
+        <item name="android:textSize">@dimen/title_hight</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_height">@dimen/textview_hight</item>
+        <item name="android:padding">@dimen/textmagrgin</item>
+    </style>
+
 </resources>

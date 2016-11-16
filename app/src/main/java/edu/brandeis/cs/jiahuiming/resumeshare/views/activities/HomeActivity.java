@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ProfileFragment;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ResumeFragment;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.MenuItem;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.MenuItemAdapter;
@@ -61,7 +62,7 @@ public class HomeActivity extends AppCompatActivity  {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
         mDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ProfileFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ResumeFragment()).commit();
         mCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

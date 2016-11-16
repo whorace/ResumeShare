@@ -9,6 +9,7 @@
     <string name="tv_education">Education BackGround</string>
     <string name="tv_experience">Professional Experience</string>
     <string name="tv_skill">Skills</string>
+    <string name="tv_defaultname">Name: NOT FILLED YET</string>
     <string-array name="menuitem_title">
         <item>Home</item>
         <item>Profile</item>

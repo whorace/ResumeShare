@@ -45,9 +45,9 @@ public class ResumeFragment extends Fragment {
 
         account=((HomeActivity)getActivity()).getResumeAccount();
         View mFragment = inflater.inflate(R.layout.fragment_resume, container, false);
-        mIv_Profile=(ImageView)mFragment.findViewById(R.id.im_fr_profile);
-        mTv_Email=(TextView)mFragment.findViewById(R.id.tv_fr_account);
-        mTv_Name=(TextView)mFragment.findViewById(R.id.tv_fr_name);
+        mIv_Profile=(ImageView)mFragment.findViewById(R.id.civ_profile_image);
+//        mTv_Email=(TextView)mFragment.findViewById(R.id.);
+//        mTv_Name=(TextView)mFragment.findViewById(R.id.tv_fr_name);
         mLv_Educations=(ListView)mFragment.findViewById(R.id.lv_fr_education);
         mLv_Experiences=(ListView)mFragment.findViewById(R.id.lv_fr_experience);
         mLv_Skills=(ListView)mFragment.findViewById(R.id.lv_fr_skill);
