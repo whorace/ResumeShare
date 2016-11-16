@@ -20,4 +20,6 @@
     <string name="hint_password_again">password again</string>
     <string name="hint_signup">Not a member? Sign up now</string>
     <string name="hint_signin">Already is member. Sign in now</string>
+    <string name="hint_home_fragment">Find People Nearby</string>
+    <string name="btn_default">Button</string>
 </resources>

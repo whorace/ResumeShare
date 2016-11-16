@@ -1,7 +1,10 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.views.activities;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +17,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ProfileFragment;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.MenuItem;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.MenuItemAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ContactsFragment;
@@ -25,6 +30,8 @@ public class HomeActivity extends AppCompatActivity  {
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private NavigationView mNavigationView;
+    private CircleImageView mCircleImageView;
 
     private ListView mDrawerList;
     private String[] mMenuItemTitle;
@@ -41,80 +48,57 @@ public class HomeActivity extends AppCompatActivity  {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ArrayList<MenuItem> parameters=new ArrayList<MenuItem>();
-
-        parameters.add(new MenuItem(getDrawable(R.drawable.action_search),"Home"));
-        parameters.add(new MenuItem(getDrawable(R.drawable.action_search),"Profile"));
-        parameters.add(new MenuItem(getDrawable(R.drawable.action_search),"Contacts"));
-        parameters.add(new MenuItem(getDrawable(R.drawable.action_search),"Settings"));
 
         mMenuItemTitle=getResources().getStringArray(R.array.menuitem_title);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-
+        mNavigationView = (NavigationView) findViewById(R.id.navigationview);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mCircleImageView=(CircleImageView)mNavigationView.getHeaderView(0).findViewById(R.id.civ_profile);
 
         setSupportActionBar(mToolbar);
-        mDrawerList=(ListView)findViewById(R.id.left_drawer) ;
-        mDrawerList.setAdapter(new MenuItemAdapter(this,parameters));
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
         mDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new HomeFragment()).commit();
-        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ProfileFragment()).commit();
+        mCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ProfileFragment()).commit();
+                mToolbar.setTitle("Profile");
+                mDrawerLayout.closeDrawer(mNavigationView);
 
             }
         });
 
-
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
-                    case 0:
-                        //  mHomeFragment=new HomeFragment();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new HomeFragment()).commit();
-                        mToolbar.setTitle("ShareResume");
-                        mDrawerLayout.closeDrawer(mDrawerList);
-                        break;
+            public boolean onNavigationItemSelected(@NonNull android.view.MenuItem item) {
+               String title=item.getTitle().toString();
+                item.setChecked(true);
+                if(title.equals("Home")){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new HomeFragment()).commit();
+                    mToolbar.setTitle("ShareResume");
+                    mDrawerLayout.closeDrawer(mNavigationView);
 
-                    case 1:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new SettingsFragment()).commit();
-                        mToolbar.setTitle("Profile");
-                        mDrawerLayout.closeDrawer(mDrawerList);
-                        break;
+                }else if(title.equals("Profile")){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ProfileFragment()).commit();
+                    mToolbar.setTitle("Profile");
+                    mDrawerLayout.closeDrawer(mNavigationView);
 
-                    case 2:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ContactsFragment()).commit();
+                }else if(title.equals("Contacts")){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ContactsFragment()).commit();
                         mToolbar.setTitle("Contacts");
-                        mDrawerLayout.closeDrawer(mDrawerList);
-                        break;
+                        mDrawerLayout.closeDrawer(mNavigationView);
 
-                    case 3:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingsFragment()).commit();
+                }else{
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingsFragment()).commit();
                         mToolbar.setTitle("Settings");
-                        mDrawerLayout.closeDrawer(mDrawerList);
-                        break;
+                        mDrawerLayout.closeDrawer(mNavigationView);
 
                 }
+                return false;
             }
         });
     }

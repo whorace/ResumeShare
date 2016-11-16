@@ -7,4 +7,19 @@
     <color name="black">#000000</color>
     <color name="hint">#FF7E7C7C</color>
     <color name="transparent">#00000000</color>
+    <color name="colorPrimaryDark_transparent">#AA464748</color>
+    <color name="colorPrimaryDark_transparent_shallow">#DD464748</color>
+    <color name="highLight_tansparent">#88FFFFFF</color>
+    <!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
+        <!--<item-->
+            <!--android:state_checked="true"-->
+            <!--android:color="@color/colorAccent"/> &lt;!&ndash; selected颜色 &ndash;&gt;-->
+        <!--<item-->
+            <!--android:state_pressed="true"-->
+            <!--android:color="@color/colorAccent"/> &lt;!&ndash; pressed颜色 &ndash;&gt;-->
+        <!--<item-->
+            <!--android:state_focused="true"-->
+            <!--android:color="@color/colorAccent"/> &lt;!&ndash; focused颜色 &ndash;&gt;-->
+        <!--<item android:color="#00000000"/> &lt;!&ndash; default颜色 &ndash;&gt;-->
+    <!--</selector>-->
 </resources>

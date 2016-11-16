@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="450dp"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/dialog_edittext_enter"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:gravity="top"
+        android:hint="输入内容"
+        android:imeOptions="actionNext"
+        android:inputType="textMultiLine"
+        android:padding="5dp"
+        android:singleLine="true" />
+
+    <ListView
+        android:id="@+id/dialog_simplelist_list"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:cacheColorHint="#00000000"
+        android:dividerHeight="1.0dip"
+        android:scrollingCache="false" />
+
+</LinearLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/navigation_header_height"
+    android:background="@color/black"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView
+        android:id="@+id/civ_profile"
+        android:layout_width="@dimen/navigation_imageview"
+        android:layout_height="@dimen/navigation_imageview"
+        android:layout_centerInParent="true"
+        android:src="@drawable/man"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/border_width" />
+
+</LinearLayout>
