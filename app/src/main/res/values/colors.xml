@@ -9,5 +9,6 @@
     <color name="transparent">#00000000</color>
     <color name="colorPrimaryDark_transparent">#AA464748</color>
     <color name="colorPrimaryDark_transparent_shallow">#DD464748</color>
+    <color name="colorAccent_transparent">#33DC372F</color>
     <color name="highLight_tansparent">#88FFFFFF</color>
 </resources>

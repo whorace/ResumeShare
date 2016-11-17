@@ -44,6 +44,9 @@ public class HomeActivity extends AppCompatActivity  {
     private String ResumeAccount;
     public String getResumeAccount(){return ResumeAccount;}
     public void setResumeAccount(String resumeAccount){this.ResumeAccount=resumeAccount;}
+    public String getCurrentUser(){
+        return mCurrentAccount;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,7 +107,5 @@ public class HomeActivity extends AppCompatActivity  {
         });
     }
 
-    public String getCurrentUser(){
-        return mCurrentAccount;
-    }
+
 }

@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
         mWaveView = (WaveView)mFragment.findViewById(R.id.waveview);
         mWaveView.setDuration(5000);
         mWaveView.setStyle(Paint.Style.FILL);
-        mWaveView.setColor(Color.RED);
+        mWaveView.setColor(getResources().getColor(R.color.colorAccent_transparent));
         mWaveView.setInterpolator(new LinearOutSlowInInterpolator());
         mButton = (Button)mFragment.findViewById(R.id.button1);
         mButton.setOnTouchListener(new View.OnTouchListener() {

@@ -39,17 +39,13 @@ public class WaveView extends View {
     };
 
     private Interpolator mInterpolator = new LinearInterpolator();
-
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
     public WaveView(Context context) {
         super(context);
     }
-
     public WaveView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-
     public void setStyle(Paint.Style style) {
         mPaint.setStyle(style);
     }
@@ -64,7 +60,6 @@ public class WaveView extends View {
     public void setMaxRadiusRate(float maxRadiusRate) {
         mMaxRadiusRate = maxRadiusRate;
     }
-
     public void setColor(int color) {
         mPaint.setColor(color);
     }

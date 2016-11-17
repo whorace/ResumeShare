@@ -1,23 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent_transparent">
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/textview_hight"
-        android:orientation="horizontal">
-
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="@dimen/activity_horizontal_padding_small">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/school_icon"/>
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
+            android:src="@drawable/school_icon" />
 
-        <TextView
-            android:id="@+id/tv_school"
+        <View
+            android:layout_width="@dimen/activity_horizontal_padding_small"
+            android:layout_height="match_parent"></View>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/school"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sn_10sp" />
 
+            <TextView
+                android:id="@+id/tv_school"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Brandeis University"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sn_18sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -26,38 +47,81 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/textview_hight"
             android:orientation="horizontal"
-            >
-
+            android:layout_width="@dimen/default_width"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:padding="@dimen/activity_horizontal_padding_small">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/major_icon"/>/>
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small"
+                android:src="@drawable/major_icon" />
 
-            <TextView
-                android:id="@+id/tv_major"
+            <View
+                android:layout_width="@dimen/activity_horizontal_padding_small"
+                android:layout_height="match_parent"></View>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/major"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sn_10sp"
+                    />
 
+                <TextView
+                    android:id="@+id/tv_major"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Computer Science"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sn_16sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/textview_hight"
-            android:orientation="horizontal">
-
+            android:orientation="horizontal"
+            android:layout_width="@dimen/default_width"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center_vertical"
+            android:padding="@dimen/activity_horizontal_padding_small">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/degree_icon"/>/>
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small"
+                android:src="@drawable/degree_icon" />
 
-            <TextView
-                android:id="@+id/tv_degree"
+            <View
+                android:layout_width="@dimen/activity_horizontal_padding_small"
+                android:layout_height="match_parent"></View>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/degree"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sn_10sp"
+                    />
 
+                <TextView
+                    android:id="@+id/tv_degree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Master"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sn_16sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -67,38 +131,81 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/textview_hight"
-            android:orientation="horizontal">
-
+            android:orientation="horizontal"
+            android:layout_width="@dimen/default_width"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:padding="@dimen/activity_horizontal_padding_small">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/calender_icon"/>/>
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small"
+                android:src="@drawable/calender_icon" />
 
-            <TextView
-                android:id="@+id/tv_startyear"
+            <View
+                android:layout_width="@dimen/activity_horizontal_padding_small"
+                android:layout_height="match_parent"></View>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/school"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sn_10sp"
+                    />
 
+                <TextView
+                    android:id="@+id/tv_startyear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2010"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sn_18sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/textview_hight"
-            android:orientation="horizontal">
-
+            android:orientation="horizontal"
+            android:layout_width="@dimen/default_width"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center_vertical"
+            android:padding="@dimen/activity_horizontal_padding_small">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/calender_icon"/>
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small"
+                android:src="@drawable/calender_icon" />
 
-            <TextView
-                android:id="@+id/tv_endyear"
+            <View
+                android:layout_width="@dimen/activity_horizontal_padding_small"
+                android:layout_height="match_parent"></View>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/school"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sn_10sp"
+                    />
 
+                <TextView
+                    android:id="@+id/tv_endyear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2016"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sn_18sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

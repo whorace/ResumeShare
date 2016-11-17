@@ -87,6 +87,5 @@ public class ContactsAdapter extends BaseAdapter {
         public ImageView imageView;
         public TextView name;
         public TextView account;
-
     }
 }
