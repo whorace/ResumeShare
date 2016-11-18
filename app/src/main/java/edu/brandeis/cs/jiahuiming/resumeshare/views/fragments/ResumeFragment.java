@@ -81,8 +81,8 @@ public class ResumeFragment extends Fragment {
         mLv_Experiences=(ListView)mFragment.findViewById(R.id.lv_experience);
         mLv_Skills=(ListView)mFragment.findViewById(R.id.lv_skill);
 
-        EducationAdapter mEducationAdapter=new EducationAdapter(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),meducationlist);
-        ExperienceAdapter mExperienceAdapter=new ExperienceAdapter(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),mexperiencelist);
+        EducationAdapter mEducationAdapter=new EducationAdapter(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),meducationlist,0);
+        ExperienceAdapter mExperienceAdapter=new ExperienceAdapter(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),mexperiencelist,0);
         SkillAdapter mSkillAdapter=new SkillAdapter(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),mskilllist);
 
         mLv_Educations.setAdapter(mEducationAdapter);

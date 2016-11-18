@@ -1,11 +1,16 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.adapters;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -17,6 +22,7 @@ import edu.brandeis.cs.jiahuiming.resumeshare.beans.ContactList;
  * Created by jiahuiming on 10/25/16.
  */
 import android.widget.Button;
+import android.widget.Toast;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ResumeFragment;
@@ -55,7 +61,7 @@ public class ContactsAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
         this.position=position;
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
         if(convertView==null){
             viewHolder=new ViewHolder();
             convertView=mInflater.inflate(R.layout.list_item_contact,null);
@@ -80,6 +86,7 @@ public class ContactsAdapter extends BaseAdapter {
                 ((HomeActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ResumeFragment()).commit();
             }
         });
+
         return convertView;
     }
 

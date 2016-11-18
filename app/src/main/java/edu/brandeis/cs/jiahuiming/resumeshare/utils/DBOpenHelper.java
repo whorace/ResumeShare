@@ -21,24 +21,23 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         updateTable="DROP TABLE IF IT EXISTS"+TableName;
         if(TableName.equals("User"))
-            createTable = "CREATE TABLE if not exists [User](Account text primary key,Password text not null, FirstName text, SecondName text)";
+            createTable = "CREATE TABLE if not exists [User](ID integer PRIMARY KEY AUTOINCREMENT, Account text not null, Password text not null, FirstName text, SecondName text)";
         else if(TableName.equals("Skill")){
-            createTable = "CREATE TABLE if not exists [Skill](Account text primary key,Skill text primary key)";
+            createTable = "CREATE TABLE if not exists [Skill](ID integer PRIMARY KEY AUTOINCREMENT, Account text primary key,Skill text primary key)";
 
         }else if(TableName.equals("Experience")){
-            createTable = "CREATE TABLE if not exists [Experience](Account text primary key,Company text, Position text, Order integer)";
+            createTable = "CREATE TABLE if not exists [Experience](ID integer PRIMARY KEY AUTOINCREMENT, Account text primary key,Company text, Position text, Order integer)";
 
         }else if(TableName.equals("Education")){
-            createTable = "CREATE TABLE if not exists [Education](Account text primary key,School text not null, StartYear text, EndYear text, Degree text, Major text, Order integer)";
+            createTable = "CREATE TABLE if not exists [Education](ID integer PRIMARY KEY AUTOINCREMENT, Account text primary key,School text not null, StartYear text, EndYear text, Degree text, Major text, Order integer)";
 
         }else if(TableName.equals("ProfileImage")){
-            createTable = "CREATE TABLE if not exists [ProfileImage](Account text primary key,ScourceId text)";
+            createTable = "CREATE TABLE if not exists [ProfileImage](ID integer PRIMARY KEY AUTOINCREMENT, Account text primary key, ScourceId text)";
 
         }else if(TableName.equals("Contact")){
-            createTable = "CREATE TABLE if not exists [Contact](HostAccount text primary key,GuestAccount text)";
+            createTable = "CREATE TABLE if not exists [Contact](ID integer PRIMARY KEY AUTOINCREMENT, HostAccount text primary key, GuestAccount text)";
 
         }
-
     }
 
     @Override
@@ -59,5 +58,40 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             onCreate(db);
 
         }
+    }
+
+    public void rebuildTable(SQLiteDatabase db,String TableName){
+        if(TableName.equals("User"))
+            createTable = "CREATE TABLE if not exists [User](ID integer PRIMARY KEY AUTOINCREMENT, Account text not null, Password text not null, FirstName text, SecondName text)";
+        else if(TableName.equals("Skill")){
+            createTable = "CREATE TABLE if not exists [Skill](ID integer PRIMARY KEY AUTOINCREMENT, Account text primary key,Skill text primary key)";
+
+        }else if(TableName.equals("Experience")){
+            createTable = "CREATE TABLE if not exists [Experience](ID integer PRIMARY KEY AUTOINCREMENT, Account text primary key,Company text, Position text, Order integer)";
+
+        }else if(TableName.equals("Education")){
+            createTable = "CREATE TABLE if not exists [Education](ID integer PRIMARY KEY AUTOINCREMENT, Account text primary key,School text not null, StartYear text, EndYear text, Degree text, Major text, Order integer)";
+
+        }else if(TableName.equals("ProfileImage")){
+            createTable = "CREATE TABLE if not exists [ProfileImage](ID integer PRIMARY KEY AUTOINCREMENT, Account text primary key, ScourceId text)";
+
+        }else if(TableName.equals("Contact")){
+            createTable = "CREATE TABLE if not exists [Contact](ID integer PRIMARY KEY AUTOINCREMENT, HostAccount text primary key, GuestAccount text)";
+
+        }
+
+        db.beginTransaction();
+        db.execSQL(createTable);
+        db.setTransactionSuccessful();
+        db.endTransaction();
+    }
+
+    public void dropTable(SQLiteDatabase db,String tableName){
+        String drop="DROP TABLE IF EXISTS ["+tableName+"]";
+        db.beginTransaction();
+        db.execSQL(drop);
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
     }
 }

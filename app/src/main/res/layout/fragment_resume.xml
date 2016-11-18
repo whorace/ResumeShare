@@ -73,10 +73,10 @@
                 android:id="@+id/lv_education"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark_transparent"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/sn_16sp"
-                android:divider="@color/colorAccent"
+                android:divider="@color/transparent"
+                android:focusableInTouchMode="false"
                 android:dividerHeight="@dimen/splitline_hight"/>
 
 
@@ -94,11 +94,11 @@
                 android:id="@+id/lv_experience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark_transparent"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/sn_16sp"
-                android:divider="@color/colorAccent"
+                android:divider="@color/transparent"
                 android:dividerHeight="@dimen/splitline_hight"
+                android:focusableInTouchMode="false"
                 />
 
             <TextView
@@ -114,11 +114,11 @@
                 android:id="@+id/lv_skill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark_transparent"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/sn_16sp"
-                android:divider="@color/colorAccent"
+                android:divider="@color/transparent"
                 android:dividerHeight="@dimen/splitline_hight"
+                android:focusableInTouchMode="false"
                 />
 
             <View

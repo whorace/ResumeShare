@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -35,6 +36,7 @@ public class ContactsFragment extends Fragment{
                 item_ContactList.add(new ContactList(R.mipmap.ic_launcher,"Hao Wang","xxxx.@gmail.com","123.pdf","www.linkedin.com"));
             }
 
+
             //ContactList(int imageId,String name,String account,String resume,String linkedin)
 
 
@@ -44,6 +46,7 @@ public class ContactsFragment extends Fragment{
 
         return mFragment;
     }
+
 
 
 }

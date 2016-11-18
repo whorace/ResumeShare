@@ -8,14 +8,14 @@ import edu.brandeis.cs.jiahuiming.resumeshare.R;
 
 public class DoubleEditDialog extends BaseDialog {
 
-	private EditText mEtNameEnter;
-	private EditText mEtDescEnter;
+	private EditText mEtFirstName;
+	private EditText mEtSecondName;
 
 	public DoubleEditDialog(Context context) {
 		super(context);
 		setDialogContentView(R.layout.include_dialog_double_edittext);
-		mEtNameEnter = (EditText) findViewById(R.id.dialog_edittext_name_enter);
-		mEtDescEnter = (EditText) findViewById(R.id.dialog_edittext_desc_enter);
+		mEtFirstName = (EditText) findViewById(R.id.dialog_edittext_firstname);
+		mEtSecondName = (EditText) findViewById(R.id.dialog_edittext_secondname);
 	}
 
 	@Override
@@ -35,46 +35,43 @@ public class DoubleEditDialog extends BaseDialog {
 		super.setButton2(text2, listener2);
 	}
 
-	public String getNameText() {
-		if (isNull(mEtNameEnter)) {
+	public String getFirstNameText() {
+		if (isNull(mEtFirstName)) {
 			return null;
 		}
-		return mEtNameEnter.getText().toString().trim();
+		return mEtFirstName.getText().toString().trim();
 	}
 
-	public String getDescText() {
-		if (isNull(mEtDescEnter)) {
+	public String getSecondNameText() {
+		if (isNull(mEtSecondName)) {
 			return null;
 		}
-		return mEtDescEnter.getText().toString().trim();
+		return mEtSecondName.getText().toString().trim();
 	}
 
 	public void setTextNull() {
-		mEtNameEnter.setText("");
-		mEtDescEnter.setText("");
+		mEtFirstName.setText("");
+		mEtSecondName.setText("");
 	}
 
-	public void setNameHint(CharSequence text) {
-		mEtNameEnter.setHint(text);
+	public void setFirstNameHint(CharSequence text) {
+		mEtFirstName.setHint(text);
 	}
 
-	public void setDescHint(CharSequence text) {
-		mEtDescEnter.setHint(text);
+	public void setSecondNameHint(CharSequence text) {
+		mEtSecondName.setHint(text);
 	}
 
 	private boolean isNull(EditText editText) {
 		String text = editText.getText().toString().trim();
-		if (text != null && text.length() > 0) {
-			return false;
+		if (text != null && text.length() > 0) {return false;
 		}
 		return true;
 	}
 
-	public void requestNameFocus() {
-		mEtNameEnter.requestFocus();
+	public void requestFirstNameNameFocus() {
+		mEtFirstName.requestFocus();
 	}
-	
-	public void requestDescFocus() {
-		mEtDescEnter.requestFocus();
+	public void requestSecondNameFocus() {mEtSecondName.requestFocus();
 	}
 }

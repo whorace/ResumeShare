@@ -20,12 +20,14 @@ public class ExperienceAdapter extends BaseAdapter {
     private List<Experience> mList;
     private Context context;
     private String account;
+    private int editmode;
     private LayoutInflater mInflater;
 
-    public ExperienceAdapter(Context context,String account,List<Experience> list) {
+    public ExperienceAdapter(Context context,String account,List<Experience> list,int editmode) {
         this.mList=list;
         this.account = account;
         this.context = context;
+        this.editmode=editmode;
         this.mInflater= LayoutInflater.from(context);
     }
 

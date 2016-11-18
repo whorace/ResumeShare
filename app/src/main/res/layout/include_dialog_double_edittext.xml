@@ -5,22 +5,21 @@
     android:orientation="vertical" >
 
     <EditText
-        android:id="@+id/dialog_edittext_name_enter"
+        android:id="@+id/dialog_edittext_firstname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="输入阶段任务名"
         android:imeOptions="actionNext"
-        android:maxLength="10"
-        android:singleLine="true" />
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textCursorDrawable="@null" />
 
     <EditText
-        android:id="@+id/dialog_edittext_desc_enter"
+        android:id="@+id/dialog_edittext_secondname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="输入阶段任务描述"
-        android:inputType="textMultiLine"
-        android:maxLength="42" />
+        android:imeOptions="actionNext"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textCursorDrawable="@null" />
 
 </LinearLayout>

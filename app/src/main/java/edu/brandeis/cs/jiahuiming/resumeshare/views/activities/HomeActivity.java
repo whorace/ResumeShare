@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -65,11 +66,11 @@ public class HomeActivity extends AppCompatActivity  {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
         mDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ResumeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ResumeFragment()).addToBackStack(null).commit();
         mCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ProfileFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ProfileFragment()).addToBackStack(null).commit();
                 mToolbar.setTitle("Profile");
                 mDrawerLayout.closeDrawer(mNavigationView);
 
@@ -82,29 +83,39 @@ public class HomeActivity extends AppCompatActivity  {
                String title=item.getTitle().toString();
                 item.setChecked(true);
                 if(title.equals("Home")){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new HomeFragment()).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new HomeFragment()).addToBackStack(null).commit();
+
                     mToolbar.setTitle("ShareResume");
                     mDrawerLayout.closeDrawer(mNavigationView);
 
                 }else if(title.equals("Profile")){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ProfileFragment()).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ProfileFragment()).addToBackStack(null).commit();
                     mToolbar.setTitle("Profile");
                     mDrawerLayout.closeDrawer(mNavigationView);
 
                 }else if(title.equals("Contacts")){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ContactsFragment()).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ContactsFragment()).addToBackStack(null).commit();
                         mToolbar.setTitle("Contacts");
                         mDrawerLayout.closeDrawer(mNavigationView);
 
                 }else{
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingsFragment()).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingsFragment()).addToBackStack(null).commit();
                         mToolbar.setTitle("Settings");
                         mDrawerLayout.closeDrawer(mNavigationView);
 
                 }
+
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            getSupportFragmentManager().popBackStack();
+        }
+        return true;
     }
 
 
