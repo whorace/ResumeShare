@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,38 +33,23 @@ public class ContactModel {
         db=mDBOpenHelper.getReadableDatabase();
     }
 
-//    public ArrayList<Skill> getSkillsfromlocal(String account){
-//        Cursor cursor=db.rawQuery("select * from Skill Where Account = "+"account",null);
-//        ArrayList<Skill> skillslist=new ArrayList<Skill>();
-//        if(cursor.getCount()>0){
-//            Skill skill=new Skill();
-//            while (cursor.moveToNext()){
-//                skill.setAccount(cursor.getString(cursor.getColumnIndex("Account")));
-//                skill.setSkill(cursor.getString(cursor.getColumnIndex("Skill")));
-//                skillslist.add(skill);
-//            }
-//        }
-//        return skillslist;
-//
-//    }
-//
-//    public int getSkillsCountfromlocal(String account){{
-//        Cursor cursor=db.rawQuery("select * from Skill Where Account = "+"account ",null);
-//        return cursor.getCount();
-//    }
-//
-//    }
-//
-//    public Skill getSkillfromlocal(String account,String skill){
-//        Cursor cursor=db.rawQuery("select * from Skill Where Account = "+"account and Skill = "+skill,null);
-//        Skill mskill=new Skill();
-//        if(cursor.getCount()>0){
-//            cursor.moveToFirst();
-//            mskill.setAccount(cursor.getString(cursor.getColumnIndex("Account")));
-//            mskill.setSkill(cursor.getString(cursor.getColumnIndex("Skill")));
-//        }
-//        return mskill;
-//    }
+    public void addContactToRemote(String hostaccount,String guestaccount){
+        HttpTask task = new HttpTask();
+        task.setTaskHandler(new HttpTask.HttpTaskHandler(){
+            public void taskSuccessful(String json) {
+                try {
+                    result=json;
+                    Log.d("addContactToRemote",result);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            public void taskFailed() {
+            }
+        });
+        task.execute("user","addContact","hostaccount="+hostaccount+"&hostaccount="+guestaccount);
+    }
 
     public void loadContactsfromRemote(String account,final ContactsAdapter contactsAdapter) {
         HttpTask task = new HttpTask();
@@ -77,11 +63,6 @@ public class ContactModel {
                     user.setAccount(result);
                     contactsAdapter.putData(user);
                     contactsAdapter.notifyDataSetChanged();
-//                    Intent intent = new Intent(context, HomeActivity.class);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("account", user.getAccount());
-//                    intent.putExtras(bundle);
-//                    context.startActivity(intent);
                 }
                 catch (Exception e) {
                     e.printStackTrace();

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ProfileFragment;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.RequestsFragment;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ResumeFragment;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.MenuItem;
@@ -108,7 +109,12 @@ public class HomeActivity extends AppCompatActivity  {
                         mToolbar.setTitle("Contacts");
                         mDrawerLayout.closeDrawer(mNavigationView);
 
-                }else{
+                }else if(title.equals("Invitation")){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new RequestsFragment()).addToBackStack(null).commit();
+                    mToolbar.setTitle("Invitation");
+                    mDrawerLayout.closeDrawer(mNavigationView);
+                }
+                else{
                     getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingsFragment()).addToBackStack(null).commit();
                         mToolbar.setTitle("Settings");
                         mDrawerLayout.closeDrawer(mNavigationView);

@@ -110,9 +110,18 @@ public class UserController {
 
     }
 
-    public void addContact(){
+    public void addContact(String hostaccount,String guestaccount){
+        contactModel=new ContactModel(context);
+        contactModel.addContactToRemote(hostaccount,guestaccount);
 
     }
+
+    public void refuseRequest(String id){
+        requestModel=new RequestModel(context);
+        requestModel.delRequestOnRemote(id);
+    }
+
+
 
     public void searchPeople(){
 
@@ -203,7 +212,7 @@ public class UserController {
 
     public void showRequests(final RequestAdapter requestAdapter){
         requestModel=new RequestModel(context);
-      //  requestModel.loadRequestsfromRemote(((HomeActivity)context).getRequestAccount(),requestAdapter);
+        requestModel.loadRequestsfromRemote(((HomeActivity)context).getCurrentUser(),requestAdapter);
     }
 
     public void showRequestDetail(){

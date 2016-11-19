@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
@@ -9,11 +9,8 @@
     android:paddingTop="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_horizontal_margin">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
         <ImageView
+            android:id="@+id/iv_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/title"
@@ -24,6 +21,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:hint="@string/hint_account"
+            android:layout_below="@+id/iv_icon"
             android:textColorHint="@color/hint"
             android:textColor="@color/black"
             android:singleLine="true"
@@ -33,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:layout_below="@+id/tv_account"
             android:hint="@string/hint_password"
             android:textColorHint="@color/hint"
             android:textColor="@color/black"
@@ -43,17 +42,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:layout_below="@+id/tv_password"
             android:hint="@string/hint_password_again"
             android:textColorHint="@color/hint"
             android:textColor="@color/black"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:singleLine="true"
             android:padding="@dimen/textmagrgin"/>
 
         <View
+            android:id="@+id/view_space"
+            android:layout_below="@+id/tv_password_again"
             android:layout_width="match_parent"
             android:layout_height="@dimen/space_between_different_view"/>
         <LinearLayout
+            android:layout_below="@+id/view_space"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -71,5 +74,4 @@
                 android:gravity="center"
                 android:background="@color/transparent"/>
         </LinearLayout>
-    </LinearLayout>
 </RelativeLayout>

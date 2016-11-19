@@ -138,19 +138,19 @@
                 android:id="@+id/btn_addeducation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="add_education"/>
+                android:text="add education"/>
 
             <Button
                 android:id="@+id/btn_addexperience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="add_experience"/>
+                android:text="add experience"/>
 
             <Button
                 android:id="@+id/btn_addskill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="add_skill"/>
+                android:text="add skill"/>
 
             <View
                 android:layout_width="match_parent"

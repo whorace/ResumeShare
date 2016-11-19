@@ -5,6 +5,10 @@ import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,12 +35,10 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
         mLoginStatue=true;
         mUserController=new UserController(LoginActivity.this);
-
-//        mLoginPresenterImpl=new LoginPresenterImpl(this,this);
         mTv_account=(EditText)findViewById(R.id.tv_account);
         mTv_password=(EditText)findViewById(R.id.tv_password);
         mTv_password_again=(EditText)findViewById(R.id.tv_password_again);
-        mTv_password_again.setVisibility(View.GONE);
+        mTv_password_again.setVisibility(View.INVISIBLE);
         mBtn_login_register=(Button)findViewById(R.id.btn_login);
         mBtn_signup=(Button)findViewById(R.id.btn_signup);
         mBtn_signup.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG );
@@ -46,12 +48,36 @@ public class LoginActivity extends Activity {
                 if(mLoginStatue==true){
                     mLoginStatue=false;
                     mBtn_login_register.setText(getString(R.string.btn_register));
+                    AnimationSet animationSet=new AnimationSet(true);
+                    AlphaAnimation alphaAnimation=new AlphaAnimation(0,1);
+                    alphaAnimation.setDuration(1000);
+                    TranslateAnimation translateAnimation=new TranslateAnimation(
+                            Animation.RELATIVE_TO_SELF,0f,
+                            Animation.RELATIVE_TO_SELF,0f,
+                            Animation.RELATIVE_TO_SELF,-1f,
+                            Animation.RELATIVE_TO_SELF,0f);
+                    translateAnimation.setDuration(500);
+                    animationSet.addAnimation(translateAnimation);
+                    animationSet.addAnimation(alphaAnimation);
+                    mTv_password_again.startAnimation(animationSet);
                     mTv_password_again.setVisibility(View.VISIBLE);
                     mBtn_signup.setText(getString(R.string.hint_signin));
                 }else{
                     mLoginStatue=true;
                     mBtn_login_register.setText(R.string.btn_login);
-                    mTv_password_again.setVisibility(View.GONE);
+                    AnimationSet animationSet=new AnimationSet(true);
+                    AlphaAnimation alphaAnimation=new AlphaAnimation(1,0);
+                    alphaAnimation.setDuration(1000);
+                    TranslateAnimation translateAnimation=new TranslateAnimation(
+                            Animation.RELATIVE_TO_SELF,0f,
+                            Animation.RELATIVE_TO_SELF,0f,
+                            Animation.RELATIVE_TO_SELF,0f,
+                            Animation.RELATIVE_TO_SELF,-1f);
+                    translateAnimation.setDuration(500);
+                    animationSet.addAnimation(translateAnimation);
+                    animationSet.addAnimation(alphaAnimation);
+                    mTv_password_again.startAnimation(animationSet);
+                    mTv_password_again.setVisibility(View.INVISIBLE);
                     mBtn_signup.setText(getString(R.string.hint_signup));
                 }
             }
