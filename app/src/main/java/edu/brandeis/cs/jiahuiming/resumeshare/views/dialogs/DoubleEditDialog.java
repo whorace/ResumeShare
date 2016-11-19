@@ -39,14 +39,14 @@ public class DoubleEditDialog extends BaseDialog {
 		if (isNull(mEtFirstName)) {
 			return null;
 		}
-		return mEtFirstName.getText().toString().trim();
+		return mEtFirstName.getText().toString().trim().replace(" ","%20");
 	}
 
 	public String getSecondNameText() {
 		if (isNull(mEtSecondName)) {
 			return null;
 		}
-		return mEtSecondName.getText().toString().trim();
+		return mEtSecondName.getText().toString().trim().replace(" ","%20");
 	}
 
 	public void setTextNull() {

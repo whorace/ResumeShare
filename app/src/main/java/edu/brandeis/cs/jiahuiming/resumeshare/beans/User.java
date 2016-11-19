@@ -20,7 +20,16 @@ public class User {
     private String FirstName;
     private String SecondName;
 
-    private List<String> contacts;
+    public String getImageId() {
+        return ImageId;
+    }
+
+    public void setImageId(String imageId) {
+        ImageId = imageId;
+    }
+
+    private String ImageId;
+
 
     public String getAccount() {
         return Account;

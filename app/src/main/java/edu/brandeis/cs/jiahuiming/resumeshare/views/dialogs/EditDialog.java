@@ -39,7 +39,7 @@ public class EditDialog extends BaseDialog {
         if (isNull(mEditText)) {
             return null;
         }
-        return mEditText.getText().toString().trim();
+        return mEditText.getText().toString().trim().replace(" ","%20");
     }
 
     public void setTextNull() {

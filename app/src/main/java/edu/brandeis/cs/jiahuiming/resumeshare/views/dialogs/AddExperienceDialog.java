@@ -40,14 +40,14 @@ public class AddExperienceDialog extends BaseDialog {
         if (isNull(mAddCompany)) {
             return null;
         }
-        return mAddCompany.getText().toString().trim();
+        return mAddCompany.getText().toString().trim().replace(" ","%20");
     }
 
     public String getAddPositionText() {
         if (isNull(mAddPosition)) {
             return null;
         }
-        return mAddPosition.getText().toString().trim();
+        return mAddPosition.getText().toString().trim().replace(" ","%20");
     }
 
 

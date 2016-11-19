@@ -36,7 +36,7 @@ public class AddSkillDialog extends BaseDialog {
         if (isNull(mAddSkill)) {
             return null;
         }
-        return mAddSkill.getText().toString().trim();
+        return mAddSkill.getText().toString().trim().replace(" ","%20");
     }
 
 

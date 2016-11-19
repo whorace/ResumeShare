@@ -13,6 +13,8 @@ import java.util.List;
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.ContactsAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.RequestAdapter;
+import edu.brandeis.cs.jiahuiming.resumeshare.beans.Request;
+import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 
 /**
@@ -26,15 +28,27 @@ public class RequestsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View mFragment = inflater.inflate(R.layout.fragment_contact, container, false);
+        View mFragment = inflater.inflate(R.layout.fragment_requests, container, false);
         mListView=(ListView)mFragment.findViewById(R.id.lv_requests);
         RequestAdapter mRequestAdapter=new RequestAdapter(getActivity());
-        ListView listView=(ListView)mFragment.findViewById(R.id.listView);
-        listView.setAdapter(mRequestAdapter);
-
+        mListView.setAdapter(mRequestAdapter);
+//
         mUserController=new UserController(getActivity());
         mUserController.showRequests(mRequestAdapter);
+
+//        for(int i=0;i<3;i++){
+//            Request request=new Request();
+//
+//            request.setHostAccount("hostaccount");
+//            request.setId(new Integer(i).toString());
+//            request.setGuestAccount("Guestaccount");
+//            request.setMessage("Message");
+//            request.setHostImageId("ImageId");
+//            request.setHostName("Name");
+//
+//            mRequestAdapter.putData(request);
+//            mRequestAdapter.notifyDataSetChanged();
+//        }
 
         return mFragment;
     }

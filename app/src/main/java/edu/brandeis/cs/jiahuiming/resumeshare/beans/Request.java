@@ -9,6 +9,25 @@ import android.app.Notification;
 public class Request {
     private String Id;
     private String Message;
+    private String HostName;
+
+    public String getHostImageId() {
+        return HostImageId;
+    }
+
+    public void setHostImageId(String hostImageId) {
+        HostImageId = hostImageId;
+    }
+
+    public String getHostName() {
+        return HostName;
+    }
+
+    public void setHostName(String hostName) {
+        HostName = hostName;
+    }
+
+    private String HostImageId;
 
     public String getGuestAccount() {
         return GuestAccount;

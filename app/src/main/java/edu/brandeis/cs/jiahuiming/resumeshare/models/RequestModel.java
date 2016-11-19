@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.ContactsAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.RequestAdapter;
+import edu.brandeis.cs.jiahuiming.resumeshare.beans.Request;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.DBOpenHelper;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.HttpTask;
@@ -22,16 +23,12 @@ public class RequestModel { private Context context;
         this.context = context;
     }
 
-    public void addRequestToRemote(String hostaccount,String guestaccount,String message) {
+    public void addRequestToRemote(String hostaccount,String guestaccount,String hostname,String imageid,String message) {
         HttpTask task = new HttpTask();
         task.setTaskHandler(new HttpTask.HttpTaskHandler(){
             public void taskSuccessful(String json) {
                 try {
                     result=json;
-                    User user=new User();
-                    user.setFirstName(result);
-                    user.setSecondName(result);
-                    user.setAccount(result);
                     Toast.makeText(context,"Invitation has been send",Toast.LENGTH_SHORT).show();
                     Log.d("addRequestToRemote",result);
                 }
@@ -42,7 +39,7 @@ public class RequestModel { private Context context;
             public void taskFailed() {
             }
         });
-        task.execute("user","addRequest","hostaccount="+hostaccount+"&guestaccount="+guestaccount+"&message="+message);
+        task.execute("user","addRequest","hostaccount="+hostaccount+"&guestaccount="+guestaccount+"&message="+message+"&imageid="+imageid+"&hostname="+hostname);
     }
 
     public void loadRequestsfromRemote(String account,final RequestAdapter requestAdapter){
@@ -51,11 +48,13 @@ public class RequestModel { private Context context;
             public void taskSuccessful(String json) {
                 try {
                     result=json;
-                    User user=new User();
-                    user.setFirstName(result);
-                    user.setSecondName(result);
-                    user.setAccount(result);
-                    requestAdapter.putData(user);
+                    Request request=new Request();
+                    request.setMessage(result);
+                    request.setGuestAccount(result);
+                    request.setHostAccount(result);
+                    requestAdapter.putData(request);
+                 //   requestAdapter.putRequest(request);
+              //      requestAdapter.notifyDataSetChanged();
                     Log.d("loadRequestsfromRemote",result);
                 }
                 catch (Exception e) {

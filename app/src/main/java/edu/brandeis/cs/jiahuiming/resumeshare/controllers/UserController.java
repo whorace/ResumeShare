@@ -187,9 +187,9 @@ public class UserController {
 
     }
 
-    public void sendRequest(String account,String message){
+    public void sendRequest(String account,String name,String imageid,String message){
         requestModel=new RequestModel(context);
-        requestModel.addRequestToRemote(((HomeActivity)context).getCurrentUser(),account,message);
+        requestModel.addRequestToRemote(((HomeActivity)context).getCurrentUser(),account,name,imageid,message);
 
     }
 

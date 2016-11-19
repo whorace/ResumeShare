@@ -19,33 +19,26 @@ import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.ContactController;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
-import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.RequestDetailFragment;
-import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ResumeFragment;
 
 /**
  * Created by jiahuiming on 11/18/16.
  */
 
 public class RequestAdapter extends BaseAdapter {
-    private List<User> mList;
-    private List<Request> mRequestList;
+    private List<Request> mList;
     private LayoutInflater mInflater;
     private int position;
     private Context context;
     public RequestAdapter(Context context){
-        this.mList=new ArrayList<User>();
+        this.mList=new ArrayList<Request>();
         this.context=context;
-        mInflater=LayoutInflater.from(context);
+        this.mInflater=LayoutInflater.from(context);
     }
-    public void putUserData(User user){
-        this.mList.add(user);
-        notifyDataSetChanged();
+    public void putData(Request requset){
+        this.mList.add(requset);
+       notifyDataSetChanged();
     }
 
-    public void putRequest(Request request){
-        this.mRequestList.add(request);
-        notifyDataSetChanged();
-    }
     @Override
     public int getCount() {
         return mList.size();
@@ -53,7 +46,7 @@ public class RequestAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return mRequestList.get(position);
+        return mList.get(position);
     }
 
     @Override
@@ -62,54 +55,45 @@ public class RequestAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, final ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         final int id=position;
         final RequestAdapter.ViewHolder viewHolder;
         if(convertView==null){
             viewHolder=new RequestAdapter.ViewHolder();
-            convertView=mInflater.inflate(R.layout.list_item_contact,null);
-            viewHolder.imageView=(ImageView) convertView.findViewById(R.id.tv_image);
-            viewHolder.name=(TextView)convertView.findViewById(R.id.tv_name);
-            viewHolder.account=(TextView)convertView.findViewById(R.id.tv_account);
-            viewHolder.message=(TextView)convertView.findViewById(R.id.tv_message);
-            viewHolder.mAccept=(Button)convertView.findViewById(R.id.btn_accept);
-            viewHolder.mRefuse=(Button)convertView.findViewById(R.id.btn_refuse);
+            convertView=mInflater.inflate(R.layout.list_item_request,null);
+            viewHolder.imageView=(ImageView) convertView.findViewById(R.id.iv_request_image);
+            viewHolder.name=(TextView)convertView.findViewById(R.id.tv_request_name);
+            viewHolder.account=(TextView)convertView.findViewById(R.id.tv_request_account);
+            viewHolder.message=(TextView)convertView.findViewById(R.id.tv_request_message);
+            viewHolder.accept=(Button)convertView.findViewById(R.id.btn_request_accept);
+            viewHolder.refuse=(Button)convertView.findViewById(R.id.btn_request_refuse);
             convertView.setTag(viewHolder);
-        }else{
-            viewHolder=(RequestAdapter.ViewHolder) convertView.getTag();
+        }else {
+            viewHolder = (RequestAdapter.ViewHolder) convertView.getTag();
 
         }
-        viewHolder.message.setVisibility(View.GONE);
-        viewHolder.mAccept.setVisibility(View.GONE);
-        viewHolder.mRefuse.setVisibility(View.GONE);
-
-        User user=mList.get(id);
+        Request request=mList.get(id);
         viewHolder.imageView.setImageResource(R.drawable.kellyisgenius);
-        viewHolder.name.setText(user.getFirstName()+" "+user.getSecondName());
-        viewHolder.account.setText(user.getAccount());
-        viewHolder.message.setText(mRequestList.get(id).getMessage());
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewHolder.message.setVisibility(View.VISIBLE);
-                viewHolder.mAccept.setVisibility(View.VISIBLE);
-                viewHolder.mRefuse.setVisibility(View.VISIBLE);
-               // ((HomeActivity)context).setRequestAccount(mList.get(position).getAccount());
-                //((HomeActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new RequestDetailFragment()).commit();
-            }
-        });
-        viewHolder.mAccept.setOnClickListener(new View.OnClickListener() {
+        viewHolder.name.setText(request.getHostName());
+        viewHolder.account.setText(request.getHostAccount());
+        viewHolder.message.setText(request.getMessage());
+        viewHolder.name.setText(request.getHostName());
+
+        final boolean visiable=false;
+
+        viewHolder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UserController userController=new UserController(context);
-                userController.addContact(((HomeActivity)context).getCurrentUser(),mList.get(id).getAccount());
+                userController.addContact(((HomeActivity)context).getCurrentUser(),mList.get(id).getHostAccount());
+                userController.refuseRequest(mList.get(id).getId());
             }
         });
-        viewHolder.mRefuse.setOnClickListener(new View.OnClickListener() {
+        viewHolder.refuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UserController userController=new UserController(context);
-                userController.refuseRequest(mRequestList.get(id).getId());
+                userController.refuseRequest(mList.get(id).getId());
             }
         });
         return convertView;
@@ -120,7 +104,7 @@ public class RequestAdapter extends BaseAdapter {
         public TextView name;
         public TextView account;
         public TextView message;
-        public Button mAccept;
-        public Button mRefuse;
+        public Button accept;
+        public Button refuse;
     }
 }

@@ -6,7 +6,8 @@ package edu.brandeis.cs.jiahuiming.resumeshare.beans;
 
 public class Contact {
     private String Id;
-    public String getId(){
+    public String getId()
+    {
         return this.Id;
 
     }

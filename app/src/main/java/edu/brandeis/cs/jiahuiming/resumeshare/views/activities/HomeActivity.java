@@ -76,7 +76,7 @@ public class HomeActivity extends AppCompatActivity  {
         mDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ProfileFragment()).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new RequestsFragment()).addToBackStack(null).commit();
 
         mCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override

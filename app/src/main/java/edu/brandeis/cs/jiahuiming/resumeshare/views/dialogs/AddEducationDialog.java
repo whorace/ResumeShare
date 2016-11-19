@@ -45,29 +45,29 @@ public class AddEducationDialog extends BaseDialog {
         if (isNull(mAddSchool)) {
             return null;
         }
-        return mAddSchool.getText().toString().trim();
+        return mAddSchool.getText().toString().trim().replace(" ","%20");
     }
 
     public String getAddMajorText() {
         if (isNull(mAddMajor)) {
             return null;
         }
-        return mAddMajor.getText().toString().trim();
+        return mAddMajor.getText().toString().trim().replace(" ","%20");
     }
 
     public String getAddDegreeText() {
         if (isNull(mAddDegree)) {
             return null;
         }
-        return mAddDegree.getText().toString().trim();
+        return mAddDegree.getText().toString().trim().replace(" ","%20");
     }
 
     public String getAddStartText() {
 
-        return new Integer(mAddStartYear.getValue()).toString().trim();
+        return new Integer(mAddStartYear.getValue()).toString().trim().replace(" ","%20");
     }
     public String getAddEndYearText() {
-        return new Integer(mAddEndYear.getValue()).toString().trim();
+        return new Integer(mAddEndYear.getValue()).toString().trim().replace(" ","%20");
     }
 
     public void setTextNull() {

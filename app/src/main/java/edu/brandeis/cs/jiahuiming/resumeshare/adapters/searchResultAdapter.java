@@ -96,7 +96,7 @@ public class SearchResultAdapter extends BaseAdapter {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         UserController mUserController=new UserController(context);
-                        mUserController.sendRequest(mList.get(id).getAccount(),mEditDialog.getEditText());
+                        mUserController.sendRequest(mList.get(id).getAccount(),mList.get(id).getFirstName()+"%20"+mList.get(id).getSecondName(),mList.get(id).getImageId(),mEditDialog.getEditText());
                         dialog.cancel();
                     }
                 });
