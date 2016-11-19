@@ -43,13 +43,6 @@ public class ContactController {
         experienceModel.loadExperienceFromRemote(((HomeActivity)context).getResumeAccount(),experienceAdapter);
         skillModel.loadSkillFromRemote(((HomeActivity)context).getResumeAccount(),skillAdapter);
 
-        Toast.makeText(context,"ContactController"+((HomeActivity)context).getResumeAccount(),Toast.LENGTH_LONG).show();
-
-//        educationModel.loadEducationFromRemote("123@qq.com",educationAdapter);
-//        experienceModel.loadExperienceFromRemote("123@qq.com",experienceAdapter);
-//        skillModel.loadSkillFromRemote("123@qq.com",skillAdapter);
-
-
     }
 
     public void showInfo(final TextView mEmail,final TextView mName){

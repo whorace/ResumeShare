@@ -11,15 +11,18 @@ import java.util.regex.Pattern;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.ContactsAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.EducationAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.ExperienceAdapter;
+import edu.brandeis.cs.jiahuiming.resumeshare.adapters.RequestAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.SearchResultAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.SkillAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Contact;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Education;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Experience;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
+import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.ContactModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.EducationModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.ExperienceModel;
+import edu.brandeis.cs.jiahuiming.resumeshare.models.RequestModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.SkillModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.UserModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.NetworkChecker;
@@ -37,6 +40,7 @@ public class UserController {
     private EducationModel educationModel;
     private SkillModel skillModel;
     private ExperienceModel experienceModel;
+    private RequestModel requestModel;
 
     public UserController(Context context){
         this.context=context;
@@ -172,19 +176,37 @@ public class UserController {
         experienceModel.loadExperienceFromRemote(((HomeActivity)context).getCurrentUser(),experienceAdapter);
         skillModel.loadSkillFromRemote(((HomeActivity)context).getCurrentUser(),skillAdapter);
 
-        Toast.makeText(context,"UserController"+((HomeActivity)context).getCurrentUser(),Toast.LENGTH_LONG).show();
     }
 
     public void sendRequest(String account,String message){
+        requestModel=new RequestModel(context);
+        requestModel.addRequestToRemote(((HomeActivity)context).getCurrentUser(),account,message);
 
     }
 
     public void sentIntantLocation(){
+        Log.d("Test","sentIntantLocation");
 
     }
 
     public void getSearchResult(final SearchResultAdapter searchResultAdapter){
+        searchResultAdapter.cleanData();
+        for(int i=0;i<10;i++){
+            User user=new User();
+            user.setAccount("jiahm92@qq.com"+new Integer(i).toString());
+            user.setFirstName("Huiming");
+            user.setSecondName("Jia");
+            searchResultAdapter.putData(user);
+        }
+        searchResultAdapter.notifyDataSetChanged();
+    }
 
+    public void showRequests(final RequestAdapter requestAdapter){
+        requestModel=new RequestModel(context);
+      //  requestModel.loadRequestsfromRemote(((HomeActivity)context).getRequestAccount(),requestAdapter);
+    }
+
+    public void showRequestDetail(){
 
     }
 

@@ -22,6 +22,7 @@ import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 public class RequestsFragment extends Fragment {
 
     private ListView mListView;
+    private UserController mUserController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,13 +30,11 @@ public class RequestsFragment extends Fragment {
         View mFragment = inflater.inflate(R.layout.fragment_contact, container, false);
         mListView=(ListView)mFragment.findViewById(R.id.lv_requests);
         RequestAdapter mRequestAdapter=new RequestAdapter(getActivity());
-
-        mContactsAdapter=new ContactsAdapter(getActivity());
         ListView listView=(ListView)mFragment.findViewById(R.id.listView);
-        listView.setAdapter(mContactsAdapter);
+        listView.setAdapter(mRequestAdapter);
 
         mUserController=new UserController(getActivity());
-        mUserController.showContacts(mContactsAdapter);
+        mUserController.showRequests(mRequestAdapter);
 
         return mFragment;
     }

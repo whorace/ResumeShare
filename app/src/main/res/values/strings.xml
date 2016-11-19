@@ -32,5 +32,6 @@
     <string name="position">Position</string>
     <string name="startyear">StartYear</string>
     <string name="finishyear">FinishYear</string>
+    <string name="btn_send">Send</string>
 
 </resources>

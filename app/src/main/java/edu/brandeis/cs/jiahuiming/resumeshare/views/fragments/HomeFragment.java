@@ -13,6 +13,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -59,6 +62,7 @@ public class HomeFragment extends Fragment {
         mListView=(ListView)mFragment.findViewById(R.id.lv_searchresult);
         mSearchResultAdapter=new SearchResultAdapter(getActivity());
         mListView.setAdapter(mSearchResultAdapter);
+        mUserController=new UserController(getActivity());
 
         mButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -71,6 +75,15 @@ public class HomeFragment extends Fragment {
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
                     mWaveView.stop();
                     mListView.setVisibility(View.VISIBLE);
+                    AnimationSet animationSet=new AnimationSet(true);
+                    TranslateAnimation translateAnimation=new TranslateAnimation(
+                            Animation.RELATIVE_TO_SELF,0f,
+                            Animation.RELATIVE_TO_SELF,0f,
+                            Animation.RELATIVE_TO_SELF,1f,
+                            Animation.RELATIVE_TO_SELF,0f);
+                    translateAnimation.setDuration(500);
+                    animationSet.addAnimation(translateAnimation);
+                    mListView.startAnimation(animationSet);
                     mUserController.getSearchResult(mSearchResultAdapter);
                     Log.d("Wave,","stop");
                    // LocationUtil locUtil=new LocationUtil(getActivity());

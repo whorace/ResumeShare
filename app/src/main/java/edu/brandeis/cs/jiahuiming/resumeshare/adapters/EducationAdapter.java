@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
-import edu.brandeis.cs.jiahuiming.resumeshare.beans.ContactList;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Education;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;

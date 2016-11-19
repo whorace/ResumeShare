@@ -52,7 +52,6 @@ public class RequestAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
-
         this.position=position;
         final RequestAdapter.ViewHolder viewHolder;
         if(convertView==null){
@@ -63,7 +62,6 @@ public class RequestAdapter extends BaseAdapter {
             viewHolder.account=(TextView)convertView.findViewById(R.id.tv_account);
             convertView.setTag(viewHolder);
         }else{
-
             viewHolder=(RequestAdapter.ViewHolder) convertView.getTag();
 
         }
@@ -79,7 +77,6 @@ public class RequestAdapter extends BaseAdapter {
                 ((HomeActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new RequestDetailFragment()).commit();
             }
         });
-
         return convertView;
     }
 

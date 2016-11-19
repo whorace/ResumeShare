@@ -118,8 +118,6 @@ public class HomeActivity extends AppCompatActivity  {
                 return false;
             }
         });
-
-//        Toast.makeText(this,"mCurrentAccount="+mCurrentAccount,Toast.LENGTH_SHORT).show();
     }
 
     @Override

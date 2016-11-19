@@ -78,9 +78,6 @@ public class ResumeFragment extends Fragment {
         ListUtils.setDynamicHeight(mLv_Experiences);
         ListUtils.setDynamicHeight(mLv_Skills);
 
-
-
-        Toast.makeText(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),Toast.LENGTH_LONG).show();
         mScrollView=(ScrollView) mFragment.findViewById(R.id.sv_resume);
         mScrollView.smoothScrollTo(0,0);
 

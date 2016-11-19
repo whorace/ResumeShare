@@ -39,6 +39,11 @@ public class SearchResultAdapter extends BaseAdapter {
         this.mList.add(user);
         notifyDataSetChanged();
     }
+
+    public void cleanData(){
+        mList.clear();
+        notifyDataSetChanged();
+    }
     @Override
     public int getCount() {
         return mList.size();
@@ -56,7 +61,8 @@ public class SearchResultAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
-        this.position=position;
+
+        final int id=position;
         final SearchResultAdapter.ViewHolder viewHolder;
         if(convertView==null){
             viewHolder=new SearchResultAdapter.ViewHolder();
@@ -77,7 +83,7 @@ public class SearchResultAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 mEditDialog=new EditDialog(context);
-                mEditDialog.setTitle("Send Request");
+                mEditDialog.setTitle("Add Contact Request");
                 mEditDialog.setEditTextHint("Say Something");
                 mEditDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -86,11 +92,11 @@ public class SearchResultAdapter extends BaseAdapter {
                     }
                 });
 
-                mEditDialog.setButton1("Confirm", new DialogInterface.OnClickListener() {
+                mEditDialog.setButton1("Send", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         UserController mUserController=new UserController(context);
-                        mUserController.sendRequest("321@qq.com","123");
+                        mUserController.sendRequest(mList.get(id).getAccount(),mEditDialog.getEditText().toString().trim());
                         dialog.cancel();
                     }
                 });

@@ -76,9 +76,6 @@ public class SkillModel {
                     skill.setSkill(result);
                     skillAdapter.putData(skill);
                     skillAdapter.notifyDataSetChanged();
-                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
-
-
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -98,7 +95,6 @@ public class SkillModel {
             public void taskSuccessful(String json) {
                 try {
                     result=json;
-                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -119,7 +115,6 @@ public class SkillModel {
             public void taskSuccessful(String json) {
                 try {
                     result=json;
-                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -139,7 +134,6 @@ public class SkillModel {
                     result=json;
                     skillAdapter.putData(skill);
                     skillAdapter.notifyDataSetChanged();
-                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e) {
                     e.printStackTrace();

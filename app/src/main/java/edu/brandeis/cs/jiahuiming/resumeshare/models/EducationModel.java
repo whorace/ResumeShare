@@ -23,48 +23,11 @@ import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
 
 public class EducationModel {
     private Context context;
-    private DBOpenHelper mDBOpenHelper;
-    private SQLiteDatabase db;
     private String result;
 
     public EducationModel(Context context) {
         this.context = context;
-        mDBOpenHelper=new DBOpenHelper(this.context,"User");
-        db=mDBOpenHelper.getReadableDatabase();
     }
-
-//    public ArrayList<Skill> getSkillsfromlocal(String account){
-//        Cursor cursor=db.rawQuery("select * from Skill Where Account = "+"account",null);
-//        ArrayList<Skill> skillslist=new ArrayList<Skill>();
-//        if(cursor.getCount()>0){
-//            Skill skill=new Skill();
-//            while (cursor.moveToNext()){
-//                skill.setAccount(cursor.getString(cursor.getColumnIndex("Account")));
-//                skill.setSkill(cursor.getString(cursor.getColumnIndex("Skill")));
-//                skillslist.add(skill);
-//            }
-//        }
-//        return skillslist;
-//
-//    }
-//
-//    public int getSkillsCountfromlocal(String account){{
-//        Cursor cursor=db.rawQuery("select * from Skill Where Account = "+"account ",null);
-//        return cursor.getCount();
-//    }
-//
-//    }
-//
-//    public Skill getSkillfromlocal(String account,String skill){
-//        Cursor cursor=db.rawQuery("select * from Skill Where Account = "+"account and Skill = "+skill,null);
-//        Skill mskill=new Skill();
-//        if(cursor.getCount()>0){
-//            cursor.moveToFirst();
-//            mskill.setAccount(cursor.getString(cursor.getColumnIndex("Account")));
-//            mskill.setSkill(cursor.getString(cursor.getColumnIndex("Skill")));
-//        }
-//        return mskill;
-//    }
 
     public void loadEducationFromRemote(String account,final EducationAdapter educationAdapter) {
         HttpTask task = new HttpTask();
@@ -81,9 +44,6 @@ public class EducationModel {
                     education.setStartYear(result);
                     education.setEndYear(result);
                     educationAdapter.putData(education);
-                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
-
-
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -104,7 +64,6 @@ public class EducationModel {
             public void taskSuccessful(String json) {
                 try {
                     result=json;
-                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -124,7 +83,6 @@ public class EducationModel {
             public void taskSuccessful(String json) {
                 try {
                     result=json;
-                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -145,7 +103,6 @@ public class EducationModel {
                     result=json;
                     educationAdapter.putData(education);
                     educationAdapter.notifyDataSetChanged();
-                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e) {
                     e.printStackTrace();

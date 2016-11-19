@@ -29,39 +29,12 @@ public class UserModel {
         this.user=new User();
     }
 
-//    public User getUserfromlocal(String account){
-//        mDBOpenHelper=new DBOpenHelper(this.context,"User");
-//        db=mDBOpenHelper.getReadableDatabase();
-//        Cursor cursor=db.rawQuery("select * from User Where Account = "+"account",null);
-//        user=new User();
-//        if(cursor.getCount()>0){
-//            cursor.moveToFirst();
-//            user.setAccount(cursor.getString(cursor.getColumnIndex("Account")));
-//            user.setPassword(cursor.getString(cursor.getColumnIndex("Password")));
-//            user.setFirstName(cursor.getString(cursor.getColumnIndex("FirstName")));
-//            user.setSecondName(cursor.getString(cursor.getColumnIndex("SecondName")));
-//        }
-//        return user;
-//    }
-
-//    public long addUserToLocal(String account,String password){
-//        mDBOpenHelper=new DBOpenHelper(this.context,"User");
-//        db=mDBOpenHelper.getWritableDatabase();
-//        mDBOpenHelper.dropTable(db,"User");
-//        mDBOpenHelper.rebuildTable(db,"User");
-//        ContentValues value=new ContentValues();
-//        value.put("Account",account);
-//        value.put("Password",password);
-//        return db.insert("User",null,value);
-//    }
-
     public void addUserToRemote(String account,String password){
         HttpTask task = new HttpTask();
         task.setTaskHandler(new HttpTask.HttpTaskHandler(){
             public void taskSuccessful(String json) {
                 try {
                     result=json;
-//                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -82,7 +55,6 @@ public class UserModel {
             public void taskSuccessful(String json) {
                 try {
                     result=json;
-//                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, HomeActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("account", user.getAccount());
@@ -106,14 +78,8 @@ public class UserModel {
             public void taskSuccessful(String json) {
                 try {
                     result=json;
-//                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(context, HomeActivity.class);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("account", user.getAccount());
-//                    intent.putExtras(bundle);
                     email.setText(result);
                     name.setText(result);
-//                    context.startActivity(intent);
                 }
                 catch (Exception e) {
                     e.printStackTrace();
