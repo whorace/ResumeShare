@@ -28,4 +28,6 @@
     <dimen name="splitline_hight">1dp</dimen>
     <dimen name="default_width">0dp</dimen>
     <dimen name="footer_height">40dp</dimen>
+    <dimen name="min_listview_height">105dp</dimen>
+    <dimen name="long_message_height">105dp</dimen>
 </resources>

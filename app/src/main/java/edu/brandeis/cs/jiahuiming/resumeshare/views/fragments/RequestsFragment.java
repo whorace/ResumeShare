@@ -1,0 +1,42 @@
+package edu.brandeis.cs.jiahuiming.resumeshare.views.fragments;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.brandeis.cs.jiahuiming.resumeshare.R;
+import edu.brandeis.cs.jiahuiming.resumeshare.adapters.ContactsAdapter;
+import edu.brandeis.cs.jiahuiming.resumeshare.adapters.RequestAdapter;
+import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
+
+/**
+ * Created by jiahuiming on 11/18/16.
+ */
+
+public class RequestsFragment extends Fragment {
+
+    private ListView mListView;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View mFragment = inflater.inflate(R.layout.fragment_contact, container, false);
+        mListView=(ListView)mFragment.findViewById(R.id.lv_requests);
+        RequestAdapter mRequestAdapter=new RequestAdapter(getActivity());
+
+        mContactsAdapter=new ContactsAdapter(getActivity());
+        ListView listView=(ListView)mFragment.findViewById(R.id.listView);
+        listView.setAdapter(mContactsAdapter);
+
+        mUserController=new UserController(getActivity());
+        mUserController.showContacts(mContactsAdapter);
+
+        return mFragment;
+    }
+}

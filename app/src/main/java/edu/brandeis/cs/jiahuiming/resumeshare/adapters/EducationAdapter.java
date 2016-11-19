@@ -10,11 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.ContactList;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Education;
+import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
+import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.BaseDialog;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.DatePickerDialog;
@@ -34,13 +37,18 @@ public class EducationAdapter extends BaseAdapter {
     private EditDialog mEditDialog;
     private DatePickerDialog mDatePickerDialog;
 
-    public EducationAdapter(Context context,String account,List<Education> list,int editmode) {
-        this.mList=list;
-        this.account = account;
+    public EducationAdapter(Context context,int editmode) {
+        this.mList=new ArrayList<Education>();
         this.context = context;
         this.editmode=editmode;
         this.mInflater= LayoutInflater.from(context);
         mBaseDialog=new BaseDialog(context);
+        mBaseDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
         mEditDialog=new EditDialog(context);
         mDatePickerDialog=new DatePickerDialog(context);
         mEditDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
@@ -57,6 +65,12 @@ public class EducationAdapter extends BaseAdapter {
         });
         mDatePickerDialog.setTitle("Edit Time");
     }
+
+    public void putData(Education education){
+        this.mList.add(education);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return mList.size();
@@ -73,7 +87,7 @@ public class EducationAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         final int id=position;
         EducationAdapter.ViewHolder viewHolder;
@@ -91,92 +105,128 @@ public class EducationAdapter extends BaseAdapter {
 
         }
 
-        Education education=mList.get(position);
+        final Education education=mList.get(position);
         viewHolder.mSchool.setText(education.getSchool());
         viewHolder.mMajor.setText(education.getMajor());
         viewHolder.mDegree.setText(education.getDegree());
         viewHolder.mStartYear.setText(education.getStartYear());
         viewHolder.mEndYear.setText(education.getEndYear());
 
-        mDatePickerDialog.setmStartYear(education.getStartYear());
-        mDatePickerDialog.setmFinishYear(education.getEndYear());
-        mDatePickerDialog.setButton1("Save", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(context,"success to save",Toast.LENGTH_SHORT).show();
-                dialog.cancel();
-            }
-        });
+//        mDatePickerDialog.setmStartYear(education.getStartYear());
+//        mDatePickerDialog.setmFinishYear(education.getEndYear());
+//        mDatePickerDialog.setButton1("Save",new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Toast.makeText(context,"success to save",Toast.LENGTH_SHORT).show();
+//                dialog.cancel();
+//            }
+//        });
 
         if(editmode==1){
-            viewHolder.mSchool.setOnLongClickListener(new View.OnLongClickListener() {
+            convertView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    mBaseDialog.setTitle("Warning");
+                    mBaseDialog.setMessage("Do you sure to delete this record?");
+                    mBaseDialog.setButton1("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            UserController userController=new UserController(context);
+                            userController.delEducation(education);
+                            mList.remove(id);
+                            notifyDataSetChanged();
+                            dialog.cancel();
+                        }
+                    });
+                    mBaseDialog.show();
+                    return false;
+                }
+            });
+
+
+            viewHolder.mSchool.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     mEditDialog.setTitle("Edit School Info");
                     mEditDialog.setEditTextHint(mList.get(id).getSchool());
                     mEditDialog.setButton1("Save", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(context,"success to save",Toast.LENGTH_SHORT).show();
+                            education.setSchool(mEditDialog.getEditText());
+                            UserController userController=new UserController(context);
+                            userController.modifyEducation(education);
+                            education.setSchool(mEditDialog.getEditText());
+                            mList.set(id,education);
+                            notifyDataSetChanged();
                             dialog.cancel();
                         }
                     });
                     mEditDialog.show();
-                    return false;
                 }
             });
 
-            viewHolder.mMajor.setOnLongClickListener(new View.OnLongClickListener() {
+            viewHolder.mMajor.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View v) {
+                public void onClick(View v) {
                     mEditDialog.setTitle("Edit Major Info");
                     mEditDialog.setEditTextHint(mList.get(id).getMajor());
                     mEditDialog.setButton1("Save", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(context,"success to save",Toast.LENGTH_SHORT).show();
+                            education.setMajor(mEditDialog.getEditText());
+                            UserController userController=new UserController(context);
+                            userController.modifyEducation(education);
+                            education.setMajor(mEditDialog.getEditText());
+                            mList.set(id,education);
+                            notifyDataSetChanged();
                             dialog.cancel();
                         }
                     });
                     mEditDialog.show();
-                    return false;
                 }
             });
 
-            viewHolder.mDegree.setOnLongClickListener(new View.OnLongClickListener() {
+            viewHolder.mDegree.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View v) {
+                public void onClick(View v) {
                     mEditDialog.setTitle("Edit Degree Info");
                     mEditDialog.setEditTextHint(mList.get(id).getDegree());
                     mEditDialog.setButton1("Save", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(context,"success to save",Toast.LENGTH_SHORT).show();
+                            education.setDegree(mEditDialog.getEditText());
+                            UserController userController=new UserController(context);
+                            userController.modifyEducation(education);
+                            education.setDegree(mEditDialog.getEditText());
+                            mList.set(id,education);
+                            notifyDataSetChanged();
                             dialog.cancel();
                         }
                     });
                     mEditDialog.show();
-                    return false;
+
                 }
             });
 
-            viewHolder.mStartYear.setOnLongClickListener(new View.OnLongClickListener() {
+            viewHolder.mStartYear.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View v) {
+                public void onClick(View v) {
+                    mDatePickerDialog.setTitle("Edit Time Info");
+                    education.setDegree(mEditDialog.getEditText());
+                    UserController userController=new UserController(context);
+                    userController.modifyEducation(education);
                     mDatePickerDialog.show();
-                    return false;
+
                 }
             });
 
-            viewHolder.mEndYear.setOnLongClickListener(new View.OnLongClickListener() {
+            viewHolder.mEndYear.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View v) {
+                public void onClick(View v) {
                     mDatePickerDialog.show();
-                    return false;
                 }
             });
         }
-
 
         return convertView;
     }

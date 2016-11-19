@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/et_addschool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionNext"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textCursorDrawable="@null"
+        />
+    <EditText
+        android:id="@+id/et_addmajor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionNext"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textCursorDrawable="@null"
+        />
+    <EditText
+        android:id="@+id/et_adddegree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionNext"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textCursorDrawable="@null"
+        />
+    <NumberPicker
+        android:id="@+id/np_addstartyear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></NumberPicker>
+    <NumberPicker
+        android:id="@+id/np_addendyear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></NumberPicker>
+
+
+</LinearLayout>

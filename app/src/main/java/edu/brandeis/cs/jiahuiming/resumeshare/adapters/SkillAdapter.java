@@ -1,17 +1,22 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Experience;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
+import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.EditDialog;
 
 /**
  * Created by jiahuiming on 11/10/16.
@@ -20,14 +25,28 @@ import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
 public class SkillAdapter extends BaseAdapter {
     private List<Skill> mList;
     private Context context;
-    private String account;
+    private int editmode;
+    private EditDialog mEditDialog;
     private LayoutInflater mInflater;
 
-    public SkillAdapter(Context context,String account,List<Skill> list) {
-        this.mList=list;
-        this.account = account;
+    public SkillAdapter(Context context,int editmode) {
+        this.mList=new ArrayList<Skill>();
+        this.editmode=editmode;
         this.context = context;
+        mEditDialog=new EditDialog(context);
+        mEditDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
         this.mInflater= LayoutInflater.from(context);
+    }
+
+    public void putData(Skill skill){
+        this.mList.add(skill);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -61,6 +80,26 @@ public class SkillAdapter extends BaseAdapter {
 
         Skill skill=mList.get(position);
         viewHolder.mSkill.setText(skill.getSkill());
+
+        if(editmode==1){
+            viewHolder.mSkill.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    mEditDialog.setTitle("Edit Skill Info");
+                    mEditDialog.setEditTextHint(mList.get(id).getSkill());
+                    mEditDialog.setButton1("Save", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(context,"success to save",Toast.LENGTH_SHORT).show();
+                            dialog.cancel();
+                        }
+                    });
+                    mEditDialog.show();
+                    return false;
+                }
+            });
+
+        }
         return convertView;
     }
 

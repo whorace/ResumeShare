@@ -11,7 +11,8 @@ public class Urls {
 
     //http://c.m.163.com/nc/article/headline/T1348647909107/0-5.html  头条
 //    public static final int PAZE_SIZE = 20;
-    public static final String HOST = "http://horacewang.com/ShareResumeBackEnd/?";
+//    public static final String HOST = "http://horacewang.com/ShareResumeBackEnd/?";
+    public static final String HOST = "http://10.0.3.2/ShareResumeBackEnd/?";
 
 //
 //    public static final String TOP_URL = HOST + "nc/article/headline/";

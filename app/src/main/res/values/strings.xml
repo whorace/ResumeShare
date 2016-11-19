@@ -23,6 +23,8 @@
     <string name="hint_signin">Already is member. Sign in now</string>
     <string name="hint_home_fragment">Find People Nearby</string>
     <string name="btn_default">Button</string>
+    <string name="btn_accept">Accept</string>
+    <string name="btn_refuse">Refuse</string>
     <string name="school">School</string>
     <string name="major">Major</string>
     <string name="degree">Degree</string>

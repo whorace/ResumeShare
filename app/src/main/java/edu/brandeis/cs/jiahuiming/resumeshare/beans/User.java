@@ -7,6 +7,14 @@ import java.util.List;
  * Created by jiahuiming on 10/25/16.
  */
 public class User {
+    private String Id;
+    public String getId(){
+        return this.Id;
+
+    }
+    public void setId(String Id){
+        this.Id=Id;
+    }
     private String Account;
     private String Password;
     private String FirstName;

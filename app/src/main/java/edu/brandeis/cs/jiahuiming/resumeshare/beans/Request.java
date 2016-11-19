@@ -1,19 +1,14 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.beans;
 
+import android.app.Notification;
+
 /**
- * Created by jiahuiming on 11/7/16.
+ * Created by jiahuiming on 11/18/16.
  */
 
-public class Contact {
+public class Request {
     private String Id;
-    public String getId(){
-        return this.Id;
-
-    }
-    public void setId(String Id){
-        this.Id=Id;
-    }
-    private String HostAccount;
+    private String Message;
 
     public String getGuestAccount() {
         return GuestAccount;
@@ -21,6 +16,22 @@ public class Contact {
 
     public void setGuestAccount(String guestAccount) {
         GuestAccount = guestAccount;
+    }
+
+    public String getMessage() {
+        return Message;
+    }
+
+    public void setMessage(String message) {
+        Message = message;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
     }
 
     public String getHostAccount() {
@@ -31,6 +42,7 @@ public class Contact {
         HostAccount = hostAccount;
     }
 
+    private String HostAccount;
     private String GuestAccount;
 
 }

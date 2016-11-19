@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark_transparent">
+    android:background="@drawable/item_contact_backgroud">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -35,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Brandeis University"
+                android:singleLine="true"
                 android:gravity="center_vertical"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sn_18sp" />

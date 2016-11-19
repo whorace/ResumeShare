@@ -5,4 +5,5 @@ package edu.brandeis.cs.jiahuiming.resumeshare.adapters;
  */
 
 public class AddContactsAdapter {
+
 }

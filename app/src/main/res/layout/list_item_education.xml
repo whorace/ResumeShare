@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark_transparent">
+    android:background="@drawable/item_contact_backgroud">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -37,6 +37,7 @@
                 android:text="Brandeis University"
                 android:gravity="center_vertical"
                 android:textColor="@color/white"
+                android:singleLine="true"
                 android:textSize="@dimen/sn_18sp" />
         </LinearLayout>
     </LinearLayout>
@@ -81,6 +82,7 @@
                     android:text="Computer Science"
                     android:gravity="center_vertical"
                     android:textColor="@color/white"
+                    android:singleLine="true"
                     android:textSize="@dimen/sn_16sp" />
             </LinearLayout>
         </LinearLayout>
@@ -118,6 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Master"
+                    android:singleLine="true"
                     android:gravity="center_vertical"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sn_16sp" />
@@ -163,6 +166,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2010"
+                    android:singleLine="true"
                     android:gravity="center_vertical"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sn_18sp" />
@@ -202,6 +206,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2016"
+                    android:singleLine="true"
                     android:gravity="center_vertical"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sn_18sp" />

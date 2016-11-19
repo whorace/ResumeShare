@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView
+            android:id="@+id/civ_rd_image"
+            android:layout_width="@dimen/navigation_imageview"
+            android:layout_height="@dimen/navigation_imageview"
+            android:background="@drawable/man"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="@dimen/border_width" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin_small"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_rd_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/textview_hight"
+                android:gravity="center"
+                android:text="@string/btn_default"
+                android:textSize="@dimen/sn_16sp" />
+
+            <TextView
+                android:id="@+id/tv_rd_account"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/textview_hight"
+                android:gravity="center"
+                android:text="@string/btn_default"
+                android:textSize="@dimen/sn_16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_rd_message"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/long_message_height"
+            android:padding="@dimen/textmagrgin"
+            android:text="@string/btn_default"
+            android:textSize="@dimen/sn_16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_rd_accept"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="@string/btn_accept" />
+
+            <view
+                android:layout_width="@dimen/space_between_same_view"
+                android:layout_height="@dimen/activity_horizontal_margin"></view>
+
+            <Button
+                android:id="@+id/btn_rd_refused"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="@string/btn_refuse" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

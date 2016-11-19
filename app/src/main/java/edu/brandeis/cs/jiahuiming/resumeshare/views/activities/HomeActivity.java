@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,16 +36,22 @@ public class HomeActivity extends AppCompatActivity  {
     private NavigationView mNavigationView;
     private CircleImageView mCircleImageView;
 
-    private ListView mDrawerList;
     private String[] mMenuItemTitle;
-    private String mCurrentAccount;
 
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
-
+    private static String mCurrentAccount;
     private String ResumeAccount;
+    private String RequestAccount;
+
+    public String getRequestAccount() {
+        return RequestAccount;}
+
+    public void setRequestAccount(String requestAccount) {
+        RequestAccount = requestAccount;}
+
     public String getResumeAccount(){return ResumeAccount;}
-    public void setResumeAccount(String resumeAccount){this.ResumeAccount=resumeAccount;}
+    public void setResumeAccount(String resumeAccount){
+        this.ResumeAccount=resumeAccount;}
+
     public String getCurrentUser(){
         return mCurrentAccount;
     }
@@ -52,8 +59,9 @@ public class HomeActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mCurrentAccount=getIntent().getStringExtra("account");
         setContentView(R.layout.activity_home);
-
+        mCurrentAccount="123@qq.com";
         mMenuItemTitle=getResources().getStringArray(R.array.menuitem_title);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -66,7 +74,9 @@ public class HomeActivity extends AppCompatActivity  {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
         mDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ResumeFragment()).addToBackStack(null).commit();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ProfileFragment()).addToBackStack(null).commit();
+
         mCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +118,8 @@ public class HomeActivity extends AppCompatActivity  {
                 return false;
             }
         });
+
+//        Toast.makeText(this,"mCurrentAccount="+mCurrentAccount,Toast.LENGTH_SHORT).show();
     }
 
     @Override

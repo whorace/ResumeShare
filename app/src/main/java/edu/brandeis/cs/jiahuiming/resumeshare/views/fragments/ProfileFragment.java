@@ -10,13 +10,19 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ScrollingView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,7 +35,12 @@ import edu.brandeis.cs.jiahuiming.resumeshare.adapters.SkillAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Education;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Experience;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
+import edu.brandeis.cs.jiahuiming.resumeshare.controllers.ContactController;
+import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.AddEducationDialog;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.AddExperienceDialog;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.AddSkillDialog;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.BaseDialog;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
 
@@ -38,13 +49,28 @@ import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
  */
 public class ProfileFragment extends Fragment implements DialogInterface.OnClickListener{
 
+    private ScrollView mScrollView;
     private BaseDialog mBaseDialog;
     private BaseDialog mConfirmDialog;
     private CircleImageView civ_profile_image;
 
+    private TextView mEmail;
+    private TextView mName;
+
     private ListView mLv_Educations;
     private ListView mLv_Experiences;
     private ListView mLv_Skills;
+
+    private UserController mUserController;
+
+    private Button mAddEducation;
+    private Button mAddExperience;
+    private Button mAddSkill;
+
+    private AddEducationDialog mAddEducationDialog;
+    private AddExperienceDialog mExperienceDialog;
+    private AddSkillDialog mAddSkillDialog;
+    private ExpandableListView mExpandableListView;
 
     private byte[] mContent;
     private String imagePath;
@@ -65,32 +91,6 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
         View mFragment = inflater.inflate(R.layout.fragment_profile, container, false);
 //        mTv_FirstName = (TextView) mFragment.findViewById(R.id.Tv_firstname);
 //        mTv_SecondName = (TextView) mFragment.findViewById(R.id.Tv_secondname);
-
-
-        ArrayList<Education> meducationlist=new ArrayList<Education>();
-        for(int i=0;i<3;i+=1){
-            Education education=new Education();
-            education.setSchool("Brandeis University");
-            education.setDegree("Mater");
-            education.setMajor("Computer Science");
-            education.setStartYear("2010");
-            education.setEndYear("2016");
-            meducationlist.add(education);
-        }
-        ArrayList<Experience> mexperiencelist=new ArrayList<Experience>();
-        for(int i=0;i<3;i+=1){
-            Experience experience=new Experience();
-            experience.setCompany("Apple Corp.");
-            experience.setPosition("Software Engineer");
-            mexperiencelist.add(experience);
-
-        }
-        ArrayList<Skill> mskilllist=new ArrayList<Skill>();
-        for(int i=0;i<3;i+=1){
-            Skill skill=new Skill();
-            skill.setSkill("Java Programming");
-            mskilllist.add(skill);
-        }
 
         mBaseDialog=new BaseDialog(getActivity());
         mBaseDialog.setTitle("Update Profile Image");
@@ -119,17 +119,105 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
         mLv_Experiences=(ListView)mFragment.findViewById(R.id.lv_experience);
         mLv_Skills=(ListView)mFragment.findViewById(R.id.lv_skill);
 
-        EducationAdapter mEducationAdapter=new EducationAdapter(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),meducationlist,1);
-        ExperienceAdapter mExperienceAdapter=new ExperienceAdapter(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),mexperiencelist,1);
-        SkillAdapter mSkillAdapter=new SkillAdapter(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),mskilllist);
+        final EducationAdapter mEducationAdapter=new EducationAdapter(getActivity(),1);
+        final ExperienceAdapter mExperienceAdapter=new ExperienceAdapter(getActivity(),1);
+        final SkillAdapter mSkillAdapter=new SkillAdapter(getActivity(),1);
 
         mLv_Educations.setAdapter(mEducationAdapter);
         mLv_Experiences.setAdapter(mExperienceAdapter);
         mLv_Skills.setAdapter(mSkillAdapter);
 
-        ResumeFragment.ListUtils.setDynamicHeight(mLv_Educations);
-        ResumeFragment.ListUtils.setDynamicHeight(mLv_Experiences);
-        ResumeFragment.ListUtils.setDynamicHeight(mLv_Skills);
+        mAddEducation=(Button)mFragment.findViewById(R.id.btn_addeducation);
+        mAddExperience=(Button)mFragment.findViewById(R.id.btn_addexperience);
+        mAddSkill=(Button)mFragment.findViewById(R.id.btn_addskill);
+
+        mUserController=new UserController(getActivity());
+        mUserController.showResume(mEducationAdapter,mExperienceAdapter,mSkillAdapter);
+//        mUserController.showInfo(mTv_Email,mTv_Name);
+
+        ListUtils.setDynamicHeight(mLv_Educations);
+        ListUtils.setDynamicHeight(mLv_Experiences);
+        ListUtils.setDynamicHeight(mLv_Skills);
+
+        mScrollView=(ScrollView) mFragment.findViewById(R.id.sv_profile);
+        mScrollView.smoothScrollTo(0,0);
+
+        mAddEducation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAddEducationDialog=new AddEducationDialog(getActivity());
+                mAddEducationDialog.setTitle("Add Education Record");
+                mAddEducationDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                mAddEducationDialog.setButton1("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Education education=new Education();
+                        education.setSchool(mAddEducationDialog.getAddSchoolText());
+                        education.setDegree(mAddEducationDialog.getAddDegreeText());
+                        education.setMajor(mAddEducationDialog.getAddMajorText());
+                        education.setStartYear(mAddEducationDialog.getAddStartText());
+                        education.setEndYear(mAddEducationDialog.getAddEndYearText());
+                        mUserController.addEducation(education,mEducationAdapter);
+                        dialog.cancel();
+                    }
+                });
+                mAddEducationDialog.show();
+            }
+        });
+
+        mAddExperience.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mExperienceDialog=new AddExperienceDialog(getActivity());
+                mExperienceDialog.setTitle("Add Experience Record");
+                mExperienceDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                mExperienceDialog.setButton1("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Experience experience=new Experience();
+                        experience.setCompany(mExperienceDialog.getAddCompanyText());
+                        experience.setPosition(mExperienceDialog.getAddPositionText());
+                        mUserController.addExperience(experience,mExperienceAdapter);
+                        dialog.cancel();
+                    }
+                });
+                mExperienceDialog.show();
+            }
+        });
+
+        mAddSkill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAddSkillDialog=new AddSkillDialog(getActivity());
+                mAddSkillDialog.setTitle("Add Skill Record");
+                mAddSkillDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                mAddSkillDialog.setButton1("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Skill skill=new Skill();
+                        skill.setSkill(mAddSkillDialog.getAddSkillText());
+                        mUserController.addSkill(skill,mSkillAdapter);
+                        dialog.cancel();
+                    }
+                });
+                mAddSkillDialog.show();
+            }
+        });
 
         return mFragment;
     }

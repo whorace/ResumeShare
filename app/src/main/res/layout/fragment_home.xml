@@ -58,9 +58,12 @@
         android:layout_below="@id/buttonpad"
         android:orientation="horizontal">
 
-        <Gallery
+        <ListView
+            android:id="@+id/lv_searchresult"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></Gallery>
+            android:layout_height="wrap_content"
+            android:visibility="gone"></ListView>
+
     </LinearLayout>
 
 </RelativeLayout>

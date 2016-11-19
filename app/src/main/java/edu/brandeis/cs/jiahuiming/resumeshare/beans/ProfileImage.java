@@ -7,6 +7,16 @@ public class ProfileImage {
     private String Account;
     private String ScourceId;
 
+    private String Id;
+    public String getId(){
+        return this.Id;
+
+    }
+    public void setId(String Id){
+        this.Id=Id;
+    }
+
+
 
     public String getScourceId() {
         return ScourceId;

@@ -3,11 +3,23 @@ package edu.brandeis.cs.jiahuiming.resumeshare.controllers;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.regex.Pattern;
 
+import edu.brandeis.cs.jiahuiming.resumeshare.adapters.ContactsAdapter;
+import edu.brandeis.cs.jiahuiming.resumeshare.adapters.EducationAdapter;
+import edu.brandeis.cs.jiahuiming.resumeshare.adapters.ExperienceAdapter;
+import edu.brandeis.cs.jiahuiming.resumeshare.adapters.SearchResultAdapter;
+import edu.brandeis.cs.jiahuiming.resumeshare.adapters.SkillAdapter;
+import edu.brandeis.cs.jiahuiming.resumeshare.beans.Contact;
+import edu.brandeis.cs.jiahuiming.resumeshare.beans.Education;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Experience;
+import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
+import edu.brandeis.cs.jiahuiming.resumeshare.models.ContactModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.EducationModel;
+import edu.brandeis.cs.jiahuiming.resumeshare.models.ExperienceModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.SkillModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.UserModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.NetworkChecker;
@@ -20,10 +32,11 @@ import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
 public class UserController {
 
     private UserModel userModel;
+    private ContactModel contactModel;
     private Context context;
     private EducationModel educationModel;
     private SkillModel skillModel;
-    private Experience experienceModel;
+    private ExperienceModel experienceModel;
 
     public UserController(Context context){
         this.context=context;
@@ -41,14 +54,6 @@ public class UserController {
             Bundle bundle = new Bundle();
             userModel=new UserModel(context);
             userModel.loginfromRemote(account,password);
-//            if(password.equals(user.getPassword()))
-//            {
-//                bundle.putString("Account", account);
-//                intent.putExtra("Bundle", bundle);
-//                context.startActivity(intent);}
-//            else{
-//                Toast.makeText(context, "Wrong Password or Unexisted Account!", Toast.LENGTH_LONG).show();
-//            }
         }
     }
 
@@ -74,8 +79,26 @@ public class UserController {
                 Toast.LENGTH_LONG).show();}
     }
 
+    public void showInfo(final TextView mEmail, final TextView mName){
+        userModel=new UserModel(context);
+        userModel.showInfo(((HomeActivity)context).getCurrentUser(),mEmail,mName);
+    }
 
-    public void login(){
+    public void addEducation(Education education,final EducationAdapter educationAdapter){
+        educationModel=new EducationModel(context);
+        educationModel.addEducationToRemote(((HomeActivity)context).getCurrentUser(),education,educationAdapter);
+
+    }
+
+    public void addExperience(Experience experience,final ExperienceAdapter experienceAdapter){
+        experienceModel=new ExperienceModel(context);
+        experienceModel.addExperienceToRemote(((HomeActivity)context).getCurrentUser(),experience,experienceAdapter);
+
+    }
+
+    public void addSkill(Skill skill,final SkillAdapter skillAdapter){
+        skillModel=new SkillModel(context);
+        skillModel.addSkillToRemote(((HomeActivity)context).getCurrentUser(),skill,skillAdapter);
 
     }
 
@@ -98,5 +121,72 @@ public class UserController {
     public void uploadUserInfo(){
 
     }
+
+    public void showContacts(final ContactsAdapter contactsAdapter){
+        contactModel=new ContactModel(context);
+        contactModel.loadContactsfromRemote(((HomeActivity)context).getCurrentUser(),contactsAdapter);
+    }
+
+    public void modifyEducation(Education education){
+        educationModel= new EducationModel(context);
+        educationModel.upDateEducationOnRemote(education);
+
+    }
+
+    public void modifyExperience(Experience experience){
+        experienceModel= new ExperienceModel(context);
+        experienceModel.upDateExperienceOnRemote(experience);
+
+    }
+
+    public void modifySkill(Skill skill){
+        skillModel= new SkillModel(context);
+        skillModel.upDateSkillOnRemote(skill);
+    }
+
+    public void delEducation(Education education){
+        educationModel= new EducationModel(context);
+        educationModel.delEducationOnRemote(education);
+
+    }
+
+    public void delExperience(Experience experience){
+        experienceModel= new ExperienceModel(context);
+        experienceModel.delExperienceOnRemote(experience);
+
+    }
+
+    public void delSkill(Skill skill){
+        skillModel= new SkillModel(context);
+        skillModel.delSkillOnRemote(skill);
+    }
+
+    public void showResume(final EducationAdapter educationAdapter, final ExperienceAdapter experienceAdapter, final SkillAdapter skillAdapter){
+        Log.d("Test","UserController+showResume");
+        Toast.makeText(context,"UserController+showResume",Toast.LENGTH_LONG).show();
+        educationModel=new EducationModel(context);
+        skillModel=new SkillModel(context);
+        experienceModel=new ExperienceModel(context);
+
+        educationModel.loadEducationFromRemote(((HomeActivity)context).getCurrentUser(),educationAdapter);
+        experienceModel.loadExperienceFromRemote(((HomeActivity)context).getCurrentUser(),experienceAdapter);
+        skillModel.loadSkillFromRemote(((HomeActivity)context).getCurrentUser(),skillAdapter);
+
+        Toast.makeText(context,"UserController"+((HomeActivity)context).getCurrentUser(),Toast.LENGTH_LONG).show();
+    }
+
+    public void sendRequest(String account,String message){
+
+    }
+
+    public void sentIntantLocation(){
+
+    }
+
+    public void getSearchResult(final SearchResultAdapter searchResultAdapter){
+
+
+    }
+
 
 }

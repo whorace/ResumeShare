@@ -15,8 +15,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,8 @@ import edu.brandeis.cs.jiahuiming.resumeshare.adapters.SkillAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Education;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Experience;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
+import edu.brandeis.cs.jiahuiming.resumeshare.controllers.ContactController;
+import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.WaveView;
 
@@ -36,41 +41,17 @@ import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.WaveView;
  */
 public class ResumeFragment extends Fragment {
 
+    private ScrollView mScrollView;
     private ListView mLv_Educations;
     private ListView mLv_Experiences;
     private ListView mLv_Skills;
     private TextView mTv_Email;
     private TextView mTv_Name;
     private String account;
+    private ContactController mContactController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        ArrayList<Education> meducationlist=new ArrayList<Education>();
-        for(int i=0;i<3;i+=1){
-            Education education=new Education();
-            education.setSchool("Brandeis University");
-            education.setDegree("Mater");
-            education.setMajor("Computer Science");
-            education.setStartYear("2010");
-            education.setEndYear("2016");
-            meducationlist.add(education);
-        }
-        ArrayList<Experience> mexperiencelist=new ArrayList<Experience>();
-        for(int i=0;i<3;i+=1){
-            Experience experience=new Experience();
-            experience.setCompany("Apple Corp.");
-            experience.setPosition("Software Engineer");
-            mexperiencelist.add(experience);
-
-        }
-        ArrayList<Skill> mskilllist=new ArrayList<Skill>();
-        for(int i=0;i<3;i+=1){
-            Skill skill=new Skill();
-            skill.setSkill("Java Programming");
-            mskilllist.add(skill);
-        }
-
 
         account=((HomeActivity)getActivity()).getResumeAccount();
         View mFragment = inflater.inflate(R.layout.fragment_resume, container, false);
@@ -81,19 +62,27 @@ public class ResumeFragment extends Fragment {
         mLv_Experiences=(ListView)mFragment.findViewById(R.id.lv_experience);
         mLv_Skills=(ListView)mFragment.findViewById(R.id.lv_skill);
 
-        EducationAdapter mEducationAdapter=new EducationAdapter(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),meducationlist,0);
-        ExperienceAdapter mExperienceAdapter=new ExperienceAdapter(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),mexperiencelist,0);
-        SkillAdapter mSkillAdapter=new SkillAdapter(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),mskilllist);
+        EducationAdapter mEducationAdapter=new EducationAdapter(getActivity(),0);
+        ExperienceAdapter mExperienceAdapter=new ExperienceAdapter(getActivity(),0);
+        SkillAdapter mSkillAdapter=new SkillAdapter(getActivity(),0);
 
         mLv_Educations.setAdapter(mEducationAdapter);
         mLv_Experiences.setAdapter(mExperienceAdapter);
         mLv_Skills.setAdapter(mSkillAdapter);
 
+        mContactController=new ContactController(getActivity());
+        mContactController.showResume(mEducationAdapter,mExperienceAdapter,mSkillAdapter);
+        mContactController.showInfo(mTv_Email,mTv_Name);
+
         ListUtils.setDynamicHeight(mLv_Educations);
         ListUtils.setDynamicHeight(mLv_Experiences);
         ListUtils.setDynamicHeight(mLv_Skills);
 
+
+
         Toast.makeText(getActivity(),((HomeActivity)getActivity()).getResumeAccount(),Toast.LENGTH_LONG).show();
+        mScrollView=(ScrollView) mFragment.findViewById(R.id.sv_resume);
+        mScrollView.smoothScrollTo(0,0);
 
         return mFragment;
     }

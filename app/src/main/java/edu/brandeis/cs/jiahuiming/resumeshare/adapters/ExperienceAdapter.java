@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
@@ -23,12 +24,16 @@ public class ExperienceAdapter extends BaseAdapter {
     private int editmode;
     private LayoutInflater mInflater;
 
-    public ExperienceAdapter(Context context,String account,List<Experience> list,int editmode) {
-        this.mList=list;
-        this.account = account;
+    public ExperienceAdapter(Context context,int editmode) {
+        this.mList=new ArrayList<>();
         this.context = context;
         this.editmode=editmode;
         this.mInflater= LayoutInflater.from(context);
+    }
+
+    public void putData(Experience experience){
+        this.mList.add(experience);
+        notifyDataSetChanged();
     }
 
     @Override

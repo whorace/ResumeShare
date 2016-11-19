@@ -23,4 +23,12 @@ public class Skill {
 
     private String Account;
     private String Skill;
+    private String Id;
+    public String getId(){
+        return this.Id;
+
+    }
+    public void setId(String Id){
+        this.Id=Id;
+    }
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
@@ -60,7 +61,7 @@ public class UserModel {
             public void taskSuccessful(String json) {
                 try {
                     result=json;
-                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -81,11 +82,11 @@ public class UserModel {
             public void taskSuccessful(String json) {
                 try {
                     result=json;
-                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, HomeActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("Account", user.getAccount());
-                    intent.putExtra("Bundle", bundle);
+                    bundle.putString("account", user.getAccount());
+                    intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
                 catch (Exception e) {
@@ -96,5 +97,32 @@ public class UserModel {
             }
         });
         task.execute("user","login","account="+account+"&password="+password);
+    }
+
+    public void showInfo(String account, final TextView email,final TextView name){
+        HttpTask task = new HttpTask();
+        user.setAccount(account);
+        task.setTaskHandler(new HttpTask.HttpTaskHandler(){
+            public void taskSuccessful(String json) {
+                try {
+                    result=json;
+//                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(context, HomeActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("account", user.getAccount());
+//                    intent.putExtras(bundle);
+                    email.setText(result);
+                    name.setText(result);
+//                    context.startActivity(intent);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            public void taskFailed() {
+            }
+        });
+        task.execute("user","showInfo","account="+account);
+
     }
 }

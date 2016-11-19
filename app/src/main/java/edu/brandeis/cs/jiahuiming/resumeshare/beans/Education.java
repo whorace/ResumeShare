@@ -5,19 +5,19 @@ package edu.brandeis.cs.jiahuiming.resumeshare.beans;
  */
 public class Education {
     private String Account;
-    private int Order;
     private String School;
     private String StartYear;
     private String EndYear;
     private String Degree;
     private String Major;
 
-    public int getOrder() {
-        return Order;
-    }
+    private String Id;
+    public String getId(){
+        return this.Id;
 
-    public void setOrder(int order) {
-        Order = order;
+    }
+    public void setId(String Id){
+        this.Id=Id;
     }
 
     public String getAccount() {

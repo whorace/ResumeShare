@@ -1,43 +1,32 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.adapters;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.LinearInterpolator;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
-
-/**
- * Created by jiahuiming on 10/25/16.
- */
-import android.widget.Button;
-import android.widget.Toast;
-
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.RequestDetailFragment;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ResumeFragment;
 
-
 /**
- * Created by jiahuiming on 10/25/16.
+ * Created by jiahuiming on 11/18/16.
  */
-public class ContactsAdapter extends BaseAdapter {
+
+public class RequestAdapter extends BaseAdapter {
     private List<User> mList;
     private LayoutInflater mInflater;
     private int position;
     private Context context;
-    public ContactsAdapter(Context context){
+    public RequestAdapter(Context context){
         this.mList=new ArrayList<User>();
         this.context=context;
         mInflater=LayoutInflater.from(context);
@@ -65,9 +54,9 @@ public class ContactsAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
         this.position=position;
-        final ViewHolder viewHolder;
+        final RequestAdapter.ViewHolder viewHolder;
         if(convertView==null){
-            viewHolder=new ViewHolder();
+            viewHolder=new RequestAdapter.ViewHolder();
             convertView=mInflater.inflate(R.layout.list_item_contact,null);
             viewHolder.imageView=(ImageView) convertView.findViewById(R.id.tv_image);
             viewHolder.name=(TextView)convertView.findViewById(R.id.tv_name);
@@ -75,7 +64,7 @@ public class ContactsAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
         }else{
 
-            viewHolder=(ViewHolder) convertView.getTag();
+            viewHolder=(RequestAdapter.ViewHolder) convertView.getTag();
 
         }
 
@@ -86,10 +75,8 @@ public class ContactsAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((HomeActivity)context).setResumeAccount(mList.get(position).getAccount());
-                ((HomeActivity)context).setResumeAccount("123@qq.com");
-                ((HomeActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ResumeFragment()).commit();
-
+                ((HomeActivity)context).setRequestAccount(mList.get(position).getAccount());
+                ((HomeActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new RequestDetailFragment()).commit();
             }
         });
 

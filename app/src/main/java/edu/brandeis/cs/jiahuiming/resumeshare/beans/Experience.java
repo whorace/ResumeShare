@@ -5,17 +5,16 @@ package edu.brandeis.cs.jiahuiming.resumeshare.beans;
  */
 public class Experience {
     private String Account;
-    private int Order;
     private String Company;
     private String Position;
 
+    private String Id;
+    public String getId(){
+        return this.Id;
 
-    public int getOrder() {
-        return Order;
     }
-
-    public void setOrder(int order) {
-        Order = order;
+    public void setId(String Id){
+        this.Id=Id;
     }
 
     public String getAccount() {
