@@ -1,6 +1,7 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.controllers;
 
 import android.content.Context;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,14 +35,14 @@ public class ContactController {
 //
 //    public ShowResume(EducationAdapter)
 
-    public void showResume(final EducationAdapter educationAdapter, final ExperienceAdapter experienceAdapter, final SkillAdapter skillAdapter){
+    public void showResume(final EducationAdapter educationAdapter, final ExperienceAdapter experienceAdapter, final SkillAdapter skillAdapter, final ListView lv_education,final ListView lv_experience, final ListView lv_skill){
         educationModel=new EducationModel(context);
         skillModel=new SkillModel(context);
         experienceModel=new ExperienceModel(context);
 
-        educationModel.loadEducationFromRemote(((HomeActivity)context).getResumeAccount(),educationAdapter);
-        experienceModel.loadExperienceFromRemote(((HomeActivity)context).getResumeAccount(),experienceAdapter);
-        skillModel.loadSkillFromRemote(((HomeActivity)context).getResumeAccount(),skillAdapter);
+        educationModel.loadEducationFromRemote(((HomeActivity)context).getResumeAccount(),educationAdapter,lv_education);
+        experienceModel.loadExperienceFromRemote(((HomeActivity)context).getResumeAccount(),experienceAdapter,lv_experience);
+        skillModel.loadSkillFromRemote(((HomeActivity)context).getResumeAccount(),skillAdapter,lv_skill);
 
     }
 

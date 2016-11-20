@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 import java.util.regex.Pattern;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.ContactsAdapter;
@@ -88,21 +91,21 @@ public class UserController {
         userModel.showInfo(((HomeActivity)context).getCurrentUser(),mEmail,mName);
     }
 
-    public void addEducation(Education education,final EducationAdapter educationAdapter){
+    public void addEducation(Education education,final EducationAdapter educationAdapter,final ListView lv_education){
         educationModel=new EducationModel(context);
-        educationModel.addEducationToRemote(((HomeActivity)context).getCurrentUser(),education,educationAdapter);
+        educationModel.addEducationToRemote(((HomeActivity)context).getCurrentUser(),education,educationAdapter,lv_education);
 
     }
 
-    public void addExperience(Experience experience,final ExperienceAdapter experienceAdapter){
+    public void addExperience(Experience experience,final ExperienceAdapter experienceAdapter,final ListView lv_experience){
         experienceModel=new ExperienceModel(context);
-        experienceModel.addExperienceToRemote(((HomeActivity)context).getCurrentUser(),experience,experienceAdapter);
+        experienceModel.addExperienceToRemote(((HomeActivity)context).getCurrentUser(),experience,experienceAdapter,lv_experience);
 
     }
 
-    public void addSkill(Skill skill,final SkillAdapter skillAdapter){
+    public void addSkill(Skill skill,final SkillAdapter skillAdapter,final ListView lv_skill){
         skillModel=new SkillModel(context);
-        skillModel.addSkillToRemote(((HomeActivity)context).getCurrentUser(),skill,skillAdapter);
+        skillModel.addSkillToRemote(((HomeActivity)context).getCurrentUser(),skill,skillAdapter,lv_skill);
 
     }
 
@@ -157,33 +160,33 @@ public class UserController {
         skillModel.upDateSkillOnRemote(skill);
     }
 
-    public void delEducation(Education education){
+    public void delEducation(Education education,final ListView lv_education){
         educationModel= new EducationModel(context);
-        educationModel.delEducationOnRemote(education);
+        educationModel.delEducationOnRemote(education,lv_education);
 
     }
 
-    public void delExperience(Experience experience){
+    public void delExperience(Experience experience,final ListView lv_experience){
         experienceModel= new ExperienceModel(context);
-        experienceModel.delExperienceOnRemote(experience);
+        experienceModel.delExperienceOnRemote(experience,lv_experience);
 
     }
 
-    public void delSkill(Skill skill){
+    public void delSkill(Skill skill,final ListView lv_skill){
         skillModel= new SkillModel(context);
-        skillModel.delSkillOnRemote(skill);
+        skillModel.delSkillOnRemote(skill,lv_skill);
     }
 
-    public void showResume(final EducationAdapter educationAdapter, final ExperienceAdapter experienceAdapter, final SkillAdapter skillAdapter){
+    public void showResume(final EducationAdapter educationAdapter, final ExperienceAdapter experienceAdapter, final SkillAdapter skillAdapter, final ListView lv_education, final ListView lv_experience, final ListView lv_skill){
         Log.d("Test","UserController+showResume");
         Toast.makeText(context,"UserController+showResume",Toast.LENGTH_LONG).show();
         educationModel=new EducationModel(context);
         skillModel=new SkillModel(context);
         experienceModel=new ExperienceModel(context);
 
-        educationModel.loadEducationFromRemote(((HomeActivity)context).getCurrentUser(),educationAdapter);
-        experienceModel.loadExperienceFromRemote(((HomeActivity)context).getCurrentUser(),experienceAdapter);
-        skillModel.loadSkillFromRemote(((HomeActivity)context).getCurrentUser(),skillAdapter);
+        educationModel.loadEducationFromRemote(((HomeActivity)context).getCurrentUser(),educationAdapter,lv_education);
+        experienceModel.loadExperienceFromRemote(((HomeActivity)context).getCurrentUser(),experienceAdapter,lv_experience);
+        skillModel.loadSkillFromRemote(((HomeActivity)context).getCurrentUser(),skillAdapter,lv_skill);
 
     }
 

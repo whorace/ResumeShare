@@ -87,6 +87,8 @@ public class RequestAdapter extends BaseAdapter {
                 UserController userController=new UserController(context);
                 userController.addContact(((HomeActivity)context).getCurrentUser(),mList.get(id).getHostAccount());
                 userController.refuseRequest(mList.get(id).getId());
+                mList.remove(id);
+                notifyDataSetChanged();
             }
         });
         viewHolder.refuse.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +96,8 @@ public class RequestAdapter extends BaseAdapter {
             public void onClick(View v) {
                 UserController userController=new UserController(context);
                 userController.refuseRequest(mList.get(id).getId());
+                mList.remove(id);
+                notifyDataSetChanged();
             }
         });
         return convertView;

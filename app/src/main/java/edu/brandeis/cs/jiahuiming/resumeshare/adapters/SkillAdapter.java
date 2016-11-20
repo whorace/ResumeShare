@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,8 @@ import edu.brandeis.cs.jiahuiming.resumeshare.R;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Experience;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
+import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.BaseDialog;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.EditDialog;
 
 /**
@@ -27,6 +30,7 @@ public class SkillAdapter extends BaseAdapter {
     private Context context;
     private int editmode;
     private EditDialog mEditDialog;
+    private BaseDialog mBaseDialog;
     private LayoutInflater mInflater;
 
     public SkillAdapter(Context context,int editmode) {
@@ -35,6 +39,13 @@ public class SkillAdapter extends BaseAdapter {
         this.context = context;
         mEditDialog=new EditDialog(context);
         mEditDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        mBaseDialog=new BaseDialog(context);
+        mBaseDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -65,7 +76,7 @@ public class SkillAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, final ViewGroup parent) {
         final int id=position;
         SkillAdapter.ViewHolder viewHolder;
         if(convertView==null){
@@ -78,24 +89,48 @@ public class SkillAdapter extends BaseAdapter {
 
         }
 
-        Skill skill=mList.get(position);
+        final Skill skill=mList.get(position);
         viewHolder.mSkill.setText(skill.getSkill());
 
         if(editmode==1){
-            viewHolder.mSkill.setOnLongClickListener(new View.OnLongClickListener() {
+            convertView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    mBaseDialog.setTitle("Warning");
+                    mBaseDialog.setMessage("Do you sure to delete this record?");
+                    mBaseDialog.setButton1("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            UserController userController=new UserController(context);
+                            userController.delSkill(skill,(ListView)parent);
+                            mList.remove(id);
+                            notifyDataSetChanged();
+                            dialog.cancel();
+                        }
+                    });
+                    mBaseDialog.show();
+                    return false;
+                }
+            });
+
+            viewHolder.mSkill.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     mEditDialog.setTitle("Edit Skill Info");
                     mEditDialog.setEditTextHint(mList.get(id).getSkill());
                     mEditDialog.setButton1("Save", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(context,"success to save",Toast.LENGTH_SHORT).show();
+
+                            skill.setSkill(mEditDialog.getEditText().trim());
+                            UserController userController=new UserController(context);
+                            userController.modifySkill(skill);
+                            mList.set(id,skill);
+                            notifyDataSetChanged();
                             dialog.cancel();
                         }
                     });
                     mEditDialog.show();
-                    return false;
                 }
             });
 

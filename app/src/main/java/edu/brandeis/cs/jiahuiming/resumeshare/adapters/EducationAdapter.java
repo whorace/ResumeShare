@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,7 +87,7 @@ public class EducationAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
 
         final int id=position;
         EducationAdapter.ViewHolder viewHolder;
@@ -116,10 +117,7 @@ public class EducationAdapter extends BaseAdapter {
 //        mDatePickerDialog.setButton1("Save",new DialogInterface.OnClickListener() {
 //            @Override
 //            public void onClick(DialogInterface dialog, int which) {
-//                Toast.makeText(context,"success to save",Toast.LENGTH_SHORT).show();
-//                dialog.cancel();
-//            }
-//        });
+//                Toast.makeText(context,"success to sa
 
         if(editmode==1){
             convertView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -131,7 +129,7 @@ public class EducationAdapter extends BaseAdapter {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             UserController userController=new UserController(context);
-                            userController.delEducation(education);
+                            userController.delEducation(education,(ListView)parent);
                             mList.remove(id);
                             notifyDataSetChanged();
                             dialog.cancel();

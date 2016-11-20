@@ -71,7 +71,7 @@ public class ResumeFragment extends Fragment {
         mLv_Skills.setAdapter(mSkillAdapter);
 
         mContactController=new ContactController(getActivity());
-        mContactController.showResume(mEducationAdapter,mExperienceAdapter,mSkillAdapter);
+        mContactController.showResume(mEducationAdapter,mExperienceAdapter,mSkillAdapter,mLv_Educations,mLv_Experiences,mLv_Skills);
         mContactController.showInfo(mTv_Email,mTv_Name);
 
         ListUtils.setDynamicHeight(mLv_Educations);

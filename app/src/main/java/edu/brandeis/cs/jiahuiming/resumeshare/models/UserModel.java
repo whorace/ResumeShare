@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.DBOpenHelper;
@@ -54,12 +57,26 @@ public class UserModel {
         task.setTaskHandler(new HttpTask.HttpTaskHandler(){
             public void taskSuccessful(String json) {
                 try {
-                    result=json;
-                    Intent intent = new Intent(context, HomeActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("account", user.getAccount());
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
+                    //result=json;
+                    JSONObject jsObj=new JSONObject(json);
+                    result = jsObj.getString("result");
+                    Log.d("test",result);
+                    if(result.equals("true")){
+
+                        Toast.makeText(context,"Login Successed",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, HomeActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("account", user.getAccount());
+                        intent.putExtras(bundle);
+                        context.startActivity(intent);
+                    }
+                    else{
+
+                        Toast.makeText(context,"Login Failed",Toast.LENGTH_LONG).show();
+
+
+                    }
+
                 }
                 catch (Exception e) {
                     e.printStackTrace();

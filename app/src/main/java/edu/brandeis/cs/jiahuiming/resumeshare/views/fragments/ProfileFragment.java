@@ -132,15 +132,8 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
         mAddSkill=(Button)mFragment.findViewById(R.id.btn_addskill);
 
         mUserController=new UserController(getActivity());
-        mUserController.showResume(mEducationAdapter,mExperienceAdapter,mSkillAdapter);
+        mUserController.showResume(mEducationAdapter,mExperienceAdapter,mSkillAdapter,mLv_Educations,mLv_Experiences,mLv_Skills);
 //        mUserController.showInfo(mTv_Email,mTv_Name);
-
-        ListUtils.setDynamicHeight(mLv_Educations);
-        ListUtils.setDynamicHeight(mLv_Experiences);
-        ListUtils.setDynamicHeight(mLv_Skills);
-
-        mScrollView=(ScrollView) mFragment.findViewById(R.id.sv_profile);
-        mScrollView.smoothScrollTo(0,0);
 
         mAddEducation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,7 +155,7 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
                         education.setMajor(mAddEducationDialog.getAddMajorText());
                         education.setStartYear(mAddEducationDialog.getAddStartText());
                         education.setEndYear(mAddEducationDialog.getAddEndYearText());
-                        mUserController.addEducation(education,mEducationAdapter);
+                        mUserController.addEducation(education,mEducationAdapter,mLv_Educations);
                         dialog.cancel();
                     }
                 });
@@ -187,7 +180,7 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
                         Experience experience=new Experience();
                         experience.setCompany(mExperienceDialog.getAddCompanyText());
                         experience.setPosition(mExperienceDialog.getAddPositionText());
-                        mUserController.addExperience(experience,mExperienceAdapter);
+                        mUserController.addExperience(experience,mExperienceAdapter,mLv_Experiences);
                         dialog.cancel();
                     }
                 });
@@ -211,13 +204,20 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
                     public void onClick(DialogInterface dialog, int which) {
                         Skill skill=new Skill();
                         skill.setSkill(mAddSkillDialog.getAddSkillText());
-                        mUserController.addSkill(skill,mSkillAdapter);
+                        mUserController.addSkill(skill,mSkillAdapter,mLv_Skills);
                         dialog.cancel();
                     }
                 });
                 mAddSkillDialog.show();
             }
         });
+
+        ListUtils.setDynamicHeight(mLv_Educations);
+        ListUtils.setDynamicHeight(mLv_Experiences);
+        ListUtils.setDynamicHeight(mLv_Skills);
+
+        mScrollView=(ScrollView) mFragment.findViewById(R.id.sv_profile);
+        mScrollView.smoothScrollTo(0,0);
 
         return mFragment;
     }

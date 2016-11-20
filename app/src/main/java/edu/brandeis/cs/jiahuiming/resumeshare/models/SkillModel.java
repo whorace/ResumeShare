@@ -3,9 +3,15 @@ package edu.brandeis.cs.jiahuiming.resumeshare.models;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.EducationAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.ExperienceAdapter;
@@ -16,6 +22,7 @@ import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.DBOpenHelper;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.HttpTask;
+import edu.brandeis.cs.jiahuiming.resumeshare.utils.ListUtils;
 
 /**
  * Created by jiahuiming on 11/8/16.
@@ -66,15 +73,33 @@ public class SkillModel {
         return mskill;
     }
 
-    public void loadSkillFromRemote(String account, final SkillAdapter skillAdapter) {
+    public void loadSkillFromRemote(String account, final SkillAdapter skillAdapter, final ListView lv_skill) {
         HttpTask task = new HttpTask();
         task.setTaskHandler(new HttpTask.HttpTaskHandler(){
             public void taskSuccessful(String json) {
                 try {
-                    result=json;
                     Skill skill=new Skill();
-                    skill.setSkill(result);
-                    skillAdapter.putData(skill);
+                    String result_skill;
+                    String result_id;
+                    String result_account;
+                    JSONArray ja=new JSONArray(json);
+
+                    for(int i =0; i<ja.length(); i++){
+                        JSONObject jo=(JSONObject)ja.get(i);
+                        result_skill = jo.getString("skill");
+                        result_id=jo.getString("id");
+                        result_account=jo.getString("account");
+                        skill=new Skill();
+                        skill.setSkill(result_skill);
+                        skill.setId(result_id);
+                        skill.setAccount(result_account);
+                        skillAdapter.putData(skill);
+                        Log.d("Skill",skill.getSkill());
+
+                    }
+
+                    ListUtils mListUtils=new ListUtils();
+                    mListUtils.setDynamicHeight(lv_skill);
                     skillAdapter.notifyDataSetChanged();
                 }
                 catch (Exception e) {
@@ -108,12 +133,14 @@ public class SkillModel {
     }
 
 
-    public void delSkillOnRemote(Skill skill){
+    public void delSkillOnRemote(Skill skill,final ListView lv_skill){
         HttpTask task = new HttpTask();
         task.setTaskHandler(new HttpTask.HttpTaskHandler()
         {
             public void taskSuccessful(String json) {
                 try {
+                    ListUtils mListUtils=new ListUtils();
+                    mListUtils.setDynamicHeight(lv_skill);
                     result=json;
                 }
                 catch (Exception e) {
@@ -126,7 +153,7 @@ public class SkillModel {
         task.execute("user","delSkill","id="+skill.getId());
     }
 
-    public void addSkillToRemote(String account,final Skill skill,final SkillAdapter skillAdapter){
+    public void addSkillToRemote(String account,final Skill skill,final SkillAdapter skillAdapter,final ListView lv_skill){
         HttpTask task = new HttpTask();
         task.setTaskHandler(new HttpTask.HttpTaskHandler(){
             public void taskSuccessful(String json) {
@@ -134,6 +161,8 @@ public class SkillModel {
                     result=json;
                     skillAdapter.putData(skill);
                     skillAdapter.notifyDataSetChanged();
+                    ListUtils mListUtils=new ListUtils();
+                    mListUtils.setDynamicHeight(lv_skill);
                 }
                 catch (Exception e) {
                     e.printStackTrace();
