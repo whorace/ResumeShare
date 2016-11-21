@@ -20,8 +20,8 @@
     <RelativeLayout
         android:id="@+id/buttonpad"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/waveview_size"
-        android:layout_margin="@dimen/activity_horizontal_margin">
+        android:layout_height="@dimen/waveview_layout"
+        android:padding="@dimen/activity_horizontal_margin">
 
         <Button
             android:id="@+id/button1"
@@ -46,7 +46,7 @@
     <ListView
         android:id="@+id/lv_searchresult"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/max_research_height"
         android:visibility="gone"></ListView>
     <View
         android:layout_width="match_parent"

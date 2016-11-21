@@ -32,23 +32,8 @@ public class RequestsFragment extends Fragment {
         mListView=(ListView)mFragment.findViewById(R.id.lv_requests);
         RequestAdapter mRequestAdapter=new RequestAdapter(getActivity());
         mListView.setAdapter(mRequestAdapter);
-//
         mUserController=new UserController(getActivity());
-//        mUserController.showRequests(mRequestAdapter);
-
-//        for(int i=0;i<3;i++){
-//            Request request=new Request();
-//
-//            request.setHostAccount("hostaccount");
-//            request.setId(new Integer(i).toString());
-//            request.setGuestAccount("Guestaccount");
-//            request.setMessage("Message");
-//            request.setHostImageId("ImageId");
-//            request.setHostName("Name");
-//
-//            mRequestAdapter.putData(request);
-//            mRequestAdapter.notifyDataSetChanged();
-//        }
+        mUserController.showRequests(mRequestAdapter);
 
         return mFragment;
     }

@@ -101,10 +101,8 @@ public class LocationUtil {
             setLongitude(location.getLongitude());
             setLatitude(location.getLatitude());
 
-            Toast.makeText(context,location.getLongitude()+" "+location.getLatitude(),Toast.LENGTH_SHORT).show();
-
         } else {
-            Toast.makeText(context,"Empty",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"Can't not get location information！",Toast.LENGTH_SHORT).show();
         }
     }
 }

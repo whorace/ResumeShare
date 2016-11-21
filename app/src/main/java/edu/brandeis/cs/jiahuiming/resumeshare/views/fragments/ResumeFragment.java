@@ -54,7 +54,6 @@ public class ResumeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         account=((HomeActivity)getActivity()).getResumeAccount();
-        Toast.makeText(getActivity(),account,Toast.LENGTH_SHORT).show();
         View mFragment = inflater.inflate(R.layout.fragment_resume, container, false);
         mTv_Email=(TextView)mFragment.findViewById(R.id.tv_resume_account);
         mTv_Name=(TextView)mFragment.findViewById(R.id.tv_resume_name);

@@ -8,13 +8,10 @@ public class TimeUtil {
     public TimeUtil(){
         timecurrentTimeMillis = System.currentTimeMillis();
     }
-
     public long getTimecurrentTimeMillis() {
         return timecurrentTimeMillis;
     }
-
     public void displayTime(){
         Log.d("current time", "timecurrentTimeMillis" + timecurrentTimeMillis);
-
     }
 }

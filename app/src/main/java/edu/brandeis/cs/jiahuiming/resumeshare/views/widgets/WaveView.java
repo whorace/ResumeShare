@@ -17,11 +17,11 @@ import java.util.List;
  */
 
 public class WaveView extends View {
-    private float mInitialRadius;   // 初始波纹半径
-    private float mMaxRadius;   // 最大波纹半径
-    private long mDuration = 2000; // 一个波纹从创建到消失的持续时间
-    private int mSpeed = 500;   // 波纹的创建速度，每500ms创建一个
-    private float mMaxRadiusRate = 0.85f;
+    private float mInitialRadius;
+    private float mMaxRadius;
+    private long mDuration = 2000;
+    private int mSpeed = 500;
+    private float mMaxRadiusRate = 1.0f;
     private boolean mMaxRadiusSet;
 
     private boolean mIsRunning;
@@ -97,6 +97,7 @@ public class WaveView extends View {
             float radius = circle.getCurrentRadius();
             if (System.currentTimeMillis() - circle.mCreateTime < mDuration) {
                 mPaint.setAlpha(circle.getAlpha());
+                mPaint.setAlpha(circle.getAlpha()+30);
                 canvas.drawCircle(getWidth() / 2, getHeight() / 2, radius, mPaint);
             } else {
                 iterator.remove();

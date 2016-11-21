@@ -176,8 +176,6 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
                         dialog.cancel();
                     }
                 });
-//                ((NumberPicker)mAddEducationDialog.getStartYearPicker()).setValue(2016);
-//                ((NumberPicker)mAddEducationDialog.getEndYearPicker()).setValue(2016);
                 mAddEducationDialog.setButton1("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -264,7 +262,6 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
                 }else{
                     Toast.makeText(getActivity(),"Content should not be empty",Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
@@ -345,95 +342,4 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
 
 
     }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data)
-//    {
-//        ContentResolver resolver = getActivity().getContentResolver();
-//        File file = new File("/sdcard/ShareResume/");
-//        file.mkdirs();
-//        if (requestCode == 1)
-//        {
-//            if(data.getData()!=null)
-//            {
-//                try {
-//                    Uri originalUri = data.getData();
-//                    imagePath = originalUri.toString();
-//                    mContent = readStream(resolver. (Uri.parse(originalUri.toString())));
-//                    // convert Imageview to Bitmap that can be used by programe
-//                    mBitmap = getPicFromBytes(mContent, null);
-//                    // check the statue of sd card
-//                    if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-//                    {
-//                        imagePath = "/sdcard/myImage/tempImage.jpg";
-//                        FileOutputStream writeImage = new FileOutputStream(imagePath);
-//                        mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, writeImage);
-//                        //write the Bitmap into filesystem
-////                        uploadUserImage(imagePath);
-//                        return;
-//                    }
-//                    else
-//                    {
-//                        Toast.makeText(getActivity(),"SD卡目前不可读",Toast.LENGTH_SHORT);
-//                    }
-//                }
-//                catch (Exception e)
-//                {
-//                    System.out.println(e.getMessage());
-//                }
-//            }
-//        }
-//        else if (requestCode == 0)
-//        {
-//            if(data.getExtras()!=null)
-//            {
-//                try
-//                {
-//                    if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-//                    {
-//                        // to get the data return by camera and save it in the bitmap
-//                        //we use the time of creating picture as the filename of the photo
-//                        mBitmap = (Bitmap) data.getExtras().get("data");
-//                        Date fileName= new Date();;
-//                        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-//                        imagePath = "/sdcard/myImage/" + format.format(fileName) + ".jpg";
-//
-//                        FileOutputStream writeImage = new FileOutputStream(imagePath);
-//                        mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, writeImage);
-//                        uploadUserImage(imagePath);
-//                    }
-//                }
-//                catch(Exception e)
-//                {
-//                    System.out.println(e.getMessage());
-//                }
-//            }
-//        }
-//    }
-
-//    public static Bitmap getPicFromBytes(byte[] bytes,BitmapFactory.Options opts)
-//    {
-//        if (bytes != null)
-//            if (opts != null)
-//                return BitmapFactory.decodeByteArray(bytes, 0, bytes.length,opts);
-//            else
-//                return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-//        return null;
-//    }
-//
-//    public static byte[] readStream(InputStream inStream) throws Exception
-//    {
-//        byte[] buffer = new byte[1024];
-//        int len = -1;
-//        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-//        while ((len = inStream.read(buffer)) != -1)
-//        {
-//            outStream.write(buffer, 0, len);
-//        }
-//        byte[] data = outStream.toByteArray();
-//        outStream.close();
-//        inStream.close();
-//        return data;
-//    }
-
 }

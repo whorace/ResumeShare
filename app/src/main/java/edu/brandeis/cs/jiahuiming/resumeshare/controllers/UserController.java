@@ -169,7 +169,6 @@ public class UserController {
 
     public void showResume(final EducationAdapter educationAdapter, final ExperienceAdapter experienceAdapter, final SkillAdapter skillAdapter, final ListView lv_education, final ListView lv_experience, final ListView lv_skill){
         Log.d("Test","UserController+showResume");
-        Toast.makeText(context,"UserController+showResume",Toast.LENGTH_LONG).show();
         educationModel=new EducationModel(context);
         skillModel=new SkillModel(context);
         experienceModel=new ExperienceModel(context);
@@ -188,14 +187,6 @@ public class UserController {
 
     public void getSearchResult(final SearchResultAdapter searchResultAdapter){
         searchResultAdapter.cleanData();
-//        for(int i=0;i<10;i++){
-//            User user=new User();
-//            user.setAccount("jiahm92@qq.com"+new Integer(i).toString());
-//            user.setFirstName("Huiming");
-//            user.setSecondName("Jia");
-//            searchResultAdapter.putData(user);
-//        }
-//        searchResultAdapter.notifyDataSetChanged();
         userModel=new UserModel(context);
         userModel.loadSearchResultFromRemote(((HomeActivity)context).getCurrentUser(),searchResultAdapter);
     }

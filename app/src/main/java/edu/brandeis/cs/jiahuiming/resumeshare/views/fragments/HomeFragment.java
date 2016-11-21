@@ -97,8 +97,6 @@ public class HomeFragment extends Fragment {
                     mListView.startAnimation(animationSet);
                     mUserController.getSearchResult(mSearchResultAdapter);
                     Log.d("Wave,","stop");
-                   // LocationUtil locUtil=new LocationUtil(getActivity());
-                    // Put your own click event here
                 }
                 return false;
             }

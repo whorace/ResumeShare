@@ -33,6 +33,8 @@
     <dimen name="min_listview_height">105dp</dimen>
     <dimen name="long_message_height">85dp</dimen>
     <dimen name="waveview_size">150dp</dimen>
+    <dimen name="waveview_layout">300dp</dimen>
     <dimen name="numberpicker_height">100dp</dimen>
     <dimen name="underline_hight">1dp</dimen>
+    <dimen name="max_research_height">156dp</dimen>
 </resources>

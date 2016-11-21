@@ -24,8 +24,6 @@ public class LoginActivity extends Activity {
     private EditText mTv_password;
     private EditText mTv_password_again;
     private boolean mLoginStatue;
-//    private LoginController mLoginController;
-//    private RegisterController mRegisterController;
     private UserController mUserController;
 
 
