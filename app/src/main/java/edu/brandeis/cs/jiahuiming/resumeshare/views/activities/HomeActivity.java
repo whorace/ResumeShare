@@ -40,8 +40,8 @@ public class HomeActivity extends AppCompatActivity  {
     private String[] mMenuItemTitle;
 
     private static String mCurrentAccount;
-    private String ResumeAccount;
-    private String RequestAccount;
+    private static String ResumeAccount;
+    private static String RequestAccount;
 
     public String getRequestAccount() {
         return RequestAccount;}
@@ -62,7 +62,6 @@ public class HomeActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         mCurrentAccount=getIntent().getStringExtra("account");
         setContentView(R.layout.activity_home);
-        mCurrentAccount="123@qq.com";
         mMenuItemTitle=getResources().getStringArray(R.array.menuitem_title);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -76,7 +75,7 @@ public class HomeActivity extends AppCompatActivity  {
         mDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new RequestsFragment()).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new HomeFragment()).addToBackStack(null).commit();
 
         mCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override

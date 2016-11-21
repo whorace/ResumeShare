@@ -3,6 +3,7 @@ package edu.brandeis.cs.jiahuiming.resumeshare.models;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -39,35 +40,16 @@ public class ExperienceModel {
             public void taskSuccessful(String json) {
                 try {
                     Experience experience=new Experience();
-
-                    String result_id;
-                    String result_account;
-                    String result_company;
-                    String result_position;
                     JSONArray ja=new JSONArray(json);
-
                     for(int i =0; i<ja.length(); i++){
-                        JSONObject jo=(JSONObject)ja.get(i);
-
-                        result_id=jo.getString("id");
-                        result_account=jo.getString("account");
-                        result_company=jo.getString("company");
-                        result_position=jo.getString("position");
-
-
                         experience=new Experience();
-
-                        experience.setId(result_id);
-                        experience.setAccount(result_account);
-                        experience.setCompany(result_company);
-                        experience.setPosition(result_position);
+                        experience.setId(((JSONObject)ja.get(i)).getString("id"));
+                        experience.setAccount(((JSONObject)ja.get(i)).getString("account"));
+                        experience.setCompany(((JSONObject)ja.get(i)).getString("company"));
+                        experience.setPosition(((JSONObject)ja.get(i)).getString("position"));
                         experienceAdapter.putData(experience);
-
-
                     }
-
                     experienceAdapter.notifyDataSetChanged();
-
                     ListUtils mListUtils=new ListUtils();
                     mListUtils.setDynamicHeight(lv_experience);
                 }
@@ -97,7 +79,7 @@ public class ExperienceModel {
             public void taskFailed() {
             }
         });
-        task.execute("user","showEducation","id="+experience.getId()+"&account="+experience.getAccount()+"&company="+experience.getCompany()+"&position="+experience.getPosition());
+        task.execute("user","modifyExperience","id="+experience.getId()+"&account="+experience.getAccount()+"&company="+experience.getCompany()+"&position="+experience.getPosition());
 
     }
 
@@ -110,6 +92,7 @@ public class ExperienceModel {
                     result=json;
                     ListUtils mListUtils=new ListUtils();
                     mListUtils.setDynamicHeight(lv_experience);
+                    Log.d("TEST","delExperienceOnRemote");
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -118,7 +101,7 @@ public class ExperienceModel {
             public void taskFailed() {
             }
         });
-        task.execute("user","delExprience","id="+experience.getId());
+        task.execute("user","delExperience","id="+experience.getId());
     }
     public void addExperienceToRemote(String account,final Experience experience,final ExperienceAdapter experienceAdapter,final ListView lv_experience){
             HttpTask task = new HttpTask();

@@ -40,62 +40,20 @@ public class SkillModel {
         db=mDBOpenHelper.getReadableDatabase();
     }
 
-    public ArrayList<Skill> getSkillsfromlocal(String account){
-        Cursor cursor=db.rawQuery("select * from Skill Where Account = "+"account",null);
-        ArrayList<Skill> skillslist=new ArrayList<Skill>();
-        if(cursor.getCount()>0){
-            Skill skill=new Skill();
-            while (cursor.moveToNext()){
-                skill.setAccount(cursor.getString(cursor.getColumnIndex("Account")));
-                skill.setSkill(cursor.getString(cursor.getColumnIndex("Skill")));
-                skillslist.add(skill);
-            }
-        }
-        return skillslist;
-
-    }
-
-    public int getSkillsCountfromlocal(String account){{
-            Cursor cursor=db.rawQuery("select * from Skill Where Account = "+"account ",null);
-            return cursor.getCount();
-        }
-
-    }
-
-    public Skill getSkillfromlocal(String account,String skill){
-        Cursor cursor=db.rawQuery("select * from Skill Where Account = "+"account and Skill = "+skill,null);
-        Skill mskill=new Skill();
-        if(cursor.getCount()>0){
-            cursor.moveToFirst();
-            mskill.setAccount(cursor.getString(cursor.getColumnIndex("Account")));
-            mskill.setSkill(cursor.getString(cursor.getColumnIndex("Skill")));
-        }
-        return mskill;
-    }
-
     public void loadSkillFromRemote(String account, final SkillAdapter skillAdapter, final ListView lv_skill) {
         HttpTask task = new HttpTask();
         task.setTaskHandler(new HttpTask.HttpTaskHandler(){
             public void taskSuccessful(String json) {
                 try {
                     Skill skill=new Skill();
-                    String result_skill;
-                    String result_id;
-                    String result_account;
                     JSONArray ja=new JSONArray(json);
 
                     for(int i =0; i<ja.length(); i++){
-                        JSONObject jo=(JSONObject)ja.get(i);
-                        result_skill = jo.getString("skill");
-                        result_id=jo.getString("id");
-                        result_account=jo.getString("account");
                         skill=new Skill();
-                        skill.setSkill(result_skill);
-                        skill.setId(result_id);
-                        skill.setAccount(result_account);
+                        skill.setSkill(((JSONObject)ja.get(i)).getString("skill"));
+                        skill.setId(((JSONObject)ja.get(i)).getString("id"));
+                        skill.setAccount(((JSONObject)ja.get(i)).getString("account"));
                         skillAdapter.putData(skill);
-                        Log.d("Skill",skill.getSkill());
-
                     }
 
                     ListUtils mListUtils=new ListUtils();
@@ -128,7 +86,7 @@ public class SkillModel {
             public void taskFailed() {
             }
         });
-        task.execute("user","showEducation","id="+skill.getId()+"&account="+skill.getAccount()+"&skill="+skill.getSkill());
+        task.execute("user","modifySkill","id="+skill.getId()+"&account="+skill.getAccount()+"&skill="+skill.getSkill());
 
     }
 

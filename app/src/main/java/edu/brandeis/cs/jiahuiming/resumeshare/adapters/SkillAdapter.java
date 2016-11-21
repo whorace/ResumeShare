@@ -90,9 +90,10 @@ public class SkillAdapter extends BaseAdapter {
         }
 
         final Skill skill=mList.get(position);
-        viewHolder.mSkill.setText(skill.getSkill());
+        viewHolder.mSkill.setText(skill.getSkill().replace("%20"," "));
 
         if(editmode==1){
+            viewHolder.mSkill.setBackground(context.getDrawable(R.drawable.item_edittext_background));
             convertView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -121,15 +122,22 @@ public class SkillAdapter extends BaseAdapter {
                     mEditDialog.setButton1("Save", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            if(mEditDialog.getEditText()!=null&&mEditDialog.getEditText()!=""){
+                                skill.setSkill(mEditDialog.getEditText().replace(" ","%20"));
+                                UserController userController=new UserController(context);
+                                userController.modifySkill(skill);
+                                mList.set(id,skill);
+                                notifyDataSetChanged();
+                                dialog.cancel();
 
-                            skill.setSkill(mEditDialog.getEditText().trim());
-                            UserController userController=new UserController(context);
-                            userController.modifySkill(skill);
-                            mList.set(id,skill);
-                            notifyDataSetChanged();
-                            dialog.cancel();
+                            }else{
+                                Toast.makeText(context,"Content should not be empty",Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     });
+                    mEditDialog.setIcon(context.getDrawable(R.drawable.skill));
+                    mEditDialog.setTextNull();
                     mEditDialog.show();
                 }
             });

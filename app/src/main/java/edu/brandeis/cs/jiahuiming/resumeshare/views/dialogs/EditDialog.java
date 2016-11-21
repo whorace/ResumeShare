@@ -1,7 +1,9 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
 
@@ -10,12 +12,18 @@ import edu.brandeis.cs.jiahuiming.resumeshare.R;
  */
 
 public class EditDialog extends BaseDialog {
+    private ImageView mImageView;
     private EditText mEditText;
 
     public EditDialog(Context context) {
         super(context);
         setDialogContentView(R.layout.include_dialog_edittext);
         mEditText = (EditText) findViewById(R.id.dialog_edittext);
+        mImageView=(ImageView)findViewById(R.id.iv_icon);
+    }
+
+    public void setIcon(Drawable drawable){
+        mImageView.setBackground(drawable);
     }
 
     @Override

@@ -4,24 +4,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/et_addcompany"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textCursorDrawable="@null"
-        />
-    <EditText
-        android:id="@+id/et_addposition"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
+            android:layout_margin="@dimen/textmagrgin"
+            android:background="@drawable/company"/>
+        <EditText
+            android:id="@+id/et_addcompany"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textview_hight"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:background="@null"
+            android:singleLine="true"
+            android:textColorHint="@color/hint"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@color/white"
+            android:hint="@string/hint_add_company"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/underline_hight"
+        android:background="@color/white"></View>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textCursorDrawable="@null"
-        />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
+            android:layout_margin="@dimen/textmagrgin"
+            android:background="@drawable/position"/>
+        <EditText
+            android:id="@+id/et_addposition"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textview_hight"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:textColorHint="@color/hint"
+            android:background="@null"
+            android:hint="@string/hint_add_position"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@color/white"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/underline_hight"
+        android:background="@color/white"></View>
+
 </LinearLayout>

@@ -4,15 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/et_addskill"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textCursorDrawable="@null"
-        />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
+            android:layout_margin="@dimen/textmagrgin"
+            android:background="@drawable/skill"/>
+        <EditText
+            android:id="@+id/et_addskill"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textview_hight"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:background="@null"
+            android:textColorHint="@color/hint"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:hint="@string/hint_add_skill"
+            android:textCursorDrawable="@color/white"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/underline_hight"
+        android:background="@color/white"></View>
 
 </LinearLayout>

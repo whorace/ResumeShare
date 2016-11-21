@@ -24,6 +24,8 @@ import edu.brandeis.cs.jiahuiming.resumeshare.R;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.SearchResultAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.LocationUtil;
+import edu.brandeis.cs.jiahuiming.resumeshare.utils.TimeUtil;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.BaseDialog;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.EditDialog;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.WaveView;
@@ -70,8 +72,17 @@ public class HomeFragment extends Fragment {
                 if(event.getAction()==MotionEvent.ACTION_DOWN){
                     mWaveView.start();
                     Log.d("Wave,","start");
-                    mUserController.sentIntantLocation();
+                    LocationUtil locUtil=new LocationUtil(getActivity());
+                    locUtil.method();
+                    Log.d("HomeFragment:","Long: "+locUtil.getLongitude()+" Lat: "+locUtil.getLatitude());
+                    String longitude=""+locUtil.getLongitude();
+                    String laititude=""+locUtil.getLatitude();
 
+                    TimeUtil timeUtil=new TimeUtil();
+                    timeUtil.displayTime();
+                    Log.d("HomeFragment:","current time mills: "+ timeUtil.getTimecurrentTimeMillis());
+                    String currentTime=""+timeUtil.getTimecurrentTimeMillis();
+                    mUserController.sentIntantLocation(((HomeActivity)getActivity()).getCurrentUser(),currentTime,longitude,laititude);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
                     mWaveView.stop();
                     mListView.setVisibility(View.VISIBLE);

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,11 +90,13 @@ public class ExperienceAdapter extends BaseAdapter {
 
             }
 
-            final Experience experience=mList.get(position);
-            viewHolder.mCompany.setText(experience.getCompany());
-            viewHolder.mPosition.setText(experience.getPosition());
+            final Experience experience=mList.get(id);
+            viewHolder.mCompany.setText(experience.getCompany().replace("%20"," "));
+            viewHolder.mPosition.setText(experience.getPosition().replace("%20"," "));
 
         if(editmode==1){
+            viewHolder.mCompany.setBackground(context.getDrawable(R.drawable.item_edittext_background));
+            viewHolder.mPosition.setBackground(context.getDrawable(R.drawable.item_edittext_background));
             convertView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -118,19 +121,27 @@ public class ExperienceAdapter extends BaseAdapter {
             viewHolder.mCompany.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     mEditDialog.setTitle("Edit Company Info");
                     mEditDialog.setEditTextHint(mList.get(id).getCompany());
                     mEditDialog.setButton1("Save", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            experience.setCompany(mEditDialog.getEditText().trim());
-                            UserController userController=new UserController(context);
-                            userController.modifyExperience(experience);
-                            mList.set(id,experience);
-                            notifyDataSetChanged();
-                            dialog.cancel();
+                            if(mEditDialog.getEditText()!=null&&mEditDialog.getEditText()!=""){
+                                experience.setCompany(mEditDialog.getEditText().replace(" ","%20"));
+                                UserController userController=new UserController(context);
+                                userController.modifyExperience(experience);
+                                mList.set(id,experience);
+                                notifyDataSetChanged();
+                                dialog.cancel();
+
+                            }else{
+                                Toast.makeText(context,"Content should not be empty",Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
+                    mEditDialog.setIcon(context.getDrawable(R.drawable.company));
+                    mEditDialog.setTextNull();
                     mEditDialog.show();
                 }
             });
@@ -143,14 +154,21 @@ public class ExperienceAdapter extends BaseAdapter {
                     mEditDialog.setButton1("Save", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            experience.setPosition(mEditDialog.getEditText().trim());
-                            UserController userController=new UserController(context);
-                            userController.modifyExperience(experience);
-                            mList.set(id,experience);
-                            notifyDataSetChanged();
-                            dialog.cancel();
+                            if(mEditDialog.getEditText()!=null&&mEditDialog.getEditText()!=""){
+                                experience.setPosition(mEditDialog.getEditText().replace(" ","%20"));
+                                UserController userController=new UserController(context);
+                                userController.modifyExperience(experience);
+                                mList.set(id,experience);
+                                notifyDataSetChanged();
+                                dialog.cancel();
+
+                            }else{
+                                Toast.makeText(context,"Content should not be empty",Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
+                    mEditDialog.setIcon(context.getDrawable(R.drawable.position));
+                    mEditDialog.setTextNull();
                     mEditDialog.show();
                 }
             });

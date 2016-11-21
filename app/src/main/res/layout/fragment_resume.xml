@@ -25,7 +25,7 @@
                 android:layout_height="@dimen/navigation_imageview"
                 android:layout_centerInParent="true"
                 android:src="@drawable/man"
-                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_color="@color/white"
                 app:civ_border_width="@dimen/border_width_thick"/>
         </RelativeLayout>
 
@@ -35,31 +35,57 @@
             android:orientation="vertical"
             android:background="@color/colorPrimaryDark_transparent">
 
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/space_between_different_view"
-                ></View>
+                android:layout_height="@dimen/textview_hight"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/textview_height_big"
+                    android:layout_weight="1.5"
 
-            <TextView
-                android:id="@+id/tv_resume_name"
+                    android:text="@string/tv_name"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical|right"
+                    android:textSize="@dimen/sn_16sp"/>
+
+                <TextView
+                    android:id="@+id/tv_resume_name"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1.0"
+                    android:layout_height="@dimen/textview_height_big"
+                    style="@style/resume_item_title"
+                    android:gravity="center_vertical|left"
+                    android:textSize="@dimen/sn_16sp"
+                    android:layout_gravity="center"
+                    android:text="@string/tv_defaultname" />
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                style="@style/resume_item_title"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/sn_16sp"
-                android:text="@string/tv_defaultname" />
+                android:layout_height="@dimen/textview_hight"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/textview_hight"
+                    android:layout_weight="1.5"
+                    android:text="@string/tv_email"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical|right"
+                    android:textSize="@dimen/sn_12sp"/>
 
-            <TextView
-                android:id="@+id/tv_resume_account"
-                android:layout_width="fill_parent"
-                style="@style/resume_item_title"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/sn_16sp"
-                />
+                <TextView
+                    android:id="@+id/tv_resume_account"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1.0"
+                    style="@style/resume_item_title"
+                    android:gravity="center_vertical|left"
+                    android:textSize="@dimen/sn_12sp"
+                    android:layout_gravity="center"
+                    android:text="@string/tv_defaultname" />
+            </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space_between_different_view"
-                ></View>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -122,9 +148,6 @@
                 android:focusableInTouchMode="false"
                 />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/footer_height"></View>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

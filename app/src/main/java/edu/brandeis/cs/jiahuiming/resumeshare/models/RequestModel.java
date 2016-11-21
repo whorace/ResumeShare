@@ -50,32 +50,46 @@ public class RequestModel { private Context context;
         task.setTaskHandler(new HttpTask.HttpTaskHandler(){
             public void taskSuccessful(String json) {
                 try {
-
                     Request request=new Request();
+
                     String result_id;
                     String result_hostaccount;
                     String result_guestaccount;
                     String result_message;
                     String result_hostname;
                     String result_imageid;
+
+
                     JSONArray ja=new JSONArray(json);
+
                     for(int i =0; i<ja.length(); i++){
                         JSONObject jo=(JSONObject)ja.get(i);
+
                         result_id=jo.getString("id");
                         result_hostaccount=jo.getString("hostaccount");
                         result_guestaccount=jo.getString("guestaccount");
                         result_message=jo.getString("message");
                         result_hostname=jo.getString("hostname");
                         result_imageid=jo.getString("imageid");
+
+
+
                         request=new Request();
+
                         request.setId(result_id);
                         request.setHostAccount(result_hostaccount);
                         request.setGuestAccount(result_guestaccount);
                         request.setMessage(result_message);
                         request.setHostName(result_hostname);
                         request.setHostImageId(result_imageid);
+
+
                         requestAdapter.putData(request);
+
+
                     }
+
+
 
                     requestAdapter.notifyDataSetChanged();
                     Log.d("loadRequestsfromRemote",result);

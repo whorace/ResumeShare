@@ -36,7 +36,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
         }else if(TableName.equals("Contact")){
             createTable = "CREATE TABLE if not exists [Contact](ID integer PRIMARY KEY AUTOINCREMENT, HostAccount text primary key, GuestAccount text)";
-
         }
     }
 
@@ -79,19 +78,16 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             createTable = "CREATE TABLE if not exists [Contact](ID integer PRIMARY KEY AUTOINCREMENT, HostAccount text primary key, GuestAccount text)";
 
         }
-
         db.beginTransaction();
         db.execSQL(createTable);
         db.setTransactionSuccessful();
         db.endTransaction();
     }
-
     public void dropTable(SQLiteDatabase db,String tableName){
         String drop="DROP TABLE IF EXISTS ["+tableName+"]";
         db.beginTransaction();
         db.execSQL(drop);
         db.setTransactionSuccessful();
         db.endTransaction();
-
     }
 }

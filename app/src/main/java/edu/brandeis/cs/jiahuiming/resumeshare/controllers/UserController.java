@@ -25,6 +25,7 @@ import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.ContactModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.EducationModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.ExperienceModel;
+import edu.brandeis.cs.jiahuiming.resumeshare.models.InstantLocationModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.RequestModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.SkillModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.UserModel;
@@ -44,6 +45,7 @@ public class UserController {
     private SkillModel skillModel;
     private ExperienceModel experienceModel;
     private RequestModel requestModel;
+    private InstantLocationModel instantLocationModel;
 
     public UserController(Context context){
         this.context=context;
@@ -109,10 +111,6 @@ public class UserController {
 
     }
 
-    public void logout(){
-
-    }
-
     public void addContact(String hostaccount,String guestaccount){
         contactModel=new ContactModel(context);
         contactModel.addContactToRemote(hostaccount,guestaccount);
@@ -124,17 +122,9 @@ public class UserController {
         requestModel.delRequestOnRemote(id);
     }
 
-
-
-    public void searchPeople(){
-
-    }
-
-    public void deleteContact(){
-
-    }
-
-    public void uploadUserInfo(){
+    public void modifyName(String FirstName,String SecondName){
+        userModel=new UserModel(context);
+        userModel.upDateUserNameOnRemote(((HomeActivity)context).getCurrentUser(),FirstName,SecondName);
 
     }
 
@@ -196,31 +186,29 @@ public class UserController {
 
     }
 
-    public void sentIntantLocation(){
-        Log.d("Test","sentIntantLocation");
-
-    }
-
     public void getSearchResult(final SearchResultAdapter searchResultAdapter){
         searchResultAdapter.cleanData();
-        for(int i=0;i<10;i++){
-            User user=new User();
-            user.setAccount("jiahm92@qq.com"+new Integer(i).toString());
-            user.setFirstName("Huiming");
-            user.setSecondName("Jia");
-            searchResultAdapter.putData(user);
-        }
-        searchResultAdapter.notifyDataSetChanged();
+//        for(int i=0;i<10;i++){
+//            User user=new User();
+//            user.setAccount("jiahm92@qq.com"+new Integer(i).toString());
+//            user.setFirstName("Huiming");
+//            user.setSecondName("Jia");
+//            searchResultAdapter.putData(user);
+//        }
+//        searchResultAdapter.notifyDataSetChanged();
+        userModel=new UserModel(context);
+        userModel.loadSearchResultFromRemote(((HomeActivity)context).getCurrentUser(),searchResultAdapter);
+    }
+
+    public void sentIntantLocation(String account,String time, String longitude,String laititude){
+        instantLocationModel=new InstantLocationModel(context);
+        instantLocationModel.addInstantLocationToRemote(account,time,longitude,laititude);
+        Log.d("Test","sentIntantLocation");
+
     }
 
     public void showRequests(final RequestAdapter requestAdapter){
         requestModel=new RequestModel(context);
         requestModel.loadRequestsfromRemote(((HomeActivity)context).getCurrentUser(),requestAdapter);
     }
-
-    public void showRequestDetail(){
-
-    }
-
-
 }

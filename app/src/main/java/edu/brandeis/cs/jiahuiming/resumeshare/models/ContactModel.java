@@ -60,29 +60,15 @@ public class ContactModel {
             public void taskSuccessful(String json) {
                 try {
                     User user=new User();
-                    String result_id;
-                    String result_account;
-                    String result_password;
-                    String result_firstname;
-                    String result_secondname;
-                    String result_imageid;
                     JSONArray ja=new JSONArray(json);
                     for(int i =0; i<ja.length(); i++){
-                        JSONObject jo=(JSONObject)ja.get(i);
-                        result_id=jo.getString("id");
-                        result_account=jo.getString("account");
-                        result_password=jo.getString("password");
-                        result_firstname=jo.getString("firstname");
-                        result_secondname=jo.getString("secondname");
-                        result_imageid=jo.getString("imageid");
-
                         user=new User();
-                        user.setId(result_id);
-                        user.setAccount(result_account);
-                        user.setPassword(result_password);
-                        user.setFirstName(result_firstname);
-                        user.setSecondName(result_secondname);
-                        user.setImageId(result_imageid);
+                        user.setId(((JSONObject)ja.get(i)).getString("id"));
+                        user.setAccount(((JSONObject)ja.get(i)).getString("account"));
+                        user.setPassword(((JSONObject)ja.get(i)).getString("password"));
+                        user.setFirstName(((JSONObject)ja.get(i)).getString("firstname"));
+                        user.setSecondName(((JSONObject)ja.get(i)).getString("secondname"));
+                        user.setImageId(((JSONObject)ja.get(i)).getString("imageid"));
                         contactsAdapter.putData(user);
                     }
                     contactsAdapter.notifyDataSetChanged();

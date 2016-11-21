@@ -3,7 +3,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/action_search"
+            android:icon="@drawable/search"
             android:title="Home" />
         <item
             android:id="@+id/nav_profile"
@@ -11,16 +11,16 @@
             android:title="Profile"/>
         <item
             android:id="@+id/nav_contact"
-            android:icon="@drawable/contact"
+            android:icon="@drawable/group"
             android:title="Contacts" />
 
         <item
             android:id="@+id/nav_invitation"
-            android:icon="@drawable/setting"
+            android:icon="@drawable/invitation"
             android:title="Invitation" />
         <item
             android:id="@+id/nav_setting"
-            android:icon="@drawable/setting"
+            android:icon="@drawable/settings"
             android:title="Settings"/>
     </group>
 </menu>

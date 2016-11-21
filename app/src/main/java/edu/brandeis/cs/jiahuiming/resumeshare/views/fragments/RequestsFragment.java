@@ -34,7 +34,7 @@ public class RequestsFragment extends Fragment {
         mListView.setAdapter(mRequestAdapter);
 //
         mUserController=new UserController(getActivity());
-        mUserController.showRequests(mRequestAdapter);
+//        mUserController.showRequests(mRequestAdapter);
 
 //        for(int i=0;i<3;i++){
 //            Request request=new Request();

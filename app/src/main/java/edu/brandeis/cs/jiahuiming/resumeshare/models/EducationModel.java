@@ -43,45 +43,21 @@ public class EducationModel {
             public void taskSuccessful(String json) {
                 try {
                         Education education=new Education();
-
-                        String result_id;
-                        String result_account;
-                        String result_school;
-                        String result_degree;
-                        String result_major;
-                        String result_startyear;
-                        String result_endyear;
                         JSONArray ja=new JSONArray(json);
-
                     for(int i =0; i<ja.length(); i++) {
-                        JSONObject jo = (JSONObject) ja.get(i);
-
-                        result_id = jo.getString("id");
-                        result_account = jo.getString("account");
-                        result_school = jo.getString("school");
-                        result_degree = jo.getString("degree");
-                        result_major = jo.getString("major");
-                        result_startyear = jo.getString("startyear");
-                        result_endyear = jo.getString("endyear");
-
                         education = new Education();
-
-                        education.setId(result_id);
-                        education.setAccount(result_account);
-                        education.setSchool(result_school);
-                        education.setDegree(result_degree);
-                        education.setMajor(result_major);
-                        education.setStartYear(result_startyear);
-                        education.setEndYear(result_endyear);
-
+                        education.setId(((JSONObject) ja.get(i)).getString("id"));
+                        education.setAccount(((JSONObject) ja.get(i)).getString("account"));
+                        education.setSchool(((JSONObject) ja.get(i)).getString("school"));
+                        education.setDegree(((JSONObject) ja.get(i)).getString("degree"));
+                        education.setMajor(((JSONObject) ja.get(i)).getString("major"));
+                        education.setStartYear(((JSONObject) ja.get(i)).getString("startyear"));
+                        education.setEndYear(((JSONObject) ja.get(i)).getString("endyear"));
                         educationAdapter.putData(education);
-
-
                         ListUtils mListUtils = new ListUtils();
                         mListUtils.setDynamicHeight(lv_education);
                     }
                 }
-
                 catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -89,7 +65,6 @@ public class EducationModel {
             public void taskFailed() {
             }
         });
-
         task.execute("user","showEducation","account="+account);
     }
 
@@ -109,7 +84,7 @@ public class EducationModel {
             public void taskFailed() {
             }
         });
-        task.execute("user","modifyEducation","id="+education.getId()+"&account="+education.getAccount()+"&school="+education.getSchool()+"&major="+education.getSchool()+"&degree="+education.getDegree()+"&startyear="+education.getStartYear()+"&endyear="+education.getEndYear());
+        task.execute("user","modifyEducation","id="+education.getId()+"&account="+education.getAccount()+"&school="+education.getSchool()+"&major="+education.getMajor()+"&degree="+education.getDegree()+"&startyear="+education.getStartYear()+"&endyear="+education.getEndYear());
 
     }
 
@@ -154,7 +129,7 @@ public class EducationModel {
             }
         });
 
-        task.execute("user","addEducation","account="+account+"&school="+education.getSchool()+"&major="+education.getSchool()+"&degree="+education.getDegree()+"&startyear="+education.getStartYear()+"&endyear="+education.getEndYear());
+        task.execute("user","addEducation","account="+account+"&school="+education.getSchool()+"&major="+education.getMajor()+"&degree="+education.getDegree()+"&startyear="+education.getStartYear()+"&endyear="+education.getEndYear());
 
     }
 }

@@ -9,7 +9,7 @@
     <string name="tv_education">Education BackGround</string>
     <string name="tv_experience">Professional Experience</string>
     <string name="tv_skill">Skills</string>
-    <string name="tv_defaultname">Name: NOT FILLED YET</string>
+    <string name="tv_defaultname">NOT FILLED YET</string>
     <string-array name="menuitem_title">
         <item>Home</item>
         <item>Profile</item>
@@ -22,6 +22,14 @@
     <string name="hint_password_again">password again</string>
     <string name="hint_signup">Not a member? Sign up now</string>
     <string name="hint_signin">Already is member. Sign in now</string>
+    <string name="hint_add_school">Your School</string>
+    <string name="hint_add_major">Your Major</string>
+    <string name="hint_add_degree">Your Degree</string>
+    <string name="hint_add_company">Your Company</string>
+    <string name="hint_add_position">Your Position</string>
+    <string name="hint_add_skill">Your Skill</string>
+    <string name="hint_add_firstname">Your FirstName</string>
+    <string name="hint_add_secondname">Your Second</string>
     <string name="hint_home_fragment">Find People Nearby</string>
     <string name="btn_default">Button</string>
     <string name="btn_accept">Accept</string>
@@ -35,5 +43,6 @@
     <string name="finishyear">FinishYear</string>
     <string name="btn_send">Send</string>
     <string name="logout">Logout</string>
-
+    <string name="tv_name">Name  : </string>
+    <string name="tv_email">Email : </string>
 </resources>

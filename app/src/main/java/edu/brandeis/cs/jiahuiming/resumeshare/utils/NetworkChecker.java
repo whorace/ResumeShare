@@ -64,6 +64,4 @@ public class NetworkChecker {
 		}
 		return -1;
 	}
-
-
 }

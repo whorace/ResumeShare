@@ -18,6 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.AddEducationDialog;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.AddExperienceDialog;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.AddSkillDialog;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.BaseDialog;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.DoubleEditDialog;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
 
 /**
@@ -70,6 +72,7 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
     private AddEducationDialog mAddEducationDialog;
     private AddExperienceDialog mExperienceDialog;
     private AddSkillDialog mAddSkillDialog;
+    private DoubleEditDialog mDoubleEditdalog;
     private ExpandableListView mExpandableListView;
 
     private byte[] mContent;
@@ -87,10 +90,10 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View mFragment = inflater.inflate(R.layout.fragment_profile, container, false);
-//        mTv_FirstName = (TextView) mFragment.findViewById(R.id.Tv_firstname);
-//        mTv_SecondName = (TextView) mFragment.findViewById(R.id.Tv_secondname);
+        mEmail = (TextView) mFragment.findViewById(R.id.tv_resume_account);
+        mName = (TextView) mFragment.findViewById(R.id.tv_resume_name);
 
         mBaseDialog=new BaseDialog(getActivity());
         mBaseDialog.setTitle("Update Profile Image");
@@ -106,6 +109,14 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
 
         mConfirmDialog.setButton1("Confirm",this);
         mConfirmDialog.setButton2("Cancel",this);
+
+        mDoubleEditdalog=new DoubleEditDialog(getActivity());
+        mDoubleEditdalog.setButton2("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
 
         civ_profile_image=(CircleImageView)mFragment.findViewById(R.id.civ_profile_image);
         civ_profile_image.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +144,26 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
 
         mUserController=new UserController(getActivity());
         mUserController.showResume(mEducationAdapter,mExperienceAdapter,mSkillAdapter,mLv_Educations,mLv_Experiences,mLv_Skills);
-//        mUserController.showInfo(mTv_Email,mTv_Name);
+        mUserController.showInfo(mEmail,mName);
+
+        mName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDoubleEditdalog.setTitle("Change Name");
+                mDoubleEditdalog.setFirstNameHint("FirstName");
+                mDoubleEditdalog.setSecondNameHint("SecondName");
+                mDoubleEditdalog.setButton1("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(mDoubleEditdalog.getFirstNameText()!=null&&mDoubleEditdalog.getSecondNameText()!=null)
+                            mUserController=new UserController(getActivity());
+                        mUserController.modifyName(mDoubleEditdalog.getFirstNameText().replace(" ","%20"),mDoubleEditdalog.getSecondNameText().replace(" ","%20"));
+                    }
+                });
+                mDoubleEditdalog.show();
+
+            }
+        });
 
         mAddEducation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,17 +176,25 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
                         dialog.cancel();
                     }
                 });
+//                ((NumberPicker)mAddEducationDialog.getStartYearPicker()).setValue(2016);
+//                ((NumberPicker)mAddEducationDialog.getEndYearPicker()).setValue(2016);
                 mAddEducationDialog.setButton1("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Education education=new Education();
-                        education.setSchool(mAddEducationDialog.getAddSchoolText());
-                        education.setDegree(mAddEducationDialog.getAddDegreeText());
-                        education.setMajor(mAddEducationDialog.getAddMajorText());
-                        education.setStartYear(mAddEducationDialog.getAddStartText());
-                        education.setEndYear(mAddEducationDialog.getAddEndYearText());
-                        mUserController.addEducation(education,mEducationAdapter,mLv_Educations);
-                        dialog.cancel();
+                        if(mAddEducationDialog.getAddSchoolText()!=null&&mAddEducationDialog.getAddMajorText()!=null&&
+                                mAddEducationDialog.getAddDegreeText()!=null){
+                            Education education=new Education();
+                            education.setSchool(mAddEducationDialog.getAddSchoolText());
+                            education.setDegree(mAddEducationDialog.getAddDegreeText());
+                            education.setMajor(mAddEducationDialog.getAddMajorText());
+                            education.setStartYear(mAddEducationDialog.getAddStartText());
+                            education.setEndYear(mAddEducationDialog.getAddEndYearText());
+                            mUserController.addEducation(education,mEducationAdapter,mLv_Educations);
+                            dialog.cancel();
+                        }else{
+                            Toast.makeText(getActivity(),"Content should not be empty",Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 });
                 mAddEducationDialog.show();
@@ -177,11 +215,16 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
                 mExperienceDialog.setButton1("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Experience experience=new Experience();
-                        experience.setCompany(mExperienceDialog.getAddCompanyText());
-                        experience.setPosition(mExperienceDialog.getAddPositionText());
-                        mUserController.addExperience(experience,mExperienceAdapter,mLv_Experiences);
-                        dialog.cancel();
+                        if(mExperienceDialog.getAddCompanyText()!=null&&mExperienceDialog.getAddPositionText()!=null){
+                            Experience experience=new Experience();
+                            experience.setCompany(mExperienceDialog.getAddCompanyText());
+                            experience.setPosition(mExperienceDialog.getAddPositionText());
+                            mUserController.addExperience(experience,mExperienceAdapter,mLv_Experiences);
+                            dialog.cancel();
+                        }else{
+
+                        }
+
                     }
                 });
                 mExperienceDialog.show();
@@ -191,6 +234,7 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
         mAddSkill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 mAddSkillDialog=new AddSkillDialog(getActivity());
                 mAddSkillDialog.setTitle("Add Skill Record");
                 mAddSkillDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
@@ -202,13 +246,25 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
                 mAddSkillDialog.setButton1("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Skill skill=new Skill();
-                        skill.setSkill(mAddSkillDialog.getAddSkillText());
-                        mUserController.addSkill(skill,mSkillAdapter,mLv_Skills);
-                        dialog.cancel();
+                        if(mAddSkillDialog.getAddSkillText()!=null){
+                            Skill skill=new Skill();
+                            skill.setSkill(mAddSkillDialog.getAddSkillText());
+                            mUserController.addSkill(skill,mSkillAdapter,mLv_Skills);
+                            dialog.cancel();
+                        }else{
+                            Toast.makeText(getActivity(),"Content should not be empty",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 mAddSkillDialog.show();
+
+
+                if(mAddSkillDialog.getAddSkillText()!=null){
+                    mAddSkillDialog=new AddSkillDialog(getActivity());
+                }else{
+                    Toast.makeText(getActivity(),"Content should not be empty",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

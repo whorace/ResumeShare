@@ -13,7 +13,9 @@
         <ImageView
             android:layout_width="@dimen/icon_size_small"
             android:layout_height="@dimen/icon_size_small"
-            android:src="@drawable/group_icon" />
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_small"
+            android:src="@drawable/skill" />
 
         <View
             android:layout_width="@dimen/activity_horizontal_padding_small"

@@ -2,6 +2,7 @@ package edu.brandeis.cs.jiahuiming.resumeshare.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,21 +50,23 @@ public class EducationAdapter extends BaseAdapter {
                 dialog.cancel();
             }
         });
+
         mEditDialog=new EditDialog(context);
-        mDatePickerDialog=new DatePickerDialog(context);
         mEditDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
+
+        mDatePickerDialog=new DatePickerDialog(context);
         mDatePickerDialog.setButton2("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Log.d("Test","mDatePickerDialog.cancel()");
                 dialog.cancel();
             }
         });
-        mDatePickerDialog.setTitle("Edit Time");
     }
 
     public void putData(Education education){
@@ -106,20 +109,20 @@ public class EducationAdapter extends BaseAdapter {
         }
 
         final Education education=mList.get(position);
-        viewHolder.mSchool.setText(education.getSchool());
-        viewHolder.mMajor.setText(education.getMajor());
-        viewHolder.mDegree.setText(education.getDegree());
-        viewHolder.mStartYear.setText(education.getStartYear());
-        viewHolder.mEndYear.setText(education.getEndYear());
-
-//        mDatePickerDialog.setmStartYear(education.getStartYear());
-//        mDatePickerDialog.setmFinishYear(education.getEndYear());
-//        mDatePickerDialog.setButton1("Save",new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Toast.makeText(context,"success to sa
+        viewHolder.mSchool.setText(education.getSchool().replace("%20"," "));
+        viewHolder.mMajor.setText(education.getMajor().replace("%20"," "));
+        viewHolder.mDegree.setText(education.getDegree().replace("%20"," "));
+        viewHolder.mStartYear.setText(education.getStartYear().replace("%20"," "));
+        viewHolder.mEndYear.setText(education.getEndYear().replace("%20"," "));
 
         if(editmode==1){
+
+            viewHolder.mSchool.setBackground(context.getDrawable(R.drawable.item_edittext_background));
+            viewHolder.mMajor.setBackground(context.getDrawable(R.drawable.item_edittext_background));
+            viewHolder.mDegree.setBackground(context.getDrawable(R.drawable.item_edittext_background));
+            viewHolder.mStartYear.setBackground(context.getDrawable(R.drawable.item_edittext_background));
+            viewHolder.mEndYear.setBackground(context.getDrawable(R.drawable.item_edittext_background));
+
             convertView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -149,15 +152,22 @@ public class EducationAdapter extends BaseAdapter {
                     mEditDialog.setButton1("Save", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            education.setSchool(mEditDialog.getEditText());
-                            UserController userController=new UserController(context);
-                            userController.modifyEducation(education);
-                            education.setSchool(mEditDialog.getEditText());
-                            mList.set(id,education);
-                            notifyDataSetChanged();
-                            dialog.cancel();
+                            if(mEditDialog.getEditText()!=null&&mEditDialog.getEditText()!=""){
+                                education.setSchool(mEditDialog.getEditText().replace(" ","%20"));
+                                UserController userController=new UserController(context);
+                                userController.modifyEducation(education);
+                                mList.set(id,education);
+                                notifyDataSetChanged();
+                                dialog.cancel();
+
+                            }else{
+                                Toast.makeText(context,"Content should not be empty",Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     });
+                    mEditDialog.setIcon(context.getDrawable(R.drawable.school));
+                    mEditDialog.setTextNull();
                     mEditDialog.show();
                 }
             });
@@ -170,15 +180,22 @@ public class EducationAdapter extends BaseAdapter {
                     mEditDialog.setButton1("Save", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            education.setMajor(mEditDialog.getEditText());
-                            UserController userController=new UserController(context);
-                            userController.modifyEducation(education);
-                            education.setMajor(mEditDialog.getEditText());
-                            mList.set(id,education);
-                            notifyDataSetChanged();
-                            dialog.cancel();
+                            if(mEditDialog.getEditText()!=null&&mEditDialog.getEditText()!=""){
+                                education.setMajor(mEditDialog.getEditText().replace(" ","%20"));
+                                UserController userController=new UserController(context);
+                                userController.modifyEducation(education);
+                                mList.set(id,education);
+                                notifyDataSetChanged();
+                                dialog.cancel();
+
+                            }else{
+                                Toast.makeText(context,"Content should not be empty",Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     });
+                    mEditDialog.setIcon(context.getDrawable(R.drawable.major));
+                    mEditDialog.setTextNull();
                     mEditDialog.show();
                 }
             });
@@ -191,15 +208,21 @@ public class EducationAdapter extends BaseAdapter {
                     mEditDialog.setButton1("Save", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            education.setDegree(mEditDialog.getEditText());
-                            UserController userController=new UserController(context);
-                            userController.modifyEducation(education);
-                            education.setDegree(mEditDialog.getEditText());
-                            mList.set(id,education);
-                            notifyDataSetChanged();
-                            dialog.cancel();
+                            if(mEditDialog.getEditText()!=null&&mEditDialog.getEditText()!=""){
+                                education.setDegree(mEditDialog.getEditText().replace(" ","%20"));
+                                UserController userController=new UserController(context);
+                                userController.modifyEducation(education);
+                                mList.set(id,education);
+                                notifyDataSetChanged();
+                                dialog.cancel();
+                            }else{
+                                Toast.makeText(context,"Content should not be empty",Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     });
+                    mEditDialog.setIcon(context.getDrawable(R.drawable.degree));
+                    mEditDialog.setTextNull();
                     mEditDialog.show();
 
                 }
@@ -209,17 +232,42 @@ public class EducationAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     mDatePickerDialog.setTitle("Edit Time Info");
-                    education.setDegree(mEditDialog.getEditText());
-                    UserController userController=new UserController(context);
-                    userController.modifyEducation(education);
+                    mDatePickerDialog.setStartYear(education.getStartYear());
+                    mDatePickerDialog.setFinishYear(education.getEndYear());
+                    mDatePickerDialog.setButton1("Save", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            education.setStartYear(new Integer(mDatePickerDialog.getStartYear()).toString());
+                            education.setEndYear(new Integer(mDatePickerDialog.getEndyear()).toString());
+                            UserController userController=new UserController(context);
+                            userController.modifyEducation(education);
+                            mList.set(id,education);
+                            notifyDataSetChanged();
+                            dialog.cancel();
+                        }
+                    });
                     mDatePickerDialog.show();
-
                 }
             });
 
             viewHolder.mEndYear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    mDatePickerDialog.setTitle("Edit Time Info");
+                    mDatePickerDialog.setStartYear(education.getStartYear());
+                    mDatePickerDialog.setFinishYear(education.getEndYear());
+                    mDatePickerDialog.setButton1("Save", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            education.setStartYear(new Integer(mDatePickerDialog.getStartYear()).toString());
+                            education.setEndYear(new Integer(mDatePickerDialog.getEndyear()).toString());
+                            UserController userController=new UserController(context);
+                            userController.modifyEducation(education);
+                            mList.set(id,education);
+                            notifyDataSetChanged();
+                            dialog.cancel();
+                        }
+                    });
                     mDatePickerDialog.show();
                 }
             });

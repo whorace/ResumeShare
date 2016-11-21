@@ -17,10 +17,11 @@
     <dimen name="sn_10sp">10sp</dimen>
     <dimen name="textmagrgin">8dp</dimen>
     <dimen name="textview_hight">34dp</dimen>
+    <dimen name="textview_height_big">36dp</dimen>
     <dimen name="title_hight">20dp</dimen>
     <dimen name="navigation_width">200dp</dimen>
     <dimen name="navigation_imageview">100dp</dimen>
-    <dimen name="contact_icon_size">40dp</dimen>
+    <dimen name="contact_icon_size">42dp</dimen>
     <dimen name="icon_size_small">20dp</dimen>
     <dimen name="navigation_header_height">192dp</dimen>
     <dimen name="border_width">2dp</dimen>
@@ -32,4 +33,6 @@
     <dimen name="min_listview_height">105dp</dimen>
     <dimen name="long_message_height">85dp</dimen>
     <dimen name="waveview_size">150dp</dimen>
+    <dimen name="numberpicker_height">100dp</dimen>
+    <dimen name="underline_hight">1dp</dimen>
 </resources>

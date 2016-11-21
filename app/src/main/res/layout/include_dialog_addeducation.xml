@@ -2,46 +2,138 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
 
-    <EditText
-        android:id="@+id/et_addschool"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textCursorDrawable="@null"
-        />
-    <EditText
-        android:id="@+id/et_addmajor"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
+            android:layout_margin="@dimen/textmagrgin"
+            android:background="@drawable/school"/>
+
+        <EditText
+            android:id="@+id/et_addschool"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textview_hight"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:textColorHint="@color/hint"
+            android:background="@null"
+            android:hint="@string/hint_add_school"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@null"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/underline_hight"
+        android:background="@color/white"></View>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textCursorDrawable="@null"
-        />
-    <EditText
-        android:id="@+id/et_adddegree"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
+            android:layout_margin="@dimen/textmagrgin"
+            android:background="@drawable/major"/>
+
+        <EditText
+            android:id="@+id/et_addmajor"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textview_hight"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:textColorHint="@color/hint"
+            android:hint="@string/hint_add_major"
+            android:background="@null"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@null"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/underline_hight"
+        android:background="@color/white"></View>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textCursorDrawable="@null"
-        />
-    <NumberPicker
-        android:id="@+id/np_addstartyear"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
+            android:layout_margin="@dimen/textmagrgin"
+            android:background="@drawable/degree"/>
+        <EditText
+            android:id="@+id/et_adddegree"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textview_hight"
+            android:imeOptions="actionNext"
+            android:background="@null"
+            android:maxLines="1"
+            android:textColorHint="@color/hint"
+            android:hint="@string/hint_add_degree"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@null"
+            />
+    </LinearLayout>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></NumberPicker>
-    <NumberPicker
-        android:id="@+id/np_addendyear"
+        android:layout_height="@dimen/underline_hight"
+        android:background="@color/white"></View>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></NumberPicker>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textview_hight"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="@string/startyear"></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textview_hight"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="@string/finishyear"></TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <NumberPicker
+            android:id="@+id/np_addstartyear"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/min_listview_height"
+            android:layout_weight="1.0"></NumberPicker>
+        <NumberPicker
+            android:id="@+id/np_addendyear"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/min_listview_height"
+            android:layout_weight="1.0"></NumberPicker>
+    </LinearLayout>
+
 
 
 </LinearLayout>

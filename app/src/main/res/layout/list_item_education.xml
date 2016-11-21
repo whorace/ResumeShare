@@ -13,7 +13,9 @@
         <ImageView
             android:layout_width="@dimen/icon_size_small"
             android:layout_height="@dimen/icon_size_small"
-            android:src="@drawable/school_icon" />
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_small"
+            android:background="@drawable/school" />
 
         <View
             android:layout_width="@dimen/activity_horizontal_padding_small"
@@ -57,7 +59,9 @@
             <ImageView
                 android:layout_width="@dimen/icon_size_small"
                 android:layout_height="@dimen/icon_size_small"
-                android:src="@drawable/major_icon" />
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_small"
+                android:background="@drawable/major" />
 
             <View
                 android:layout_width="@dimen/activity_horizontal_padding_small"
@@ -97,7 +101,9 @@
             <ImageView
                 android:layout_width="@dimen/icon_size_small"
                 android:layout_height="@dimen/icon_size_small"
-                android:src="@drawable/degree_icon" />
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_small"
+                android:background="@drawable/degree" />
 
             <View
                 android:layout_width="@dimen/activity_horizontal_padding_small"
@@ -143,7 +149,9 @@
             <ImageView
                 android:layout_width="@dimen/icon_size_small"
                 android:layout_height="@dimen/icon_size_small"
-                android:src="@drawable/calender_icon" />
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_small"
+                android:background="@drawable/calender" />
 
             <View
                 android:layout_width="@dimen/activity_horizontal_padding_small"
@@ -156,7 +164,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/school"
+                    android:text="@string/startyear"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sn_10sp"
                     />
@@ -183,7 +191,9 @@
             <ImageView
                 android:layout_width="@dimen/icon_size_small"
                 android:layout_height="@dimen/icon_size_small"
-                android:src="@drawable/calender_icon" />
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_small"
+                android:background="@drawable/calender" />
 
             <View
                 android:layout_width="@dimen/activity_horizontal_padding_small"
@@ -196,7 +206,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/school"
+                    android:text="@string/finishyear"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sn_10sp"
                     />

@@ -1,10 +1,12 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
+import edu.brandeis.cs.jiahuiming.resumeshare.utils.NumberPickerHelper;
 
 /**
  * Created by jiahuiming on 11/18/16.
@@ -16,6 +18,7 @@ public class AddEducationDialog extends BaseDialog {
     private EditText mAddDegree;
     private NumberPicker mAddStartYear;
     private NumberPicker mAddEndYear;
+    private NumberPickerHelper mNumberPickerHelper;
 
     public AddEducationDialog(Context context) {
         super(context);
@@ -23,8 +26,22 @@ public class AddEducationDialog extends BaseDialog {
         mAddSchool = (EditText) findViewById(R.id.et_addschool);
         mAddMajor = (EditText) findViewById(R.id.et_addmajor);
         mAddDegree = (EditText) findViewById(R.id.et_adddegree);
-        mAddStartYear = (NumberPicker) findViewById(R.id.np_addstartyear);
-        mAddEndYear=(NumberPicker)findViewById(R.id.np_endyear);
+        mAddStartYear=(NumberPicker) findViewById(R.id.np_addstartyear);
+        mAddEndYear=(NumberPicker)findViewById(R.id.np_addendyear);
+
+
+        mAddStartYear.setMaxValue(2050);
+        mAddStartYear.setMinValue(1950);
+        mAddStartYear.setValue(2016);
+
+        mAddEndYear.setMaxValue(2050);
+        mAddEndYear.setMinValue(1950);
+        mAddEndYear.setValue(2016);
+
+        mNumberPickerHelper.setNumberPickerDividerColor(mAddStartYear,context.getResources().getColor(R.color.white));
+        mNumberPickerHelper.setNumberPickerTextColor(mAddStartYear,context.getResources().getColor(R.color.white));
+        mNumberPickerHelper.setNumberPickerDividerColor(mAddEndYear,context.getResources().getColor(R.color.white));
+        mNumberPickerHelper.setNumberPickerTextColor(mAddEndYear,context.getResources().getColor(R.color.white));
     }
 
     @Override
@@ -68,6 +85,15 @@ public class AddEducationDialog extends BaseDialog {
     }
     public String getAddEndYearText() {
         return new Integer(mAddEndYear.getValue()).toString().trim().replace(" ","%20");
+    }
+
+    public View getStartYearPicker(){
+        return mAddStartYear;
+
+    }
+
+    public View getEndYearPicker(){
+        return mAddEndYear;
     }
 
     public void setTextNull() {

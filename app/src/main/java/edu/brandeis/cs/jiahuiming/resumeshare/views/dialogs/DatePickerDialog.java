@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
+import edu.brandeis.cs.jiahuiming.resumeshare.utils.NumberPickerHelper;
 
 /**
  * Created by jiahuiming on 11/17/16.
@@ -14,18 +15,25 @@ import edu.brandeis.cs.jiahuiming.resumeshare.R;
 public class DatePickerDialog extends BaseDialog {
     private NumberPicker mStartYear;
     private NumberPicker mFinishYear;
+    private NumberPickerHelper mNumberPickerHelper;
 
     public DatePickerDialog(Context context) {
         super(context);
         setDialogContentView(R.layout.include_dialog_yearpicker);
         mStartYear = (NumberPicker) findViewById(R.id.np_startyear);
         mFinishYear= (NumberPicker) findViewById(R.id.np_endyear);
+        mNumberPickerHelper.setNumberPickerDividerColor(mStartYear,context.getResources().getColor(R.color.white));
+        mNumberPickerHelper.setNumberPickerTextColor(mStartYear,context.getResources().getColor(R.color.white));
+        mNumberPickerHelper.setNumberPickerDividerColor(mFinishYear,context.getResources().getColor(R.color.white));
+        mNumberPickerHelper.setNumberPickerTextColor(mFinishYear,context.getResources().getColor(R.color.white));
 
         mStartYear.setMaxValue(2050);
         mStartYear.setMinValue(1950);
+        mStartYear.setValue(2016);
 
         mFinishYear.setMaxValue(2050);
         mFinishYear.setMinValue(1950);
+        mFinishYear.setValue(2016);
     }
 
     @Override
@@ -45,15 +53,15 @@ public class DatePickerDialog extends BaseDialog {
         super.setButton2(text2, listener2);
     }
 
-    public void setmStartYear(String value){
+    public void setStartYear(String value){
         Integer startvalue=new Integer(value);
-        mStartYear.setMaxValue(startvalue.intValue());
+        mStartYear.setValue(startvalue.intValue());
 
     }
 
-    public void setmFinishYear(String value){
+    public void setFinishYear(String value){
         Integer finishvalue=new Integer(value);
-        mFinishYear.setMaxValue(finishvalue.intValue());
+        mFinishYear.setValue(finishvalue.intValue());
 
     }
 

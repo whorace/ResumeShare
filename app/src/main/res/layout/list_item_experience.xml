@@ -14,7 +14,9 @@
         <ImageView
             android:layout_width="@dimen/icon_size_small"
             android:layout_height="@dimen/icon_size_small"
-            android:src="@drawable/company_icon" />
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_small"
+            android:background="@drawable/company" />
 
         <View
             android:layout_width="@dimen/activity_horizontal_padding_small"
@@ -51,7 +53,9 @@
         <ImageView
             android:layout_width="@dimen/icon_size_small"
             android:layout_height="@dimen/icon_size_small"
-            android:src="@drawable/degree_icon" />
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_small"
+            android:background="@drawable/position" />
 
         <View
             android:layout_width="@dimen/activity_horizontal_padding_small"

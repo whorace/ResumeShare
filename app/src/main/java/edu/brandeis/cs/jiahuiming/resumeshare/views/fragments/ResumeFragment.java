@@ -54,6 +54,7 @@ public class ResumeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         account=((HomeActivity)getActivity()).getResumeAccount();
+        Toast.makeText(getActivity(),account,Toast.LENGTH_SHORT).show();
         View mFragment = inflater.inflate(R.layout.fragment_resume, container, false);
         mTv_Email=(TextView)mFragment.findViewById(R.id.tv_resume_account);
         mTv_Name=(TextView)mFragment.findViewById(R.id.tv_resume_name);
@@ -69,6 +70,10 @@ public class ResumeFragment extends Fragment {
         mLv_Educations.setAdapter(mEducationAdapter);
         mLv_Experiences.setAdapter(mExperienceAdapter);
         mLv_Skills.setAdapter(mSkillAdapter);
+
+        mLv_Educations.setItemsCanFocus(false);
+        mLv_Experiences.setItemsCanFocus(false);
+        mLv_Skills.setItemsCanFocus(false);
 
         mContactController=new ContactController(getActivity());
         mContactController.showResume(mEducationAdapter,mExperienceAdapter,mSkillAdapter,mLv_Educations,mLv_Experiences,mLv_Skills);

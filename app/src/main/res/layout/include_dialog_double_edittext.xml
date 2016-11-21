@@ -7,21 +7,33 @@
     <EditText
         android:id="@+id/dialog_edittext_firstname"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/textview_hight"
         android:imeOptions="actionNext"
         android:maxLines="1"
+        android:background="@null"
         android:singleLine="true"
+        android:textColorHint="@color/hint"
         android:textColor="@color/white"
-        android:textCursorDrawable="@null" />
+        android:textCursorDrawable="@color/white" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/underline_hight"
+        android:background="@color/white"></View>
 
     <EditText
         android:id="@+id/dialog_edittext_secondname"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/textview_hight"
         android:imeOptions="actionNext"
         android:maxLines="1"
+        android:background="@null"
         android:singleLine="true"
+        android:textColorHint="@color/hint"
         android:textColor="@color/white"
-        android:textCursorDrawable="@null" />
+        android:textCursorDrawable="@color/white" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/underline_hight"
+        android:background="@color/white"></View>
 
 </LinearLayout>

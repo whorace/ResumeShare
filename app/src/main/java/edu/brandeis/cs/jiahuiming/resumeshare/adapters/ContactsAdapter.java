@@ -62,9 +62,9 @@ public class ContactsAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, final ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-        this.position=position;
+        final int id=position;
         final ViewHolder viewHolder;
         if(convertView==null){
             viewHolder=new ViewHolder();
@@ -86,8 +86,7 @@ public class ContactsAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((HomeActivity)context).setResumeAccount(mList.get(position).getAccount());
-                ((HomeActivity)context).setResumeAccount("123@qq.com");
+                ((HomeActivity)context).setResumeAccount(mList.get(id).getAccount());
                 ((HomeActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new ResumeFragment()).commit();
 
             }
