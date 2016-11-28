@@ -37,7 +37,16 @@ public class UserModel {
         task.setTaskHandler(new HttpTask.HttpTaskHandler(){
             public void taskSuccessful(String json) {
                 try {
-                    result=json;
+                    JSONObject jsObj=new JSONObject(json);
+                    result = jsObj.getString("result");
+                    Log.d("test",result);
+                    if(result.equals("true")){
+                        Toast.makeText(context,"Register Successed",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+
+                        Toast.makeText(context,"Register Failed",Toast.LENGTH_SHORT).show();
+                    }
                 }
                 catch (Exception e) {
                     e.printStackTrace();
