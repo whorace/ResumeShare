@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
+import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ProfileFragment;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.RequestsFragment;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ResumeFragment;
@@ -69,6 +70,8 @@ public class HomeActivity extends AppCompatActivity  {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mCircleImageView=(CircleImageView)mNavigationView.getHeaderView(0).findViewById(R.id.civ_profile);
 
+        UserController mUserController=new UserController(this);
+        mUserController.loadImageview(mCurrentAccount,mCircleImageView);
         setSupportActionBar(mToolbar);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);

@@ -1,25 +1,15 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.models;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+import android.graphics.Bitmap;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import edu.brandeis.cs.jiahuiming.resumeshare.adapters.EducationAdapter;
-import edu.brandeis.cs.jiahuiming.resumeshare.adapters.ExperienceAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.SkillAdapter;
-import edu.brandeis.cs.jiahuiming.resumeshare.beans.Education;
-import edu.brandeis.cs.jiahuiming.resumeshare.beans.Experience;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
-import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.DBOpenHelper;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.HttpTask;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.ListUtils;

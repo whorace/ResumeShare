@@ -82,6 +82,7 @@ public class HomeFragment extends Fragment {
                     timeUtil.displayTime();
                     Log.d("HomeFragment:","current time mills: "+ timeUtil.getTimecurrentTimeMillis());
                     String currentTime=""+timeUtil.getTimecurrentTimeMillis();
+                    Toast.makeText(getActivity(),"NOW LOCATION:"+longitude+","+laititude,Toast.LENGTH_SHORT).show();
                     mUserController.sentIntantLocation(((HomeActivity)getActivity()).getCurrentUser(),currentTime,longitude,laititude);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
                     mWaveView.stop();

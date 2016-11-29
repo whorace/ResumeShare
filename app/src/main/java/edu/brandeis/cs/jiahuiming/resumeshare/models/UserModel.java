@@ -1,23 +1,24 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.models;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.SearchResultAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
-import edu.brandeis.cs.jiahuiming.resumeshare.utils.DBOpenHelper;
+import edu.brandeis.cs.jiahuiming.resumeshare.utils.HttpLoadImageTask;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.HttpTask;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
 
 /**
  * Created by jiahuiming on 11/8/16.
@@ -182,5 +183,23 @@ public class UserModel {
             });
             task.execute("user","showSearchResult","account="+account);
 
+    }
+
+    public void loadImageView(String account, final CircleImageView circleImageView){
+        HttpLoadImageTask task=new HttpLoadImageTask();
+        task.setTaskHandler(new HttpLoadImageTask.HttpLoadImageTaskHandler() {
+            @Override
+            public void taskSuccessful(Bitmap bitmap) {
+                Log.d("test","download image successful");
+                circleImageView.setImageBitmap(bitmap);
+            }
+
+            @Override
+            public void taskFailed() {
+                Log.d("test","download image failed");
+
+            }
+        });
+        task.execute(account);
     }
 }

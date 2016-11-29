@@ -25,8 +25,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
+import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ResumeFragment;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
 
 
 /**
@@ -69,7 +71,7 @@ public class ContactsAdapter extends BaseAdapter {
         if(convertView==null){
             viewHolder=new ViewHolder();
             convertView=mInflater.inflate(R.layout.list_item_contact,null);
-            viewHolder.imageView=(ImageView) convertView.findViewById(R.id.tv_image);
+            viewHolder.imageView=(CircleImageView) convertView.findViewById(R.id.tv_image);
             viewHolder.name=(TextView)convertView.findViewById(R.id.tv_name);
             viewHolder.account=(TextView)convertView.findViewById(R.id.tv_account);
             convertView.setTag(viewHolder);
@@ -81,6 +83,8 @@ public class ContactsAdapter extends BaseAdapter {
 
         User user=mList.get(position);
         viewHolder.imageView.setImageResource(R.drawable.kellyisgenius);
+        UserController mUserController=new UserController(context);
+        mUserController.loadImageview(user.getAccount(),viewHolder.imageView);
         viewHolder.name.setText(user.getFirstName()+" "+user.getSecondName());
         viewHolder.account.setText(user.getAccount());
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +100,7 @@ public class ContactsAdapter extends BaseAdapter {
     }
 
     class ViewHolder{
-        public ImageView imageView;
+        public CircleImageView imageView;
         public TextView name;
         public TextView account;
     }

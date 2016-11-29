@@ -19,6 +19,7 @@ import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.ContactController;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
 
 /**
  * Created by jiahuiming on 11/18/16.
@@ -61,7 +62,7 @@ public class RequestAdapter extends BaseAdapter {
         if(convertView==null){
             viewHolder=new RequestAdapter.ViewHolder();
             convertView=mInflater.inflate(R.layout.list_item_request,null);
-            viewHolder.imageView=(ImageView) convertView.findViewById(R.id.iv_request_image);
+            viewHolder.imageView=(CircleImageView) convertView.findViewById(R.id.iv_request_image);
             viewHolder.name=(TextView)convertView.findViewById(R.id.tv_request_name);
             viewHolder.account=(TextView)convertView.findViewById(R.id.tv_request_account);
             viewHolder.message=(TextView)convertView.findViewById(R.id.tv_request_message);
@@ -74,6 +75,8 @@ public class RequestAdapter extends BaseAdapter {
         }
         Request request=mList.get(id);
         viewHolder.imageView.setImageResource(R.drawable.kellyisgenius);
+        UserController mUserController=new UserController(context);
+        mUserController.loadImageview(request.getHostAccount(),viewHolder.imageView);
         viewHolder.name.setText(request.getHostName());
         viewHolder.account.setText(request.getHostAccount());
         viewHolder.message.setText(request.getMessage());
@@ -104,7 +107,7 @@ public class RequestAdapter extends BaseAdapter {
     }
 
     class ViewHolder{
-        public ImageView imageView;
+        public CircleImageView imageView;
         public TextView name;
         public TextView account;
         public TextView message;

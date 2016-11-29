@@ -145,6 +145,7 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
         mUserController=new UserController(getActivity());
         mUserController.showResume(mEducationAdapter,mExperienceAdapter,mSkillAdapter,mLv_Educations,mLv_Experiences,mLv_Skills);
         mUserController.showInfo(mEmail,mName);
+        mUserController.loadImageview(((HomeActivity)getActivity()).getCurrentUser(),civ_profile_image);
 
         mName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,6 +159,7 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
                         if(mDoubleEditdalog.getFirstNameText()!=null&&mDoubleEditdalog.getSecondNameText()!=null)
                             mUserController=new UserController(getActivity());
                         mUserController.modifyName(mDoubleEditdalog.getFirstNameText().replace(" ","%20"),mDoubleEditdalog.getSecondNameText().replace(" ","%20"));
+                        dialog.cancel();
                     }
                 });
                 mDoubleEditdalog.show();

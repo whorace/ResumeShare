@@ -18,6 +18,7 @@ import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.EditDialog;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.fragments.ResumeFragment;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
 
 /**
  * Created by jiahuiming on 11/18/16.
@@ -67,7 +68,7 @@ public class SearchResultAdapter extends BaseAdapter {
         if(convertView==null){
             viewHolder=new SearchResultAdapter.ViewHolder();
             convertView=mInflater.inflate(R.layout.list_item_contact,null);
-            viewHolder.imageView=(ImageView) convertView.findViewById(R.id.tv_image);
+            viewHolder.imageView=(CircleImageView) convertView.findViewById(R.id.tv_image);
             viewHolder.name=(TextView)convertView.findViewById(R.id.tv_name);
             convertView.setTag(viewHolder);
         }else{
@@ -78,6 +79,8 @@ public class SearchResultAdapter extends BaseAdapter {
 
         User user=mList.get(position);
         viewHolder.imageView.setImageResource(R.drawable.kellyisgenius);
+        UserController mUserController=new UserController(context);
+        mUserController.loadImageview(user.getAccount(),viewHolder.imageView);
         viewHolder.name.setText(user.getFirstName()+" "+user.getSecondName());
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +112,7 @@ public class SearchResultAdapter extends BaseAdapter {
     }
 
     class ViewHolder{
-        public ImageView imageView;
+        public CircleImageView imageView;
         public TextView name;
     }
 }

@@ -31,6 +31,7 @@ import edu.brandeis.cs.jiahuiming.resumeshare.models.SkillModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.models.UserModel;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.NetworkChecker;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
 
 /**
  * Created by jiahuiming on 11/13/16.
@@ -64,6 +65,12 @@ public class UserController {
             userModel=new UserModel(context);
             userModel.loginfromRemote(account,password);
         }
+    }
+
+    public void loadImageview(String account, final CircleImageView mCircleImageView){
+        userModel=new UserModel(context);
+        userModel.loadImageView(account,mCircleImageView);
+
     }
 
     public void register(String email, String password, String password2){

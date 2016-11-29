@@ -1,24 +1,17 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.models;
 
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
+import android.graphics.Bitmap;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.ContactsAdapter;
-import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.DBOpenHelper;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.HttpTask;
-import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
 
 /**
  * Created by jiahuiming on 11/8/16.

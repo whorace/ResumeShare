@@ -34,6 +34,7 @@ import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.ContactController;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
+import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.WaveView;
 
 /**
@@ -47,6 +48,7 @@ public class ResumeFragment extends Fragment {
     private ListView mLv_Skills;
     private TextView mTv_Email;
     private TextView mTv_Name;
+    private CircleImageView circleImageView;
     private String account;
     private ContactController mContactController;
 
@@ -61,10 +63,13 @@ public class ResumeFragment extends Fragment {
         mLv_Educations=(ListView)mFragment.findViewById(R.id.lv_education);
         mLv_Experiences=(ListView)mFragment.findViewById(R.id.lv_experience);
         mLv_Skills=(ListView)mFragment.findViewById(R.id.lv_skill);
+        circleImageView=(CircleImageView)mFragment.findViewById(R.id.civ_resume_image);
 
         EducationAdapter mEducationAdapter=new EducationAdapter(getActivity(),0);
         ExperienceAdapter mExperienceAdapter=new ExperienceAdapter(getActivity(),0);
         SkillAdapter mSkillAdapter=new SkillAdapter(getActivity(),0);
+        UserController mUserController=new UserController(getActivity());
+        mUserController.loadImageview(account,circleImageView);
 
         mLv_Educations.setAdapter(mEducationAdapter);
         mLv_Experiences.setAdapter(mExperienceAdapter);

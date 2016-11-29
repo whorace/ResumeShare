@@ -1,5 +1,6 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.utils;
 
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -22,7 +23,7 @@ public class HttpTask extends AsyncTask<String, Integer, StringBuffer> {
     @Override
     protected StringBuffer doInBackground(String... params) {
         StringBuffer json=new StringBuffer();
-        String url=Urls.HOST+"controller="+params[0]+"&method="+ params[1]+"&"+params[2];
+        String url=Urls.HOST+"?controller="+params[0]+"&method="+ params[1]+"&"+params[2];
         Log.d("url",url);
         try{
             URL httpUrl=new URL(url);
