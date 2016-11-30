@@ -44,7 +44,7 @@ public class ContactModel {
             public void taskFailed() {
             }
         });
-        task.execute("user","addContact","hostaccount="+hostaccount+"&hostaccount="+guestaccount);
+        task.execute("user","addContact","hostaccount="+hostaccount+"&guestaccount="+guestaccount);
     }
 
     public void loadContactsfromRemote(String account,final ContactsAdapter contactsAdapter) {

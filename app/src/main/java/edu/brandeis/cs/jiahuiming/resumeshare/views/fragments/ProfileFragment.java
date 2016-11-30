@@ -5,12 +5,14 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ScrollingView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +27,10 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.R;
@@ -38,6 +42,7 @@ import edu.brandeis.cs.jiahuiming.resumeshare.beans.Experience;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.Skill;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.ContactController;
 import edu.brandeis.cs.jiahuiming.resumeshare.controllers.UserController;
+import edu.brandeis.cs.jiahuiming.resumeshare.utils.ImageUtil;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.AddEducationDialog;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.dialogs.AddExperienceDialog;
@@ -270,7 +275,6 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
         ListUtils.setDynamicHeight(mLv_Educations);
         ListUtils.setDynamicHeight(mLv_Experiences);
         ListUtils.setDynamicHeight(mLv_Skills);
-
         mScrollView=(ScrollView) mFragment.findViewById(R.id.sv_profile);
         mScrollView.smoothScrollTo(0,0);
 
@@ -342,6 +346,88 @@ public class ProfileFragment extends Fragment implements DialogInterface.OnClick
             mBaseDialog.show();
         }
 
+    }
 
+    public static Bitmap getPicFromBytes(byte[] bytes,BitmapFactory.Options opts)
+    {
+        if (bytes != null)
+            if (opts != null)
+                return BitmapFactory.decodeByteArray(bytes, 0, bytes.length,opts);
+            else
+                return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        return null;
+    }
+
+    public static byte[] readStream(InputStream inStream) throws Exception
+    {
+        byte[] buffer = new byte[1024];
+        int len = -1;
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        while ((len = inStream.read(buffer)) != -1)
+        {
+            outStream.write(buffer, 0, len);
+        }
+        byte[] data = outStream.toByteArray();
+        outStream.close();
+        inStream.close();
+        return data;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        Log.d("Test","onActivityResult");
+        ContentResolver resolver = getActivity().getContentResolver();
+        File file = new File("/sdcard/img/");
+        file.mkdirs();
+
+        if (requestCode == 1)
+        {
+            Log.d("Test",""+requestCode);
+            if(data.getData()!=null)
+            {
+                Log.d("Test","data.getExtras()!=null");
+                try {
+                    Log.d("Test",""+"go into try");
+                    Uri originalUri = data.getData();
+                    imagePath = originalUri.toString();
+                    mContent = readStream(resolver.openInputStream(Uri.parse(originalUri.toString())));
+                    // convert Imageview to Bitmap that can be used by programe
+                    mBitmap = getPicFromBytes(mContent, null);
+                    // check the statue of sd card
+                    imagePath = "/sdcard/img/"+((HomeActivity)getActivity()).getCurrentUser()+ ".jpg";
+                    FileOutputStream writeImage = new FileOutputStream(imagePath);
+                    mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, writeImage);
+                    //write the Bitmap into filesystem
+                    mUserController.upLoadImage(imagePath);
+                }
+                catch (Exception e)
+                {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        else if (requestCode == 0)
+        {
+            Log.d("Test",""+requestCode);
+            if(data.getExtras()!=null)
+            {
+                Log.d("Test","data.getExtras()!=null");
+                try
+                {
+                    Log.d("Test",""+"go into try");
+                    mBitmap = (Bitmap) data.getExtras().get("data");
+                    imagePath = "/sdcard/img/"+((HomeActivity)getActivity()).getCurrentUser()+ ".jpg";
+                    FileOutputStream writeImage = new FileOutputStream(imagePath);
+                    mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, writeImage);
+                    mUserController.upLoadImage(imagePath);
+
+                }
+                catch(Exception e)
+                {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
     }
 }

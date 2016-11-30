@@ -209,4 +209,10 @@ public class UserController {
         requestModel=new RequestModel(context);
         requestModel.loadRequestsfromRemote(((HomeActivity)context).getCurrentUser(),requestAdapter);
     }
+
+    public void upLoadImage(String imagepath){
+        userModel=new UserModel(context);
+        userModel.uploadImageToRemote(imagepath,((HomeActivity)context).getCurrentUser());
+
+    }
 }

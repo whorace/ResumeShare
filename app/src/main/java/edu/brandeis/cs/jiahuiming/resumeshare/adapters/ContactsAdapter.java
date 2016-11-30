@@ -85,7 +85,12 @@ public class ContactsAdapter extends BaseAdapter {
         viewHolder.imageView.setImageResource(R.drawable.kellyisgenius);
         UserController mUserController=new UserController(context);
         mUserController.loadImageview(user.getAccount(),viewHolder.imageView);
-        viewHolder.name.setText(user.getFirstName()+" "+user.getSecondName());
+        if(user.getFirstName().equals("")&&user.getSecondName().equals("")){
+            viewHolder.name.setText("Not Filled");
+        }else{
+            viewHolder.name.setText(user.getFirstName()+" "+user.getSecondName());
+        }
+
         viewHolder.account.setText(user.getAccount());
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

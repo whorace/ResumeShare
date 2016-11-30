@@ -37,7 +37,7 @@ public class RequestAdapter extends BaseAdapter {
     }
     public void putData(Request requset){
         this.mList.add(requset);
-       notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -77,6 +77,11 @@ public class RequestAdapter extends BaseAdapter {
         viewHolder.imageView.setImageResource(R.drawable.kellyisgenius);
         UserController mUserController=new UserController(context);
         mUserController.loadImageview(request.getHostAccount(),viewHolder.imageView);
+        if(request.getHostName().equals("")){
+            viewHolder.name.setText("Not Filled");
+        }else{
+            viewHolder.name.setText(request.getHostName());
+        }
         viewHolder.name.setText(request.getHostName());
         viewHolder.account.setText(request.getHostAccount());
         viewHolder.message.setText(request.getMessage());

@@ -20,7 +20,7 @@ public class WaveView extends View {
     private float mInitialRadius;
     private float mMaxRadius;
     private long mDuration = 2000;
-    private int mSpeed = 500;
+    private int mSpeed = 800;
     private float mMaxRadiusRate = 1.0f;
     private boolean mMaxRadiusSet;
 

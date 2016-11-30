@@ -11,12 +11,14 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.adapters.SearchResultAdapter;
 import edu.brandeis.cs.jiahuiming.resumeshare.beans.User;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.HttpLoadImageTask;
 import edu.brandeis.cs.jiahuiming.resumeshare.utils.HttpTask;
+import edu.brandeis.cs.jiahuiming.resumeshare.utils.HttpUploadImageTask;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
 import edu.brandeis.cs.jiahuiming.resumeshare.views.widgets.CircleImageView;
 
@@ -41,16 +43,19 @@ public class UserModel {
                     JSONObject jsObj=new JSONObject(json);
                     result = jsObj.getString("result");
                     Log.d("test",result);
-                    if(result.equals("true")){
-                        Toast.makeText(context,"Register Successed",Toast.LENGTH_SHORT).show();
+                    if(result.equals("false")){
+                            Toast.makeText(context,"Register Failed",Toast.LENGTH_SHORT).show();
                     }
                     else{
-
-                        Toast.makeText(context,"Register Failed",Toast.LENGTH_SHORT).show();
+                        try{
+                            Toast.makeText(context,"Register Successed",Toast.LENGTH_SHORT).show();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 }
                 catch (Exception e) {
-                    e.printStackTrace();
+
                 }
             }
             public void taskFailed() {
@@ -201,5 +206,36 @@ public class UserModel {
             }
         });
         task.execute(account);
+    }
+
+    public void uploadImageToRemote(String imagepath, String account){
+        HttpUploadImageTask task=new HttpUploadImageTask();
+        task.setTaskHandler(new HttpUploadImageTask.HttpUploadImageTaskHandler() {
+            @Override
+            public void taskSuccessful(String json){
+                Log.d("Test",json);
+                try {
+                    JSONObject jsObj=new JSONObject(json);
+                    result = jsObj.getString("result");
+                    Log.d("test",result);
+                    if(result.equals("true")){
+                        Toast.makeText(context,"Upload Successed",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+
+                        Toast.makeText(context,"Upload Failed",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void taskFailed() {
+
+            }
+        });
+        task.execute(imagepath,account);
     }
 }

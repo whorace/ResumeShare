@@ -1,30 +1,36 @@
 package edu.brandeis.cs.jiahuiming.resumeshare.utils;
+
+import android.os.AsyncTask;
 import android.util.Log;
+
+import org.json.JSONException;
+
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import edu.brandeis.cs.jiahuiming.resumeshare.commons.Urls;
-import edu.brandeis.cs.jiahuiming.resumeshare.views.activities.HomeActivity;
 
 /**
- * Created by chenj on 2016/11/27.
+ * Created by jiahuiming on 11/29/16.
  */
 
-public class ImageUtil {
-    private String account;
-    private String Upload_Image_URL = Urls.HOST+"upload.php";
+public class HttpUploadImageTask extends AsyncTask<String, Float, StringBuffer> {
+    private static final String TAG = "HTTP_TASK";
 
-    public ImageUtil(String account){
-        this.account=account;
-    }
-
-    public  void uploadFile(String imagePath)
-    {
-        String fileName=account+".jpg";
+    @Override
+    protected StringBuffer doInBackground(String... params) {
+        StringBuffer json=new StringBuffer();
+        String imagePath=params[0];
+        String fileName=params[1]+".jpg";
+        Log.d("imagePath",imagePath);
+        Log.d("fileName",fileName);
         HttpURLConnection conn = null;
         DataOutputStream dos = null;
         String lineEnd = "\r\n";
@@ -43,7 +49,7 @@ public class ImageUtil {
                 Log.d("Test","fileName");
                 // open a URL connection to the Servlet
                 FileInputStream fileInputStream = new FileInputStream(sourceFile);
-                URL url = new URL(Upload_Image_URL);
+                URL url = new URL(Urls.HOST+"upload.php");
                 // Open a HTTP  connection to  the URL
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setDoInput(true); // Allow Inputs
@@ -83,12 +89,50 @@ public class ImageUtil {
                 fileInputStream.close();
                 dos.flush();
                 dos.close();
+
+                json=new StringBuffer();
+                BufferedReader reader=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String temp;
+                while((temp=reader.readLine())!=null)
+                {json.append(temp);}
+
             } catch (MalformedURLException ex) {
                 Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } // End else block
+        return json;
     }
 
+    @Override
+    protected void onPostExecute(StringBuffer jsonbuffer) {
+        // Done on UI Thread
+        String json=jsonbuffer.toString();
+        if (json != null && json != "") {
+            Log.d(TAG, "taskSuccessful");
+            int i1 = json.indexOf("["), i2 = json.indexOf("{"), i = i1 > -1
+                    && i1 < i2 ? i1 : i2;
+            if (i > -1) {
+                json = json.substring(i);
+                taskHandler.taskSuccessful(json);
+            } else {
+                Log.d(TAG, "taskFailed");
+                taskHandler.taskFailed();
+            }
+        } else {
+            Log.d(TAG, "taskFailed");
+            taskHandler.taskFailed();
+        }
+    }
+
+    public static interface HttpUploadImageTaskHandler {
+        void taskSuccessful(String json);
+        void taskFailed();
+    }
+
+    HttpUploadImageTask.HttpUploadImageTaskHandler taskHandler;
+    public void setTaskHandler(HttpUploadImageTask.HttpUploadImageTaskHandler taskHandler) {
+        this.taskHandler = taskHandler;
+    }
 }
