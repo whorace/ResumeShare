@@ -7,7 +7,7 @@ Android Project: ResumeShare App(Android, Java)
 ----
 
 ###Description:
-#Resume share is developed to help people easily share their own Resume or review others’.
+ResumeShare is developed to help people easily share their own resumes or review others' resumes.
 
 ---
 
